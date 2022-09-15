@@ -1,0 +1,17 @@
+current directory: /Users/elsonotake/repos/Microverse/Blog_App/vendor/bundle/ruby/3.1.0/gems/strscan-3.0.4/ext/strscan
+/Users/elsonotake/.rbenv/versions/3.1.2/bin/ruby -I /Users/elsonotake/.rbenv/versions/3.1.2/lib/ruby/site_ruby/3.1.0 extconf.rb
+checking for onig_region_memsize() in ruby.h... yes
+creating Makefile
+
+current directory: /Users/elsonotake/repos/Microverse/Blog_App/vendor/bundle/ruby/3.1.0/gems/strscan-3.0.4/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20220915-7284-mo9bhh sitelibdir\=./.gem.20220915-7284-mo9bhh clean
+
+current directory: /Users/elsonotake/repos/Microverse/Blog_App/vendor/bundle/ruby/3.1.0/gems/strscan-3.0.4/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20220915-7284-mo9bhh sitelibdir\=./.gem.20220915-7284-mo9bhh
+compiling strscan.c
+linking shared-object strscan.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/elsonotake/repos/Microverse/Blog_App/vendor/bundle/ruby/3.1.0/gems/strscan-3.0.4/ext/strscan
+make DESTDIR\= sitearchdir\=./.gem.20220915-7284-mo9bhh sitelibdir\=./.gem.20220915-7284-mo9bhh install
+/usr/bin/install -c -m 0755 strscan.bundle ./.gem.20220915-7284-mo9bhh
