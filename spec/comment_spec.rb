@@ -29,4 +29,23 @@ RSpec.describe Comment, type: :model do
   it 'Post_id must be the post.id' do
     expect(comment.post_id).to be(post.id)
   end
+  it 'Post counter must have value 1' do
+    new_user = User.create(name: 'Anyone else')
+    new_post = Post.create(title: 'Something else', author: new_user)
+    new_comment = Comment.create(text: 'Something 1', author: new_user, post: new_post)
+    new_comment.update_comments_counter
+    expect(new_post.comments_counter).to be(1)
+  end
+  it 'Post counter must have value 6' do
+    new_user = User.create(name: 'Anyone else')
+    new_post = Post.create(title: 'Something else', author: new_user)
+    Comment.create(text: 'Something 1', author: new_user, post: new_post)
+    Comment.create(text: 'Something 2', author: new_user, post: new_post)
+    Comment.create(text: 'Something 3', author: new_user, post: new_post)
+    Comment.create(text: 'Something 4', author: new_user, post: new_post)
+    Comment.create(text: 'Something 5', author: new_user, post: new_post)
+    new_comment = Comment.create(text: 'Something 6', author: new_user, post: new_post)
+    new_comment.update_comments_counter
+    expect(new_post.comments_counter).to be(6)
+  end
 end
