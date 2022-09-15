@@ -7,6 +7,14 @@ RSpec.describe Comment, type: :model do
   it 'is valid with valid attributes' do
     expect(comment).to be_valid
   end
+  it 'is not valid without valid attributes' do
+    comment_without_user = Comment.new(text: 'Something', post:)
+    expect(comment_without_user).to_not be_valid
+  end
+  it 'is not valid without valid attributes' do
+    comment_without_post = Comment.new(text: 'Something', author: user)
+    expect(comment_without_post).to_not be_valid
+  end
   it 'Text must not be blank' do
     comment.text = ' '
     expect(comment).to_not be_valid
