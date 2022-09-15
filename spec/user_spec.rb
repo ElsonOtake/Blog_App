@@ -20,9 +20,4 @@ RSpec.describe User, type: :model do
   it 'Recent posts must be empty array' do
     expect(user.recent_posts.size).to be(0)
   end
-  it 'Recent posts must be empty array' do
-    Post.new(title: 'Anything', author: user)
-    Post.new(title: 'Other thing', author: user)
-    expect(user.recent_posts.size).to be(0)
-  end
 end
