@@ -22,4 +22,10 @@ RSpec.describe Post, type: :model do
     expect(post.likes_counter).to be_an(Numeric)
     expect(post.likes_counter).to be >= 0
   end
+  it 'Author id must be the user id' do
+    expect(post.author_id).to be(user.id)
+  end
+  it 'Recent comments must be empty array' do
+    expect(post.recent_comments.size).to be(0)
+  end
 end
