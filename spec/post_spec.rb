@@ -50,11 +50,6 @@ RSpec.describe Post, type: :model do
     expect(new_post.recent_comments[3].text).to eql('Something 3')
     expect(new_post.recent_comments[4].text).to eql('Something 2')
   end
-  # it 'Post counter must have value 0' do
-  #   new_user = User.create(name: 'Anyone else')
-  #   Post.create(title: 'Something else', author: new_user)
-  #   expect(new_user.post_counter).to eq(0)
-  # end
   it 'Post counter must have value 1' do
     new_user = User.create(name: 'Anyone else')
     new_post = Post.create(title: 'Something else', author: new_user)
