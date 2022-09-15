@@ -20,4 +20,45 @@ RSpec.describe User, type: :model do
   it 'Recent posts must be empty array' do
     expect(user.recent_posts.size).to be(0)
   end
+  it 'Recent posts must not be empty array' do
+    new_user = User.create(name: 'Anyone else')
+    Post.create(title: 'Something 1', author: new_user)
+    expect(new_user.recent_posts.size).to be(1)
+  end
+  it 'Recent posts must have title Something 1' do
+    new_user = User.create(name: 'Anyone else')
+    Post.create(title: 'Something 1', author: new_user)
+    expect(new_user.recent_posts[0].title).to eql('Something 1')
+  end
+  it 'Recent posts must have size 2' do
+    new_user = User.create(name: 'Anyone else')
+    Post.create(title: 'Something 1', author: new_user)
+    Post.create(title: 'Something 2', author: new_user)
+    expect(new_user.recent_posts.size).to be(2)
+  end
+  it 'Recent posts must have size 3' do
+    new_user = User.create(name: 'Anyone else')
+    Post.create(title: 'Something 1', author: new_user)
+    Post.create(title: 'Something 2', author: new_user)
+    Post.create(title: 'Something 3', author: new_user)
+    expect(new_user.recent_posts.size).to be(3)
+  end
+  it 'Recent posts must must have size 3' do
+    new_user = User.create(name: 'Anyone else')
+    Post.create(title: 'Something 1', author: new_user)
+    Post.create(title: 'Something 2', author: new_user)
+    Post.create(title: 'Something 3', author: new_user)
+    Post.create(title: 'Something 4', author: new_user)
+    expect(new_user.recent_posts.size).to be(3)
+  end
+  it 'Recent posts must must have the recent posts' do
+    new_user = User.create(name: 'Anyone else')
+    Post.create(title: 'Something 1', author: new_user)
+    Post.create(title: 'Something 2', author: new_user)
+    Post.create(title: 'Something 3', author: new_user)
+    Post.create(title: 'Something 4', author: new_user)
+    expect(new_user.recent_posts[0].title).to eql('Something 4')
+    expect(new_user.recent_posts[1].title).to eql('Something 3')
+    expect(new_user.recent_posts[2].title).to eql('Something 2')
+  end
 end
