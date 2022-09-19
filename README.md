@@ -41,8 +41,18 @@ Cloning a repository
 
 - Type `git clone`, and then paste the URL you copied earlier.
 
+### Rspec Tests
 
-## Authors
+To run the tests:
+
+- Open your terminal;
+
+- Go to your application folder;
+
+- run `rspec spec/requests`.
+
+
+## Author
 
 👤 **Elson Otake**
 
