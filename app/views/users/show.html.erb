@@ -27,4 +27,6 @@
     </div>
   </div>
 <% end %>
-<button type="button" class="btn btn-outline-secondary mx-auto d-block mb-4">See all posts</button>
+<button type="button" class="btn btn-outline-secondary mx-auto d-block mb-4">
+  <%= link_to "See all posts", user_posts_path(@user), class: "text-decoration-none" %>
+</button>
