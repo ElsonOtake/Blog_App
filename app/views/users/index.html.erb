@@ -1,2 +1,15 @@
-<h1>Here is a list of users</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<% @users.each do |user| %>
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="https://fotografiamais.com.br/wp-content/uploads/2018/09/fotos-de-cachorro-filhote-1.jpg" class="img-fluid rounded-start" alt="user photo">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= user.name %></h5>
+          <p class="card-text"><small class="text-muted">Number of posts: <%= user.post_counter %></small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
