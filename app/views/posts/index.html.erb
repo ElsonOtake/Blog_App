@@ -40,16 +40,19 @@
     </div>
   </div>
 <% end %>
+<% previous = (@page.to_i - 1) > 0 ? @page.to_i - 1 : 1 %>
+<% limit = (@user.post_counter + @posts_per_page - 1) / @posts_per_page %>
+<% next_page = (@page.to_i + 1) > limit ? limit : @page.to_i + 1 %>
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <%= link_to "Previous", user_posts_path(@user, page: @page.to_i - 1), class: "p-2 text-decoration-none border rounded-left" %>
-    </li>
-    <li class="page-item"><%= link_to "1", user_posts_path(@user, page: 1), class: "p-2 text-decoration-none border" %></li>
-    <li class="page-item"><%= link_to "2", user_posts_path(@user, page: 2), class: "p-2 text-decoration-none border" %></li>
-    <li class="page-item"><%= link_to "3", user_posts_path(@user, page: 3), class: "p-2 text-decoration-none border" %></li>
     <li class="page-item">
-      <%= link_to "Next", user_posts_path(@user, page: @page.to_i + 1), class: "p-2 text-decoration-none border rounded-right" %>
+      <%= link_to "Previous", user_posts_path(@user, page: previous), class: "p-2 text-decoration-none border rounded-left" %>
+    </li>
+    <% (1..limit).each do |pg| %>
+      <li class="page-item"><%= link_to pg, user_posts_path(@user, page: pg), class: "p-2 text-decoration-none border" %></li>
+    <% end %>
+    <li class="page-item">
+      <%= link_to "Next", user_posts_path(@user, page: next_page), class: "p-2 text-decoration-none border rounded-right" %>
     </li>
   </ul>
 </nav>
