@@ -1,12 +1,14 @@
-<div class="card m-3">
+<div class="card m-3 border-0">
   <div class="row g-0">
     <div class="col-md-1">
       <img src="https://c.tenor.com/uj4Cnt7RVE0AAAAM/fatdog-dog.gif" class="img-fluid rounded-start" alt="user photo">
     </div>
     <div class="col-md-11">
-      <div class="card-body">
-        <h5 class="card-title"><%= @user.name %></h5>
-        <p class="card-text text-end" class="text-muted"><small>Number of posts: <%= @user.post_counter %></small></p>
+      <div class="card m-2">
+        <div class="card-body">
+          <h5 class="card-title"><%= @user.name %></h5>
+          <p class="card-text text-end" class="text-muted"><small>Number of posts: <%= @user.post_counter %></small></p>
+        </div>
       </div>
     </div>
   </div>
