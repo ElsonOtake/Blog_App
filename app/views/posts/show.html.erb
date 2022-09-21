@@ -7,8 +7,12 @@
 </div>
 <div class="card m-3">
   <div class="card-body">
-    <% @post.comments.each do |comment| %>
-      <%= User.find(comment.author_id).name %>: <%= comment.text %><br/>
+    <% if @post.comments_counter.zero? %>
+      <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
+    <% else %>
+      <% @post.comments.each do |comment| %>
+        <%= User.find(comment.author_id).name %>: <%= comment.text %><br/>
+      <% end %>
     <% end %>
   </div>
 </div>
