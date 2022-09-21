@@ -16,7 +16,7 @@
 <% @posts.each do |post| %>
   <div class="card m-3">
     <div class="card-body">
-      <h5 class="card-title"><%= link_to post.title, user_post_path(id: post.id), class: "text-decoration-none" %></h5>
+      <h5 class="card-title"><%= link_to post.title, user_post_path(@user.id, post.id), class: "text-decoration-none" %></h5>
       <% if post.text.size > 70 %>
       <p class="card-text"><%= post.text[0, 70] %>...</p>
       <% else %>
@@ -33,7 +33,23 @@
         <% post.recent_comments.each do |comment| %>
           <%= User.find(comment.author_id).name %>: <%= comment.text %><br/>
         <% end %>
+        <% if post.comments_counter > 5 %>
+          ...
+        <% end %>
       <% end %>
     </div>
   </div>
 <% end %>
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <%= link_to "Previous", user_posts_path(@user, page: @page.to_i - 1), class: "p-2 text-decoration-none border rounded-left" %>
+    </li>
+    <li class="page-item"><%= link_to "1", user_posts_path(@user, page: 0), class: "p-2 text-decoration-none border" %></li>
+    <li class="page-item"><%= link_to "2", user_posts_path(@user, page: 1), class: "p-2 text-decoration-none border" %></li>
+    <li class="page-item"><%= link_to "3", user_posts_path(@user, page: 2), class: "p-2 text-decoration-none border" %></li>
+    <li class="page-item">
+      <%= link_to "Next", user_posts_path(@user, page: @page.to_i + 1), class: "p-2 text-decoration-none border rounded-right" %>
+    </li>
+  </ul>
+</nav>
