@@ -45,9 +45,9 @@
     <li class="page-item disabled">
       <%= link_to "Previous", user_posts_path(@user, page: @page.to_i - 1), class: "p-2 text-decoration-none border rounded-left" %>
     </li>
-    <li class="page-item"><%= link_to "1", user_posts_path(@user, page: 0), class: "p-2 text-decoration-none border" %></li>
-    <li class="page-item"><%= link_to "2", user_posts_path(@user, page: 1), class: "p-2 text-decoration-none border" %></li>
-    <li class="page-item"><%= link_to "3", user_posts_path(@user, page: 2), class: "p-2 text-decoration-none border" %></li>
+    <li class="page-item"><%= link_to "1", user_posts_path(@user, page: 1), class: "p-2 text-decoration-none border" %></li>
+    <li class="page-item"><%= link_to "2", user_posts_path(@user, page: 2), class: "p-2 text-decoration-none border" %></li>
+    <li class="page-item"><%= link_to "3", user_posts_path(@user, page: 3), class: "p-2 text-decoration-none border" %></li>
     <li class="page-item">
       <%= link_to "Next", user_posts_path(@user, page: @page.to_i + 1), class: "p-2 text-decoration-none border rounded-right" %>
     </li>
