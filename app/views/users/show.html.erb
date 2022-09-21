@@ -1,7 +1,7 @@
 <div class="card m-3 border-0">
   <div class="row g-0">
     <div class="col-md-1">
-      <img src="https://c.tenor.com/uj4Cnt7RVE0AAAAM/fatdog-dog.gif" class="img-fluid rounded-start" alt="user photo">
+      <img src=<%= @user.photo %> class="img-fluid rounded" alt="user photo">
     </div>
     <div class="col-md-11">
       <div class="card m-2">
@@ -19,16 +19,23 @@
     <p class="card-text"><%= @user.bio %></p>
   </div>
 </div>
-<br/>
-<% @user.recent_posts.each do |post| %>
-  <div class="card m-3">
-    <div class="card-body">
-      <h5 class="card-title"><%= post.title %></h5>
-      <p class="card-text"><%= post.text %></p>
-      <p class="mb-2 text-muted text-end"><small>Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></small></p>
+<% if @user.recent_posts.size.zero? %>
+    <div class="card m-3">
+      <div class="card-body">
+        <p class="mb-2 text-muted"><small>There are no posts yet</small></p>
+      </div>
     </div>
-  </div>
+<% else %>
+  <% @user.recent_posts.each do |post| %>
+    <div class="card m-3">
+      <div class="card-body">
+        <h5 class="card-title"><%= post.title %></h5>
+        <p class="card-text"><%= post.text %></p>
+        <p class="mb-2 text-muted text-end"><small>Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></small></p>
+      </div>
+    </div>
+  <% end %>
+  <button type="button" class="btn btn-link text-primary mx-auto d-block mb-4 border border-primary rounded text-decoration-none">
+    <%= link_to "See all posts", user_posts_path(@user), class: "text-decoration-none" %>
+  </button>
 <% end %>
-<button type="button" class="btn btn-outline-secondary mx-auto d-block mb-4">
-  <%= link_to "See all posts", user_posts_path(@user), class: "text-decoration-none" %>
-</button>
