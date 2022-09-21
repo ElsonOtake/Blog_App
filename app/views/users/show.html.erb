@@ -1,2 +1,45 @@
-<h1>Here is a detail for a given user</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="card m-3 border-0">
+  <div class="row g-0">
+    <div class="col-md-1">
+      <img src=<%= @user.photo %> class="img-fluid rounded" alt="user photo">
+    </div>
+    <div class="col-md-11">
+      <div class="card m-2">
+        <div class="card-body">
+          <h5 class="card-title"><%= @user.name %></h5>
+          <p class="card-text text-end" class="text-muted"><small>Number of posts: <%= @user.post_counter %></small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card m-3">
+  <div class="card-body">
+    <h5 class="card-title">Bio</h5>
+    <p class="card-text"><%= @user.bio %></p>
+  </div>
+</div>
+<% if @user.recent_posts.size.zero? %>
+    <div class="card m-3">
+      <div class="card-body">
+        <p class="mb-2 text-muted"><small>There are no posts yet</small></p>
+      </div>
+    </div>
+<% else %>
+  <% @user.recent_posts.each do |post| %>
+    <div class="card m-3">
+      <div class="card-body">
+        <h5 class="card-title"><%= post.title %></h5>
+        <% if post.text.size > 70 %>
+          <p class="card-text"><%= post.text[0, 70] %>...</p>
+        <% else %>
+          <p class="card-text"><%= post.text %></p>
+        <% end %>
+        <p class="mb-2 text-muted text-end"><small>Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></small></p>
+      </div>
+    </div>
+  <% end %>
+  <button type="button" class="btn btn-link text-primary mx-auto d-block mb-4 border border-primary rounded text-decoration-none">
+    <%= link_to "See all posts", user_posts_path(@user), class: "text-decoration-none" %>
+  </button>
+<% end %>
