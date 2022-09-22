@@ -21,20 +21,16 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
-
+    post = Post.new(params.require(:user_posts).permit(:title, :text))
+    post.author_id = current_user.id
     respond_to do |format|
       format.html do
         if post.save
           flash[:success] = 'Post was successfully created'
           redirect_to root_url
-          # format.html { redirect_to post_url(post), notice: "Post was successfully created." }
-          # format.json { render :show, status: :created, location: post }
         else
           flash.now[:error] = 'Error: Post could not be saved'
-          render :new, post
-          # format.html { render :new, status: :unprocessable_entity }
-          # format.json { render json: post.errors, status: :unprocessable_entity }
+          render :new, new_user_post_path(current_user.id)
         end
       end
     end
