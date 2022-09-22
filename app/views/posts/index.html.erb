@@ -17,7 +17,7 @@
         <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
       <% else %>
         <% post.recent_comments.each do |comment| %>
-          <%= User.find(comment.author_id).name %>: <%= comment.text %><br/>
+          <%= comment.author.name %>: <%= comment.text %><br/>
         <% end %>
         <% if post.comments_counter > 5 %>
           ...
