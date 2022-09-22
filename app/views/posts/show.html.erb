@@ -3,6 +3,11 @@
     <h5 class="card-title"><%= @post.title %></h5>
     <p class="mb-2 text-muted text-end"><small>Comments: <%= @post.comments_counter %> Likes: <%= @post.likes_counter %></small></p>
     <p class="card-text"><%= @post.text %></p>
+    <%= form_with model: @likes, url: user_post_likes_path(@current_user, @post), method: :post, local: true, scope: :user_post_likes do |form| %>
+
+      <%= form.submit value: 'Add Like', class:'btn btn-secondary m-2' %>
+      
+    <% end %>
   </div>
 </div>
 <div class="card m-3">
@@ -16,11 +21,12 @@
     <% end %>
   </div>
 </div>
+<br/><br/>
 <%= form_with model: @comments, url: user_post_comments_path(@current_user, @post), method: :post, local: true, scope: :user_post_comments do |form| %>
 
-  <div class="form-group">
+  <div class="form-group m-3">
     <%= form.text_field :text, class: "form-control m-2 w-75", placeholder: "Comment text" %>
   </div>
 
-  <%= form.submit class:'btn btn-secondary m-2' %>
+  <%= form.submit value: 'Add comment', class:'btn btn-secondary mx-4' %>
 <% end %>
