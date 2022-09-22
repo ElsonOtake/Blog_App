@@ -1,14 +1,10 @@
-<%= form_with model: @post, url: new_user_post_path do |form| %>
+<%= form_with model: @post, url: user_posts_path(@current_user), method: :post, local: true, scope: :user_posts do |form| %>
   <div class="form-group">
     <%= form.text_field :title, class: "form-control m-2 w-75", placeholder: "Title" %>
   </div>
 
   <div class="form-group">
     <%= form.text_field :text, class: "form-control m-2 w-75", placeholder: "Post text" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.text_field :author, id: :author_id, class: "form-control m-2 w-75", value: @current_user.id %>
   </div>
 
   <%= form.submit class:'btn btn-secondary m-2' %>
