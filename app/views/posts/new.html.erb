@@ -1,15 +1,15 @@
 <%= form_with model: @post, url: new_user_post_path do |form| %>
   <div class="form-group">
-    <%= form.text_field :title, class: "form-control", placeholder: "Title" %>
+    <%= form.text_field :title, class: "form-control m-2 w-75", placeholder: "Title" %>
   </div>
 
   <div class="form-group">
-    <%= form.text_field :text, class: "form-control", placeholder: "Post text" %>
+    <%= form.text_field :text, class: "form-control m-2 w-75", placeholder: "Post text" %>
   </div>
 
   <div class="form-group">
-    <%= form.text_field :author, id: :author_id, class: "form-control", value: @current_user.id, type: :hidden %>
+    <%= form.text_field :author, id: :author_id, class: "form-control m-2 w-75", value: @current_user.id %>
   </div>
 
-  <%= form.submit class:'btn btn-secondary' %>
+  <%= form.submit class:'btn btn-secondary m-2' %>
 <% end %>
