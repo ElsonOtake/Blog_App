@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
   def create
     post = Post.new(params.require(:user_posts).permit(:title, :text))
-    post.author_id = current_user.id
+    post.author = current_user
     respond_to do |format|
       format.html do
         if post.save
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
           redirect_to root_url
         else
           flash.now[:error] = 'Error: Post could not be saved'
-          render :new, new_user_post_path(current_user.id)
+          render :new, new_user_post_path(current_user)
         end
       end
     end
