@@ -8,7 +8,7 @@
       <% else %>
         <p class="card-text"><%= post.text %></p>
       <% end %>
-      <p class="mb-2 text-muted text-end"><small>Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></small></p>
+      <p class="mb-2 text-muted text-end"><small>Comments: <%= post.comments_counter %> Likes: <%= post.likes_counter %></small></p>
     </div>
   </div>
   <div class="card m-3">
@@ -17,7 +17,7 @@
         <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
       <% else %>
         <% post.recent_comments.each do |comment| %>
-          <%= User.find(comment.author_id).name %>: <%= comment.text %><br/>
+          <%= comment.author.name %>: <%= comment.text %><br/>
         <% end %>
         <% if post.comments_counter > 5 %>
           ...
