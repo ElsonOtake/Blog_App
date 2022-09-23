@@ -21,7 +21,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(params.require(:user_posts).permit(:title, :text))
+    post = Post.new
+    post.title = params[:user_posts][:title]
+    post.text = params[:user_posts][:text]
     post.author = current_user
     respond_to do |format|
       format.html do
