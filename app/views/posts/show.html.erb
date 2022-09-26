@@ -15,7 +15,7 @@
     <% if @post.comments_counter.zero? %>
       <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
     <% else %>
-      <% @post.comments.each do |comment| %>
+      <% @comms.each do |comment| %>
         <%= comment.author.name %>: <%= comment.text %><br/>
       <% end %>
     <% end %>
