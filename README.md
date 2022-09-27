@@ -66,6 +66,13 @@ To run the tests:
 - Twitter: [@javb_1187](https://twitter.com/javb_1187)
 - LinkedIn: [@jevazquezb](https://www.linkedin.com/in/jevazquezb)
 
+👤 **Addisu Haile**
+
+- GitHub: [@Addisu87](https://github.com/Addisu87)
+- Twitter: [@AddisuTedla](https://twitter.com/AddisuTedla)
+- LinkedIn: [Addisu Tedla](www.linkedin.com/in/addisu-tedla/)
+
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
