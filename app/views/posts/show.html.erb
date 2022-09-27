@@ -8,6 +8,10 @@
       <%= form.submit value: 'Add Like', class:'btn btn-secondary m-2' %>
       
     <% end %>
+    <% flash.each do |name, message| %>
+      <br/>
+      <div class="<%= name %>"><%= message %></div>
+    <% end %>
   </div>
 </div>
 <div class="card m-3">
