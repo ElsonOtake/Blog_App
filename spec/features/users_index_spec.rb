@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'user index view', type: :feature do
   describe 'GET index for Lilly' do
     before(:each) do
-      @lilly = User.create(name: 'Lilly', photo: 'https://c.tenor.com/YIeHLcvImMsAAAAM/meditation-dog.gif', bio: 'Teacher from Poland')
+      @lilly = User.create(name: 'Lilly', photo: 'https://c.tenor.com/YIeHLcvImMsAAAAM/meditation-dog.gif',
+                           bio: 'Teacher from Poland')
       Post.create(author: @lilly, title: 'Hello', text: 'This is my first post')
       Post.create(author: @lilly, title: 'Hey', text: 'This is my second post')
     end
@@ -40,7 +41,8 @@ RSpec.describe 'user index view', type: :feature do
 
   describe 'GET index' do
     before(:each) do
-      @luna = User.create(name: 'Luna', photo: 'https://c.tenor.com/JAWsyDUCa4QAAAAM/puppy-stretching.gif', bio: 'Teacher from Brazil')
+      @luna = User.create(name: 'Luna', photo: 'https://c.tenor.com/JAWsyDUCa4QAAAAM/puppy-stretching.gif',
+                          bio: 'Teacher from Brazil')
       Post.create(author: @luna, title: 'Hi', text: 'This is my first post')
     end
 
