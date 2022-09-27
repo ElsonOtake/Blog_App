@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'user show view', type: :feature do
+RSpec.describe 'User show page', type: :feature do
   describe 'GET index for Lilly' do
     before(:each) do
       @lilly = User.create(name: 'Lilly', photo: 'https://c.tenor.com/YIeHLcvImMsAAAAM/meditation-dog.gif',
