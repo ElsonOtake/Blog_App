@@ -4,7 +4,7 @@ class LikesController < ApplicationController
     author = User.find(params[:user_id])
     like = Like.new
     like.post = post
-    like.author = current_user
+    like.author = User.first
     respond_to do |format|
       format.html do
         if like.save

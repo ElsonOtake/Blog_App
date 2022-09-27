@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     user = User.find(params[:user_id])
     comment = Comment.new(params.require(:user_post_comments).permit(:text))
     comment.post = post
-    comment.author = current_user
+    comment.author = User.first
     respond_to do |format|
       format.html do
         if comment.save

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @current_user = current_user
+    @current_user = User.first
     @posts_per_page = 2
     @user = User.find(params[:user_id])
     @page = params.fetch(:page, 1)
@@ -8,14 +8,14 @@ class PostsController < ApplicationController
   end
 
   def show
-    @current_user = current_user
+    @current_user = User.first
     @post = Post.find(params[:id])
     @comms = @post.comments.includes(:author)
   end
 
   def new
     @post = Post.new
-    @current_user = current_user
+    @current_user = User.first
     respond_to do |format|
       format.html { render :new, locals: { post: @post } }
     end
@@ -30,10 +30,10 @@ class PostsController < ApplicationController
       format.html do
         if post.save
           flash[:success] = 'Post was successfully created'
-          redirect_to user_path(current_user)
+          redirect_to user_path(User.first)
         else
           flash.now[:error] = 'Error: Post could not be saved'
-          render :new, new_user_post_path(current_user)
+          render :new, new_user_post_path(User.first)
         end
       end
     end
