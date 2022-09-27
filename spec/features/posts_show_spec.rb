@@ -28,11 +28,11 @@ RSpec.describe 'Post show page', type: :feature do
       expect(page).to_not have_content('Hey')
     end
 
-    # it 'Show who wrote the post' do
-    #   visit user_post_path(@lilly, @hello)
-    #   expect(page).to have_content('Lilly')
-    #   expect(page).to_not have_content('Luna')
-    # end
+    it 'Show who wrote the post' do
+      visit user_post_path(@lilly, @hello)
+      expect(page).to have_content('by Lilly')
+      expect(page).to_not have_content('by Luna')
+    end
 
     it 'Shows how many comments it has' do
       visit user_post_path(@lilly, @hello)
