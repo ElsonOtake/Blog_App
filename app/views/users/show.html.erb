@@ -3,6 +3,10 @@
   <div class="card-body">
     <h5 class="card-title">Bio</h5>
     <p class="card-text"><%= @user.bio %></p>
+    <% flash.each do |name, message| %>
+      <br/>
+      <div class="<%= name %>"><%= message %></div>
+    <% end %>
   </div>
 </div>
 <% if @user.recent_posts.size.zero? %>
