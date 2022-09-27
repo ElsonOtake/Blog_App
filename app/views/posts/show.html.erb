@@ -1,12 +1,16 @@
 <div class="card m-3">
   <div class="card-body">
-    <h5 class="card-title"><%= @post.title %></h5>
+    <h5 class="card-title"><%= @post.title %> by <%= @post.author.name %></h5>
     <p class="mb-2 text-muted text-end"><small>Comments: <%= @post.comments_counter %> Likes: <%= @post.likes_counter %></small></p>
     <p class="card-text"><%= @post.text %></p>
     <%= form_with model: @likes, url: user_post_likes_path(@current_user, @post), method: :post, local: true, scope: :user_post_likes do |form| %>
 
       <%= form.submit value: 'Add Like', class:'btn btn-secondary m-2' %>
       
+    <% end %>
+    <% flash.each do |name, message| %>
+      <br/>
+      <div class="<%= name %>"><%= message %></div>
     <% end %>
   </div>
 </div>
@@ -15,7 +19,7 @@
     <% if @post.comments_counter.zero? %>
       <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
     <% else %>
-      <% @post.comments.each do |comment| %>
+      <% @comms.each do |comment| %>
         <%= comment.author.name %>: <%= comment.text %><br/>
       <% end %>
     <% end %>
