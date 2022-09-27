@@ -1,32 +1,72 @@
 require 'rails_helper'
 
-RSpec.describe 'Show post page: ', type: :feature do
-  before(:each) do
-    @user = User.create(name: 'Addisu', photo: 'img_1.png', bio: 'Physics teacher', posts_counter: 0)
-    @user.save!
+RSpec.describe 'Post show page', type: :feature do
+  describe 'Show page for Lilly' do
+    before(:each) do
+      @lilly = User.create(name: 'Lilly', photo: 'https://c.tenor.com/YIeHLcvImMsAAAAM/meditation-dog.gif',
+                           bio: 'Teacher from Poland')
+      @tom = User.create(name: 'Tom', photo: 'https://c.tenor.com/uj4Cnt7RVE0AAAAM/fatdog-dog.gif',
+                         bio: 'Teacher from Mexico.')
+      @jim = User.create(name: 'Jim', photo: 'https://c.tenor.com/lFZ9_tWmmEAAAAAM/please-doggy.gif',
+                         bio: 'Teacher from Japan.')
+      @bill = User.create(name: 'Bill', photo: 'https://c.tenor.com/x0eeZxeU56AAAAAM/puppy-cute.gif',
+                          bio: 'Teacher from Uganda.')
+      @hello = Post.create(author: @lilly, title: 'Hello', text: 'This is my first post')
+      Comment.create(post: @hello, author: @tom, text: 'First comment')
+      Comment.create(post: @hello, author: @lilly, text: 'Second comment')
+      Comment.create(post: @hello, author: @jim, text: 'Third comment')
+      Comment.create(post: @hello, author: @bill, text: 'Fourth comment')
+      Comment.create(post: @hello, author: @tom, text: 'Fifth comment')
+      Like.create(post: @hello, author: @bill)
+      Like.create(post: @hello, author: @jim)
+      Like.create(post: @hello, author: @tom)
+    end
 
-    @post_one = Post.create(title: 'First post', text: 'Hello world!', id: 1, comments_counter: 0, likes_counter: 0)
+    it "Shows the post's title" do
+      visit user_post_path(@lilly, @hello)
+      expect(page).to have_content('Hello')
+      expect(page).to_not have_content('Hey')
+    end
 
-    @comment_one = Comment.create(post: @post, user: @user, text: 'First comment')
-    @comment_one.save!
-    @comment_two = Comment.create(post: @post, user: @user, text: 'Second comment')
+    # it 'Show who wrote the post' do
+    #   visit user_post_path(@lilly, @hello)
+    #   expect(page).to have_content('Lilly')
+    #   expect(page).to_not have_content('Luna')
+    # end
 
-    visit "/users/#{@user.id}/posts/#{@post.id}"
-  end
+    it 'Shows how many comments it has' do
+      visit user_post_path(@lilly, @hello)
+      expect(page).to have_content('Comments: 5')
+      expect(page).to_not have_content('Comments: 3')
+    end
 
-  it 'shows the name of the author' do
-    expect(page).to have_content(@user.name)
-  end
+    it 'Show how many likes it has' do
+      visit user_post_path(@lilly, @hello)
+      expect(page).to have_content('Likes: 3')
+      expect(page).to_not have_content('Likes: 5')
+    end
 
-  it 'shows the posts title' do
-    expect(page).to have_content(@post.title)
-  end
+    it "Show some of the post's body" do
+      visit user_post_path(@lilly, @hello)
+      expect(page).to have_content('This is my first post')
+      expect(page).to_not have_content('This is my second post')
+    end
 
-  it 'shows the number of comments for a post' do
-    expect(page).to have_content("Comments: #{@post.comments_counter}")
-  end
+    it 'Show the username of each commentor' do
+      visit user_post_path(@lilly, @hello)
+      expect(page).to have_content('Tom:')
+      expect(page).to have_content('Lilly:')
+      expect(page).to have_content('Bill:')
+      expect(page).to have_content('Jim:')
+    end
 
-  it 'shows the number of likes for a post' do
-    expect(page).to have_content("Likes: #{@post.likes_counter}")
+    it 'Show the comment each commentor left' do
+      visit user_post_path(@lilly, @hello)
+      expect(page).to have_content('First comment')
+      expect(page).to have_content('Second comment')
+      expect(page).to have_content('Third comment')
+      expect(page).to have_content('Fourth comment')
+      expect(page).to have_content('Fifth comment')
+    end
   end
 end
