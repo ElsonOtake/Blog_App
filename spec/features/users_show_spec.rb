@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User show page', type: :feature do
-  describe 'GET index for Lilly' do
+  describe 'Show page for Lilly' do
     before(:each) do
       @lilly = User.create(name: 'Lilly', photo: 'https://c.tenor.com/YIeHLcvImMsAAAAM/meditation-dog.gif',
                            bio: 'Teacher from Poland')
@@ -20,7 +20,6 @@ RSpec.describe 'User show page', type: :feature do
       expect(page).to have_content('Lilly')
       expect(page).to_not have_content('Luna')
     end
-
 
     it 'Shows the number of posts the user has written' do
       visit user_path(@lilly)
@@ -62,7 +61,7 @@ RSpec.describe 'User show page', type: :feature do
     end
   end
 
-  describe 'GET index' do
+  describe 'Show page for Luna' do
     before(:each) do
       @luna = User.create(name: 'Luna', photo: 'https://c.tenor.com/JAWsyDUCa4QAAAAM/puppy-stretching.gif',
                           bio: 'Teacher from Brazil')
