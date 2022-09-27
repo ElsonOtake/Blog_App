@@ -1,33 +1,91 @@
 require 'rails_helper'
 
-RSpec.describe 'posts#index', type: :feature do
-  before(:each) do
-    @user = User.create(name: 'Addisu', photo: 'img_1.png', bio: 'Physics teacher', posts_counter: 0)
-    @user.save!
-    visit root_path
+RSpec.describe 'User post index page', type: :feature do
+  describe 'Show page for Lilly' do
+    before(:each) do
+      @lilly = User.create(name: 'Lilly', photo: 'https://c.tenor.com/YIeHLcvImMsAAAAM/meditation-dog.gif',
+                           bio: 'Teacher from Poland')
+      @tom = User.create(name: 'Tom', photo: 'https://c.tenor.com/uj4Cnt7RVE0AAAAM/fatdog-dog.gif',
+                         bio: 'Teacher from Mexico.')
+      @jim = User.create(name: 'Jim', photo: 'https://c.tenor.com/lFZ9_tWmmEAAAAAM/please-doggy.gif',
+                         bio: 'Teacher from Japan.')
+      @bill = User.create(name: 'Bill', photo: 'https://c.tenor.com/x0eeZxeU56AAAAAM/puppy-cute.gif',
+                          bio: 'Teacher from Uganda.')
+      @hello = Post.create(author: @lilly, title: 'Hello', text: 'This is my first post')
+      Post.create(author: @lilly, title: 'Hey', text: 'This is my second post')
+      Comment.create(post: @hello, author: @tom, text: 'First comment')
+      Comment.create(post: @hello, author: @lilly, text: 'Second comment')
+      Comment.create(post: @hello, author: @jim, text: 'Third comment')
+      Comment.create(post: @hello, author: @bill, text: 'Fourth comment')
+      Comment.create(post: @hello, author: @tom, text: 'Fifth comment')
+      Like.create(post: @hello, author: @bill)
+      Like.create(post: @hello, author: @jim)
+      Like.create(post: @hello, author: @tom)
+    end
 
-    @post_one = Post.create(title: 'First post', text: 'Hello world!', id: 1, comments_counter: 0, likes_counter: 0)
-    @post_two = Post.create(title: 'Second post', text: 'Quantum Mechanics!', id: 2, comments_counter: 0,
-                            likes_counter: 0)
+    it "Shows the user's profile picture" do
+      visit user_posts_path(@lilly)
+      expect(page).to have_css('img[src*="meditation-dog"]')
+      expect(page).to_not have_css('img[src*="puppy-stretching"]')
+    end
 
-    @comment_one = Comment.create(title: 'First comment', author: User.first, post: Post.first)
-    @comment_two = Comment.create(title: 'Second comment', author: User.first, post: Post.first)
-    visit(user_path(id: @user))
-  end
+    it "Show the user's username" do
+      visit user_posts_path(@lilly)
+      expect(page).to have_content('Lilly')
+      expect(page).to_not have_content('Luna')
+    end
 
-  it 'shows username of the user' do
-    visit(user_posts_path(@user.id))
-    expect(page).to have_content('Addisu')
-  end
+    it 'Shows the number of posts the user has written' do
+      visit user_posts_path(@lilly)
+      expect(page).to have_content('Number of posts: 2')
+      expect(page).to_not have_content('Number of posts: 0')
+    end
 
-  it 'shows number of posts of user has written' do
-    visit(user_posts_path(@user.id))
-    post = Post.all
-    expect(post.size).to eql(2)
-  end
+    it "Show a post's title" do
+      visit user_posts_path(@lilly)
+      expect(page).to have_content('Hello')
+      expect(page).to have_content('Hey')
+      expect(page).to_not have_content('Hi')
+    end
 
-  it 'shows post title' do
-    visit(user_posts_path(@user.id))
-    expect(page).to have_content('First post')
+    it "Show some of the post's body" do
+      visit user_posts_path(@lilly)
+      expect(page).to have_content('This is my first post')
+      expect(page).to have_content('This is my second post')
+      expect(page).to_not have_content('This is my third post')
+    end
+
+    it 'Show the first comments on a post' do
+      visit user_posts_path(@lilly)
+      expect(page).to have_content('First comment')
+    end
+
+    it 'Show how many comments a post has' do
+      visit user_posts_path(@lilly)
+      expect(page).to have_content('Comments: 5')
+    end
+
+    it 'Show how many likes a post has' do
+      visit user_posts_path(@lilly)
+      expect(page).to have_content('Likes: 3')
+    end
+
+    it 'Show a section for pagination if there are more posts than fit on the view' do
+      visit user_posts_path(@lilly)
+      expect(page).to have_content('Previous')
+      expect(page).to have_content('Next')
+    end
+
+    it 'Show a section for pagination if there are more posts than fit on the view' do
+      visit user_posts_path(@lilly)
+      click_link 'Previous'
+      expect(current_path).to eq user_posts_path(@lilly)
+    end
+
+    it "When I click on a post, it redirects me to that post's show page" do
+      visit user_posts_path(@lilly)
+      click_link 'Hello'
+      expect(current_path).to eq user_post_path(@lilly, @hello)
+    end
   end
 end
