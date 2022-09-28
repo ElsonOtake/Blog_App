@@ -9,10 +9,6 @@
       
     <% end %>
     <%= button_to 'Delete', user_post_path(@post.author, @post), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-    <% flash.each do |name, message| %>
-      <br/>
-      <div class="<%= name %>"><%= message %></div>
-    <% end %>
   </div>
 </div>
 <div class="card m-3">
