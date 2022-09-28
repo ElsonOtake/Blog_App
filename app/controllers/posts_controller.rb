@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-    @posts_per_page = 2
-    @user = User.find(params[:user_id])
-    @page = params.fetch(:page, 1)
-    @posts = @user.posts[2 * (@page.to_i - 1), @posts_per_page]
-  end
+
+  @posts_per_page = 2
+  @user = User.find(params[:user_id])
+  @page = params.fetch(:page, 1)
+  @posts = @user.posts[2 * (@page.to_i - 1), @posts_per_page]
 
   def show
     @post = Post.find(params[:id])
