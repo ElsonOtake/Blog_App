@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   root 'users#index'
 
   delete '/users/:user_id/posts/:id', to: 'posts#destroy'
+  delete '/users/:user_id/posts/:post_id/comments/:id', to: 'comments#destroy'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
