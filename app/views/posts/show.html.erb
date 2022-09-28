@@ -21,7 +21,7 @@
       <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
     <% else %>
       <% @comms.each do |comment| %>
-        <%= comment.author.name %>: <%= comment.text %><br/>
+        <%= comment.author.name %>: <%= comment.text %>  <%= button_to 'Delete', user_post_comment_path(@post.author, @post, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %><br/>
       <% end %>
     <% end %>
   </div>
