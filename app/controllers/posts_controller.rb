@@ -39,11 +39,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
+    post = Post.find(params[:id])
+    post.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Post was successfully deleted.' }
       format.json { head :no_content }
     end
   end
