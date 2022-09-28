@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @posts_per_page = 2
     @user = User.find(params[:user_id])
