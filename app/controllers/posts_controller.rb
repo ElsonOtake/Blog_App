@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   def index
-    @current_user = current_user
     @posts_per_page = 2
     @user = User.find(params[:user_id])
     @page = params.fetch(:page, 1)
@@ -8,14 +7,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @current_user = current_user
     @post = Post.find(params[:id])
     @comms = @post.comments.includes(:author)
   end
 
   def new
     @post = Post.new
-    @current_user = current_user
     respond_to do |format|
       format.html { render :new, locals: { post: @post } }
     end
