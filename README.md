@@ -39,7 +39,14 @@ Cloning a repository
 
 - Change the current working directory to the location where you want the cloned directory;
 
-- Type `git clone`, and then paste the URL you copied earlier.
+- Type `git clone`, and then paste the URL you copied earlier;
+
+- Run `bundle install`;
+
+- Run `rails server`;
+
+- Open `http://localhost:3000/` on your browser.
+
 
 ### Rspec Tests
 
@@ -47,12 +54,12 @@ To run the tests:
 
 - Open your terminal;
 
-- Go to your application folder;
+- Go to application folder;
 
-- run `rspec spec/requests`.
+- run `rspec`.
 
 
-## Author
+## Authors
 
 👤 **Elson Otake**
 
