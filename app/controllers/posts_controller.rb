@@ -1,7 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-
-  def index
+  before_action :authenticate_user!
     @posts_per_page = 2
     @user = User.find(params[:user_id])
     @page = params.fetch(:page, 1)
