@@ -6,6 +6,8 @@ class Ability
 
     can :destroy, Post, author_id: user.id
     can :destroy, Comment, author_id: user.id
-    can :manage, :all if user.is? :admin
+    can :destroy, :all if user.is? :admin
+    can :read, :all
+    can :create, :all
   end
 end
