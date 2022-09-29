@@ -8,7 +8,7 @@
       <%= form.submit value: 'Add Like', class:'btn btn-secondary m-2' %>
 
     <% end %>
-    <% if can? :destroy, current_user %>
+    <% if can? :destroy, @post %>
       <%= button_to 'Delete', user_post_path(@post.author, @post), method: :delete, class: "btn btn-danger m-2" %>
     <% end %>
   </div>
@@ -32,7 +32,7 @@
             <tr>
               <td><%= comment.author.name %></td>
               <td><%= comment.text %></td>
-              <% if can? :destroy, current_user %>
+              <% if can? :destroy, comment %>
                 <td><%= button_to 'Delete', user_post_comment_path(@post.author, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %></td>
               <% else %>
                 <td></td>
