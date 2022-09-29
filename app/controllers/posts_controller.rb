@@ -1,10 +1,13 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
 
-  @posts_per_page = 2
-  @user = User.find(params[:user_id])
-  @page = params.fetch(:page, 1)
-  @posts = @user.posts[2 * (@page.to_i - 1), @posts_per_page]
+  def index
+    @posts_per_page = 2
+    @user = User.find(params[:user_id])
+    @page = params.fetch(:page, 1)
+    @posts = @user.posts[2 * (@page.to_i - 1), @posts_per_page]
+  end
 
   def show
     @post = Post.find(params[:id])
@@ -33,6 +36,16 @@ class PostsController < ApplicationController
           render :new, new_user_post_path(current_user)
         end
       end
+    end
+  end
+
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Post was successfully deleted.' }
+      format.json { head :no_content }
     end
   end
 end

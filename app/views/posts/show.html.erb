@@ -6,11 +6,10 @@
     <%= form_with model: @likes, url: user_post_likes_path(current_user, @post), method: :post, local: true, scope: :user_post_likes do |form| %>
 
       <%= form.submit value: 'Add Like', class:'btn btn-secondary m-2' %>
-      
+
     <% end %>
-    <% flash.each do |name, message| %>
-      <br/>
-      <div class="<%= name %>"><%= message %></div>
+    <% if can? :destroy, @post %>
+      <%= button_to 'Delete', user_post_path(@post.author, @post), method: :delete, class: "btn btn-danger m-2" %>
     <% end %>
   </div>
 </div>
@@ -19,9 +18,29 @@
     <% if @post.comments_counter.zero? %>
       <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
     <% else %>
-      <% @comms.each do |comment| %>
-        <%= comment.author.name %>: <%= comment.text %><br/>
-      <% end %>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Author</th>
+            <th scope="col">Comment</th>
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <% @comms.each do |comment| %>
+            <tr>
+              <td><%= comment.author.name %></td>
+              <td><%= comment.text %></td>
+              <% if can? :destroy, comment %>
+                <td><%= button_to 'Delete', user_post_comment_path(@post.author, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %></td>
+              <% else %>
+                <td></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
   </div>
 </div>
