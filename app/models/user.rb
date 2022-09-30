@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  has_secure_password
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   has_many :comments, foreign_key: 'author_id'
