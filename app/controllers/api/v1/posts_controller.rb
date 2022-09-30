@@ -16,7 +16,7 @@ class Api::V1::PostsController < ApplicationController
     render json: post
   rescue ActiveRecord::RecordNotFound
     render json: { errors: 'Post not found' }, status: :not_found
-  end 
+  end
 
   private
 
