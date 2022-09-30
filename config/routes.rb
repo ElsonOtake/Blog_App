@@ -14,6 +14,13 @@ Rails.application.routes.draw do
   get '/users/:user_id/posts/:post_id/comments/:id', to: 'comments#show', as: 'user_post_comment'
   delete '/users/:user_id/posts/:post_id/comments/:id', to: 'comments#destroy'
 
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :posts do
+        resources :comments
+      end
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
