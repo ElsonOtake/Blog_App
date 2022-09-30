@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 
   resources :users, param: :_user_id
   post 'api/v1/auth/login', to: 'authentication#login'
-  # get '/*a', to: 'application#not_found'
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
