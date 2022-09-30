@@ -7,6 +7,25 @@ class ApplicationController < ActionController::Base
     HashWithIndifferentAccess.new(JSON.parse(request.raw_post))
   end
 
+  def not_found
+    render json: { error: 'not_found' }
+  end
+
+  def authorize_request
+    header = request.headers['Authorization']
+    p header
+    header = header.split.last if header
+    p header
+    begin
+      @decoded = JsonWebToken.decode(header)
+      @current_user = User.find(@decoded[:user_id])
+    rescue ActiveRecord::RecordNotFound || JWT::DecodeError => e
+      render json: { errors: e.message }, status: :unauthorized
+      # rescue JWT::DecodeError => e
+      #   render json: { errors: e.message }, status: :unauthorized
+    end
+  end
+
   protected
 
   def update_allowed_parameters
