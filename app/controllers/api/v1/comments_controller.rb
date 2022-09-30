@@ -6,12 +6,18 @@ class Api::V1::CommentsController < ApplicationController
 
   def index
     comments = @post.comments
-    render json: comments
+    if comments.size.positive?
+      render json: comments
+    else
+      render json: { errors: 'Comments not found' }, status: :not_found
+    end
   end
 
   def show
-    comment = @post.comments.find(params[:id])
+    comment = @post.comments.find_by_id!(params[:id])
     render json: comment
+  rescue ActiveRecord::RecordNotFound
+    render json: { errors: 'Comment not found' }, status: :not_found
   end
 
   def create
