@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
     render json: @users, status: :ok
   end
 
-  # GET /users/{username}
+  # GET /users/:id
   def show
     render json: @user, status: :ok
   end
@@ -16,7 +16,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.find_by_username!(params[:_username])
+    @user = User.find_by_id!(params[:_user_id])
   rescue ActiveRecord::RecordNotFound
     render json: { errors: 'User not found' }, status: :not_found
   end
