@@ -11,13 +11,11 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def show
-    post = @user.posts.find(params[:id])
-    if post
-      render json: post
-    else
-      render json: { errors: 'Post not found' }, status: :not_found
-    end
-  end
+    post = @user.posts.find_by_id!(params[:id])
+    render json: post
+  rescue ActiveRecord::RecordNotFound
+    render json: { errors: 'Post not found' }, status: :not_found
+  end 
 
   private
 
