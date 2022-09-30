@@ -14,10 +14,16 @@ Rails.application.routes.draw do
   get '/users/:user_id/posts/:post_id/comments/:id', to: 'comments#show', as: 'user_post_comment'
   delete '/users/:user_id/posts/:post_id/comments/:id', to: 'comments#destroy'
 
-  namespace :api, defaults: {format: :json} do
+  resources :users, param: :_username
+  post 'api/v1/auth/login', to: 'authentication#login'
+  # get '/*a', to: 'application#not_found'
+
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :posts do
-        resources :comments
+      resources :users do
+        resources :posts do
+          resources :comments
+        end
       end
     end
   end
