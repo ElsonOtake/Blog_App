@@ -19,8 +19,8 @@ describe 'Posts' do
                  updated_at: { type: :string },
                  author_id: { type: :integer }
                }
-        let(:header) do
-          { authorization: token }
+        let(:id) do
+          { id: 1 }
         end
         run_test!
       end
@@ -55,8 +55,8 @@ describe 'Posts' do
                  updated_at: { type: :string },
                  author_id: { type: :integer }
                }
-        let(:header) do
-          { authorization: token }
+        let(:id) do
+          { user_id: 1, id: 1 }
         end
         run_test!
       end
