@@ -22,6 +22,8 @@ class Api::V1::CommentsController < ApplicationController
 
   def create
     data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
+    return render json: { error: 'Empty body. Could not create it' } if data.empty?
+
     post = Post.find(params[:post_id])
     comment = Comment.new(data)
     comment.post = post

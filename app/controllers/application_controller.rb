@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   before_action :update_allowed_parameters, if: :devise_controller?
 
   def json_payload
+    return [] if request.raw_post.empty?
+
     HashWithIndifferentAccess.new(JSON.parse(request.raw_post))
   end
 
