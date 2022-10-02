@@ -1,7 +1,7 @@
 require 'swagger_helper'
 
 describe 'Comments' do
-  path 'api/v1/users/{user_id}/posts/{post_id}/comments' do
+  path '/api/v1/users/{user_id}/posts/{post_id}/comments' do
     get 'Retrieves comments' do
       tags 'Comments'
       produces 'application/json'
@@ -30,7 +30,7 @@ describe 'Comments' do
     end
   end
 
-  path 'api/v1/users/{user_id}/posts/{post_id}/comments/{id}' do
+  path '/api/v1/users/{user_id}/posts/{post_id}/comments/{id}' do
     get 'Retrieve a comment' do
       tags 'Comments'
       produces 'application/json'
@@ -64,7 +64,7 @@ describe 'Comments' do
     end
   end
 
-  path 'api/v1/users/{user_id}/posts/{post_id}/comments' do
+  path '/api/v1/users/{user_id}/posts/{post_id}/comments' do
     post 'Create a comment' do
       tags 'Comments'
       consumes 'application/json'
