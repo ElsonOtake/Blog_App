@@ -10,6 +10,10 @@
 - SQL 
 - Postgresql
 
+## API documentation
+
+- [API documentation](http://localhost:3000/api-docs/index.html)
+
 
 ## Getting Started
 
