@@ -65,8 +65,7 @@ group :development, :test do
   gem 'bullet', require: true
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'rails-controller-testing'
-  gem 'rspec-rails', '>= 3.9.0'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -84,4 +83,5 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'factory_bot_rails'
 end
