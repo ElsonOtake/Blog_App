@@ -1,9 +1,8 @@
 require 'rails_helper'
-require_relative '../support/devise'
 
 RSpec.describe 'Users', type: :request do
   before(:each) do
-    get :index
+    get root_path
   end
   describe 'GET /' do
     it 'returns http success' do
@@ -22,7 +21,7 @@ RSpec.describe 'Users', type: :request do
 
   describe 'GET /users' do
     before(:each) do
-      get :index
+      get root_path
     end
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -40,13 +39,13 @@ RSpec.describe 'Users', type: :request do
 
   describe 'GET /users/1' do
     before(:each) do
-      get :show
+      get user_path(1)
     end
     it 'returns http success' do
-      expect(response).to have_http_status(:success)
+      expect(response).to_not have_http_status(:success)
     end
     it 'render template users/show' do
-      expect(response).to render_template('users/show')
+      expect(response).to_not render_template('users/show')
     end
     it 'body include the placeholder "Here is a detail for a given user"' do
       expect(response.body).to_not include('Here is a detail for a given user')
@@ -58,16 +57,16 @@ RSpec.describe 'Users', type: :request do
 
   describe 'GET /users/index' do
     before(:each) do
-      get :show
+      get root_path
     end
     it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
     it 'not render template users/index' do
-      expect(response).to_not render_template('users/index')
+      expect(response).to render_template('users/index')
     end
     it 'render template users/show' do
-      expect(response).to render_template('users/show')
+      expect(response).to_not render_template('users/show')
     end
     it 'body include the path app/views/users/show.html.erb' do
       expect(response.body).to_not include('app/views/users/show.html.erb')
@@ -76,13 +75,13 @@ RSpec.describe 'Users', type: :request do
 
   describe 'GET /users/show' do
     before(:each) do
-      get :show
+      get user_path(1)
     end
     it 'returns http success' do
-      expect(response).to have_http_status(:success)
+      expect(response).to_not have_http_status(:success)
     end
     it 'render template users/show' do
-      expect(response).to render_template('users/show')
+      expect(response).to_not render_template('users/show')
     end
     it 'body include the placeholder "Here is a detail for a given user"' do
       expect(response.body).to_not include('Here is a detail for a given user')
