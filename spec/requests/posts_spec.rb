@@ -1,6 +1,8 @@
 require 'rails_helper'
+require_relative '../support/devise'
 
 RSpec.describe 'Posts', type: :request do
+  login_user
   before(:each) do
     get '/posts/index'
   end

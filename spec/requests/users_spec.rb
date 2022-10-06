@@ -1,10 +1,11 @@
 require 'rails_helper'
+require_relative '../support/devise'
 
 RSpec.describe 'Users', type: :request do
+  before(:each) do
+    get :index
+  end
   describe 'GET /' do
-    before(:each) do
-      get '/'
-    end
     it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
@@ -12,16 +13,16 @@ RSpec.describe 'Users', type: :request do
       expect(response).to render_template('users/index')
     end
     it 'body include the placeholder "Here is a list of users"' do
-      expect(response.body).to include('Here is a list of users')
+      expect(response.body).to_not include('Here is a list of users')
     end
     it 'body include the path app/views/users/index.html.erb' do
-      expect(response.body).to include('app/views/users/index.html.erb')
+      expect(response.body).to_not include('app/views/users/index.html.erb')
     end
   end
 
   describe 'GET /users' do
     before(:each) do
-      get '/users'
+      get :index
     end
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -30,16 +31,16 @@ RSpec.describe 'Users', type: :request do
       expect(response).to render_template('users/index')
     end
     it 'body include the placeholder "Here is a list of users"' do
-      expect(response.body).to include('Here is a list of users')
+      expect(response.body).to_not include('Here is a list of users')
     end
     it 'body include the path app/views/users/index.html.erb' do
-      expect(response.body).to include('app/views/users/index.html.erb')
+      expect(response.body).to_not include('app/views/users/index.html.erb')
     end
   end
 
   describe 'GET /users/1' do
     before(:each) do
-      get '/users/1'
+      get :show
     end
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -48,16 +49,16 @@ RSpec.describe 'Users', type: :request do
       expect(response).to render_template('users/show')
     end
     it 'body include the placeholder "Here is a detail for a given user"' do
-      expect(response.body).to include('Here is a detail for a given user')
+      expect(response.body).to_not include('Here is a detail for a given user')
     end
     it 'body include the path app/views/users/show.html.erb' do
-      expect(response.body).to include('app/views/users/show.html.erb')
+      expect(response.body).to_not include('app/views/users/show.html.erb')
     end
   end
 
   describe 'GET /users/index' do
     before(:each) do
-      get '/users/index'
+      get :show
     end
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -69,13 +70,13 @@ RSpec.describe 'Users', type: :request do
       expect(response).to render_template('users/show')
     end
     it 'body include the path app/views/users/show.html.erb' do
-      expect(response.body).to include('app/views/users/show.html.erb')
+      expect(response.body).to_not include('app/views/users/show.html.erb')
     end
   end
 
   describe 'GET /users/show' do
     before(:each) do
-      get '/users/show'
+      get :show
     end
     it 'returns http success' do
       expect(response).to have_http_status(:success)
@@ -84,13 +85,13 @@ RSpec.describe 'Users', type: :request do
       expect(response).to render_template('users/show')
     end
     it 'body include the placeholder "Here is a detail for a given user"' do
-      expect(response.body).to include('Here is a detail for a given user')
+      expect(response.body).to_not include('Here is a detail for a given user')
     end
     it "body doesn't include the placeholder 'Here is a list of users'" do
       expect(response.body).to_not include('Here is a list of users')
     end
     it 'body include the path app/views/users/show.html.erb' do
-      expect(response.body).to include('app/views/users/show.html.erb')
+      expect(response.body).to_not include('app/views/users/show.html.erb')
     end
   end
 end
