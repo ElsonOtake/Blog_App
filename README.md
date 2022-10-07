@@ -10,9 +10,9 @@
 - SQL 
 - Postgresql
 
-## API documentation
+## Live demo
 
-- [API documentation](http://localhost:3000/api-docs/index.html)
+- [Heroku](https://elsonotake-blog-app.herokuapp.com/)
 
 
 ## Getting Started
