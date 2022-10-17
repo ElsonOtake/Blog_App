@@ -6,6 +6,7 @@ RSpec.configure do |config|
       openapi: '3.0.1',
       info: {
         title: 'Blog app API V1',
+        description: 'This is a sample server Blog app.',
         version: 'v1'
       },
       paths: {},
