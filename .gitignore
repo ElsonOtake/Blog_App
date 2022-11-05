@@ -31,4 +31,3 @@
 /config/master.key
 
 node_modules/
-.env
