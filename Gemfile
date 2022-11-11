@@ -19,6 +19,10 @@ gem 'devise'
 
 gem 'cancancan'
 
+gem 'kramdown'
+gem 'rake'
+gem 'rspec'
+
 # Use Json Web Token (JWT) for token based authentication
 gem 'jwt'
 
