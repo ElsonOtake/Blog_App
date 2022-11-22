@@ -141,10 +141,11 @@ To run tests, run the following command:
   rspec spec/requests
 ```
 
-To generate the [API documentation](http://localhost:3000/api-docs/index.html):
+To generate the API documentation:
 ```sh
   rake rswag:specs:swaggerize
 ```
+[API documentation](http://localhost:3000/api-docs/index.html) address.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
