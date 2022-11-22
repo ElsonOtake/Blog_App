@@ -136,7 +136,14 @@ Open `http://localhost:3000/` on your browser.
 To run tests, run the following command:
 
 ```sh
-  rspec
+  rspec spec/features
+  rspec spec/models
+  rspec spec/requests
+```
+
+To generate the [API documentation](http://localhost:3000/api-docs/index.html):
+```sh
+  rake rswag:specs:swaggerize
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
