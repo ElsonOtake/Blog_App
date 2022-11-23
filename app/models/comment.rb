@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  belongs_to :author, class_name: 'User'
+  belongs_to :author, class_name: 'Member'
   belongs_to :post
   validates :text, presence: true, length: { maximum: 250, too_long: '%<count>s characters is the maximum allowed' }
 

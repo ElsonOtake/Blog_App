@@ -1,6 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :authorize_request
-  before_action :find_user_post
+  before_action :find_member_post
 
   ALLOWED_DATA = %(text).freeze
 
@@ -27,7 +27,7 @@ class Api::V1::CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     comment = Comment.new(data)
     comment.post = post
-    comment.author = @current_user
+    comment.author = @current_member
     if comment.save
       render json: comment
     else
@@ -37,10 +37,10 @@ class Api::V1::CommentsController < ApplicationController
 
   private
 
-  def find_user_post
-    user = User.find_by_id!(params[:user_id])
-    @post = user.posts.find_by_id!(params[:post_id])
+  def find_member_post
+    member = Member.find_by_id!(params[:member_id])
+    @post = member.posts.find_by_id!(params[:post_id])
   rescue ActiveRecord::RecordNotFound
-    render json: { errors: 'User and/or post not found' }, status: :not_found
+    render json: { errors: 'Member and/or post not found' }, status: :not_found
   end
 end

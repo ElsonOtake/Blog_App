@@ -7,7 +7,7 @@ info:
 paths:
   "/api/v1/auth/login":
     post:
-      summary: Valid user log in
+      summary: Valid member log in
       tags:
       - Log in
       parameters: []
@@ -29,8 +29,8 @@ paths:
               required:
               - email
               - password
-        description: Valid user log in
-  "/api/v1/users/{user_id}/posts/{post_id}/comments":
+        description: Valid member log in
+  "/api/v1/members/{member_id}/posts/{post_id}/comments":
     get:
       summary: Retrieves comments
       security:
@@ -38,10 +38,10 @@ paths:
       tags:
       - Comments
       parameters:
-      - name: user_id
+      - name: member_id
         in: path
         required: true
-        description: user id
+        description: member id
         schema:
           type: string
       - name: post_id
@@ -79,10 +79,10 @@ paths:
       tags:
       - Comments
       parameters:
-      - name: user_id
+      - name: member_id
         in: path
         required: true
-        description: user id
+        description: member id
         schema:
           type: string
       - name: post_id
@@ -107,7 +107,7 @@ paths:
               required:
               - text
         description: Create a comment
-  "/api/v1/users/{user_id}/posts/{post_id}/comments/{id}":
+  "/api/v1/members/{member_id}/posts/{post_id}/comments/{id}":
     get:
       summary: Retrieve a comment
       security:
@@ -115,10 +115,10 @@ paths:
       tags:
       - Comments
       parameters:
-      - name: user_id
+      - name: member_id
         in: path
         required: true
-        description: user id
+        description: member id
         schema:
           type: string
       - name: post_id
@@ -155,7 +155,7 @@ paths:
                     type: integer
         '404':
           description: Not found
-  "/api/v1/users/{id}/posts":
+  "/api/v1/members/{id}/posts":
     get:
       summary: Retrieves posts
       security:
@@ -166,7 +166,7 @@ paths:
       - name: id
         in: path
         required: true
-        description: user id
+        description: member id
         schema:
           type: string
       responses:
@@ -195,7 +195,7 @@ paths:
                     type: integer
         '404':
           description: Not found
-  "/api/v1/users/{user_id}/posts/{id}":
+  "/api/v1/members/{member_id}/posts/{id}":
     get:
       summary: Retrieve a post
       security:
@@ -203,10 +203,10 @@ paths:
       tags:
       - Posts
       parameters:
-      - name: user_id
+      - name: member_id
         in: path
         required: true
-        description: user id
+        description: member id
         schema:
           type: string
       - name: id
@@ -241,26 +241,26 @@ paths:
                     type: integer
         '404':
           description: Not found
-  "/api/v1/users":
+  "/api/v1/members":
     get:
-      summary: Retrieves users
+      summary: Retrieves members
       tags:
-      - Users
+      - Members
       responses:
         '200':
           description: OK
-  "/api/v1/users/{id}":
+  "/api/v1/members/{id}":
     get:
-      summary: Retrieve a user
+      summary: Retrieve a member
       security:
       - ApiKeyAuth: []
       tags:
-      - Users
+      - Members
       parameters:
       - name: id
         in: path
         required: true
-        description: user id
+        description: member id
         schema:
           type: string
       responses:

@@ -1,9 +1,9 @@
 require 'swagger_helper'
 
-describe 'Users' do
-  path '/api/v1/users' do
-    get 'Retrieves users' do
-      tags 'Users'
+describe 'Members' do
+  path '/api/v1/members' do
+    get 'Retrieves members' do
+      tags 'Members'
       consumes 'application/json'
 
       response '200', 'OK' do
@@ -24,12 +24,12 @@ describe 'Users' do
     end
   end
 
-  path '/api/v1/users/{id}' do
-    get 'Retrieve a user' do
+  path '/api/v1/members/{id}' do
+    get 'Retrieve a member' do
       security [{ ApiKeyAuth: [] }]
-      tags 'Users'
+      tags 'Members'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string, required: true, description: 'user id'
+      parameter name: :id, in: :path, type: :string, required: true, description: 'member id'
 
       response '200', 'OK' do
         schema type: :object,
@@ -49,7 +49,7 @@ describe 'Users' do
       end
 
       response '404', 'Not found' do
-        let(:error) { 'User not found' }
+        let(:error) { 'Member not found' }
         run_test!
       end
     end

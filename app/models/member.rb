@@ -1,4 +1,4 @@
-class User < ApplicationRecord
+class Member < ApplicationRecord
   # :confirmable removed from the list on the deployed version
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

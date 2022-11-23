@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   before_action :update_allowed_parameters, if: :devise_controller?
 
+  def current_user
+    current_member
+  end
+
   def json_payload
     return [] if request.raw_post.empty?
 
@@ -19,12 +23,12 @@ class ApplicationController < ActionController::Base
       header = header.split.last
       begin
         @decoded = JsonWebToken.decode(header)
-        @current_user = User.find_by_id!(@decoded[:user_id])
+        @current_member = Member.find_by_id!(@decoded[:member_id])
       rescue ActiveRecord::RecordNotFound || JWT::DecodeError => e
         render json: { errors: e.message }, status: :unauthorized
       end
     else
-      render json: { errors: 'Unauthorized user' }, status: :unauthorized
+      render json: { errors: 'Unauthorized member' }, status: :unauthorized
     end
   end
 

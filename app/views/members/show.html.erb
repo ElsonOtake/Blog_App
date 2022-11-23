@@ -1,26 +1,26 @@
-<%= render partial: 'partials/user_display', locals: { user: @user } %>
+<%= render partial: 'partials/member_display', locals: { member: @member } %>
 <div class="card m-3">
   <div class="card-body">
     <h5 class="card-title">Bio</h5>
-    <p class="card-text"><%= @user.bio %></p>
+    <p class="card-text"><%= @member.bio %></p>
     <% flash.each do |name, message| %>
       <br/>
       <div class="<%= name %>"><%= message %></div>
     <% end %>
   </div>
 </div>
-<% if @user.recent_posts.size.zero? %>
+<% if @member.recent_posts.size.zero? %>
     <div class="card m-3">
       <div class="card-body">
         <p class="mb-2 text-muted"><small>There are no posts yet</small></p>
       </div>
     </div>
 <% else %>
-  <% @user.recent_posts.each do |post| %>
+  <% @member.recent_posts.each do |post| %>
     <div class="card m-3">
       <div class="card-body">
         <h5 class="card-title">
-          <%= link_to post.title, user_post_path(@user, post), class: "text-decoration-none" %>
+          <%= link_to post.title, member_post_path(@member, post), class: "text-decoration-none" %>
         </h5>
         <% if post.text.size > 70 %>
           <p class="card-text"><%= post.text[0, 70] %>...</p>
@@ -32,6 +32,6 @@
     </div>
   <% end %>
   <button type="button" class="btn btn-link text-primary mx-auto d-block mb-4 border border-primary rounded text-decoration-none">
-    <%= link_to "See all posts", user_posts_path(@user), class: "text-decoration-none" %>
+    <%= link_to "See all posts", member_posts_path(@member), class: "text-decoration-none" %>
   </button>
 <% end %>

@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_member!
   load_and_authorize_resource
 
   def new
@@ -8,10 +8,10 @@ class CommentsController < ApplicationController
 
   def create
     post = Post.find(params[:post_id])
-    user = User.find(params[:user_id])
-    comment = Comment.new(params.require(:user_post_comments).permit(:text))
+    member = Member.find(params[:member_id])
+    comment = Comment.new(params.require(:member_post_comments).permit(:text))
     comment.post = post
-    comment.author = current_user
+    comment.author = current_member
     respond_to do |format|
       format.html do
         if comment.save
@@ -19,19 +19,19 @@ class CommentsController < ApplicationController
         else
           flash.now[:error] = 'Error: Comment could not be saved'
         end
-        redirect_to user_post_path(user, post)
+        redirect_to member_post_path(member, post)
       end
     end
   end
 
   def destroy
-    user = User.find(params[:user_id])
+    member = Member.find(params[:member_id])
     post = Post.find(params[:post_id])
     comment = Comment.find(params[:id])
     comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_post_path(user, post), notice: 'Comment was successfully deleted.' }
+      format.html { redirect_to member_post_path(member, post), notice: 'Comment was successfully deleted.' }
       format.json { head :no_content }
     end
   end
