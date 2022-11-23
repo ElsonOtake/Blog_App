@@ -1,6 +1,6 @@
-class CreateUser < ActiveRecord::Migration[7.0]
+class CreateMember < ActiveRecord::Migration[7.0]
   def change
-    create_table :users do |t|
+    create_table :members do |t|
       t.string :name
       t.string :bio
 

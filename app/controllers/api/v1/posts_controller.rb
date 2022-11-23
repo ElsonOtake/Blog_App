@@ -1,9 +1,9 @@
 class Api::V1::PostsController < ApplicationController
   before_action :authorize_request
-  before_action :find_user
+  before_action :find_member
 
   def index
-    posts = @user.posts
+    posts = @member.posts
     if posts.size.positive?
       render json: posts
     else
@@ -12,7 +12,7 @@ class Api::V1::PostsController < ApplicationController
   end
 
   def show
-    post = @user.posts.find_by_id!(params[:id])
+    post = @member.posts.find_by_id!(params[:id])
     render json: post
   rescue ActiveRecord::RecordNotFound
     render json: { errors: 'Post not found' }, status: :not_found
@@ -20,9 +20,9 @@ class Api::V1::PostsController < ApplicationController
 
   private
 
-  def find_user
-    @user = User.find_by_id!(params[:user_id])
+  def find_member
+    @member = Member.find_by_id!(params[:member_id])
   rescue ActiveRecord::RecordNotFound
-    render json: { errors: 'User not found' }, status: :not_found
+    render json: { errors: 'Member not found' }, status: :not_found
   end
 end

@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
-  load_and_authorize_resource
+  before_action :authenticate_member!
+  # load_and_authorize_resource
 
   def index
     @posts_per_page = 2
-    @user = User.find(params[:user_id])
+    @member = Member.find(params[:member_id])
     @page = params.fetch(:page, 1)
-    @posts = @user.posts[2 * (@page.to_i - 1), @posts_per_page]
+    @posts = @member.posts[2 * (@page.to_i - 1), @posts_per_page]
   end
 
   def show
@@ -23,17 +23,17 @@ class PostsController < ApplicationController
 
   def create
     post = Post.new
-    post.title = params[:user_posts][:title]
-    post.text = params[:user_posts][:text]
-    post.author = current_user
+    post.title = params[:member_posts][:title]
+    post.text = params[:member_posts][:text]
+    post.author = current_member
     respond_to do |format|
       format.html do
         if post.save
           flash[:success] = 'Post was successfully created'
-          redirect_to user_path(current_user)
+          redirect_to member_path(current_member)
         else
           flash.now[:error] = 'Error: Post could not be saved'
-          render :new, new_user_post_path(current_user)
+          render :new, new_member_post_path(current_member)
         end
       end
     end

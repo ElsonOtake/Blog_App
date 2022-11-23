@@ -3,13 +3,13 @@
     <h5 class="card-title"><%= @post.title %> by <%= @post.author.name %></h5>
     <p class="mb-2 text-muted text-end"><small>Comments: <%= @post.comments_counter %> Likes: <%= @post.likes_counter %></small></p>
     <p class="card-text"><%= @post.text %></p>
-    <%= form_with model: @likes, url: user_post_likes_path(current_user, @post), method: :post, local: true, scope: :user_post_likes do |form| %>
+    <%= form_with model: @likes, url: member_post_likes_path(current_member, @post), method: :post, local: true, scope: :member_post_likes do |form| %>
 
       <%= form.submit value: 'Add Like', class:'btn btn-secondary m-2' %>
 
     <% end %>
     <% if can? :destroy, @post %>
-      <%= button_to 'Delete', user_post_path(@post.author, @post), method: :delete, class: "btn btn-danger m-2" %>
+      <%= button_to 'Delete', member_post_path(@post.author, @post), method: :delete, class: "btn btn-danger m-2" %>
     <% end %>
   </div>
 </div>
@@ -33,7 +33,7 @@
               <td><%= comment.author.name %></td>
               <td><%= comment.text %></td>
               <% if can? :destroy, comment %>
-                <td><%= button_to 'Delete', user_post_comment_path(@post.author, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %></td>
+                <td><%= button_to 'Delete', member_post_comment_path(@post.author, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %></td>
               <% else %>
                 <td></td>
               <% end %>
@@ -46,7 +46,7 @@
 </div>
 <br/><br/>
 
-<%= form_with model: @comments, url: user_post_comments_path(current_user, @post), method: :post, local: true, scope: :user_post_comments do |form| %>
+<%= form_with model: @comments, url: member_post_comments_path(current_member, @post), method: :post, local: true, scope: :member_post_comments do |form| %>
 
   <div class="form-group m-3">
     <%= form.text_field :text, class: "form-control m-2 w-75", placeholder: "Comment text" %>

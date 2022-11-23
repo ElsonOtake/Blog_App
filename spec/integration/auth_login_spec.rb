@@ -2,10 +2,10 @@ require 'swagger_helper'
 
 describe 'Auth login' do
   path '/api/v1/auth/login' do
-    post 'Valid user log in' do
+    post 'Valid member log in' do
       tags 'Log in'
       consumes 'application/json'
-      parameter name: :user, in: :body, description: 'Valid user log in', schema: {
+      parameter name: :member, in: :body, description: 'Valid member log in', schema: {
         type: :object,
         properties: {
           email: { type: :string },

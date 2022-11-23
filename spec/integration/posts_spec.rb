@@ -1,12 +1,12 @@
 require 'swagger_helper'
 
 describe 'Posts' do
-  path '/api/v1/users/{id}/posts' do
+  path '/api/v1/members/{id}/posts' do
     get 'Retrieves posts' do
       security [{ ApiKeyAuth: [] }]
       tags 'Posts'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string, required: true, description: 'user id'
+      parameter name: :id, in: :path, type: :string, required: true, description: 'member id'
 
       response '200', 'OK' do
         schema type: :object, properties: {
@@ -24,18 +24,18 @@ describe 'Posts' do
       end
 
       response '404', 'Not found' do
-        let(:error) { 'User/Post not found' }
+        let(:error) { 'Member/Post not found' }
         run_test!
       end
     end
   end
 
-  path '/api/v1/users/{user_id}/posts/{id}' do
+  path '/api/v1/members/{member_id}/posts/{id}' do
     get 'Retrieve a post' do
       security [{ ApiKeyAuth: [] }]
       tags 'Posts'
       produces 'application/json'
-      parameter name: :user_id, in: :path, type: :string, required: true, description: 'user id'
+      parameter name: :member_id, in: :path, type: :string, required: true, description: 'member id'
       parameter name: :id, in: :path, type: :string, required: true, description: 'post id'
 
       response '200', 'OK' do
@@ -54,7 +54,7 @@ describe 'Posts' do
       end
 
       response '404', 'Not found' do
-        let(:error) { 'User/Post not found' }
+        let(:error) { 'Member/Post not found' }
         run_test!
       end
     end
