@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
   before_action :authenticate_member!
-  # load_and_authorize_resource
+  load_and_authorize_resource
 
   def create
     post = Post.find(params[:post_id])

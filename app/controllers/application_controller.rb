@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   before_action :update_allowed_parameters, if: :devise_controller?
 
+  def current_user
+    current_member
+  end
+
   def json_payload
     return [] if request.raw_post.empty?
 

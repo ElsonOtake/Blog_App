@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   before_action :authenticate_member!, except: [:index]
-  # load_and_authorize_resource
+  load_and_authorize_resource
 
   def index
     @members = Member.all
