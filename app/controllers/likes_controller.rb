@@ -6,12 +6,12 @@ class LikesController < ApplicationController
     post = Post.find(params[:post_id])
     like = Like.new
     like.post = post
-    like.author = current_member
+    like.author = current_user
     if like.save
-      flash[:success] = 'Like was successfully created'
+      flash.notice = 'Like was successfully created'
     else
-      flash[:error] = 'Error: Like could not be saved'
+      flash.now.alert = 'Like could not be saved'
     end
-    redirect_to member_post_path(current_member, post)
+    redirect_to member_post_path(current_user, post)
   end
 end
