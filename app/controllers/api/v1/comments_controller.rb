@@ -7,31 +7,31 @@ class Api::V1::CommentsController < ApplicationController
   def index
     comments = @post.comments
     if comments.size.positive?
-      render json: comments
+      render json: comments, status: :ok
     else
-      render json: { errors: 'Comments not found' }, status: :not_found
+      render json: { error: 'Comments not found' }, status: :not_found
     end
   end
 
   def show
     comment = @post.comments.find_by_id!(params[:id])
-    render json: comment
+    render json: comment, status: :ok
   rescue ActiveRecord::RecordNotFound
-    render json: { errors: 'Comment not found' }, status: :not_found
+    render json: { error: 'Comment not found' }, status: :not_found
   end
 
   def create
     data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
-    return render json: { error: 'Empty body. Could not create it' } if data.empty?
+    return render json: { error: 'Empty body. Could not create it' }, status: :unprocessable_entity if data.empty?
 
-    post = Post.find(params[:post_id])
+    # post = Post.find(params[:post_id])
     comment = Comment.new(data)
-    comment.post = post
-    comment.author = @current_member
+    comment.post = @post
+    comment.author = current_user
     if comment.save
-      render json: comment
+      render json: comment, status: :ok
     else
-      render json: { error: 'could not create it' }
+      render json: { error: 'Could not create it' }, status: :unprocessable_entity
     end
   end
 
@@ -41,6 +41,6 @@ class Api::V1::CommentsController < ApplicationController
     member = Member.find_by_id!(params[:member_id])
     @post = member.posts.find_by_id!(params[:post_id])
   rescue ActiveRecord::RecordNotFound
-    render json: { errors: 'Member and/or post not found' }, status: :not_found
+    render json: { error: 'Member and/or post not found' }, status: :not_found
   end
 end
