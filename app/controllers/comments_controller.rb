@@ -20,12 +20,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    member = Member.find(params[:member_id])
     post = Post.find(params[:post_id])
     comment = Comment.find(params[:id])
     comment.destroy
 
-    redirect_to member_post_path(member, post), notice: 'Comment was successfully deleted.'
+    redirect_to member_post_path(current_member, post), notice: 'Comment was successfully deleted.'
   end
 
   private
