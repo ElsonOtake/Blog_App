@@ -11,7 +11,7 @@ class LikesController < ApplicationController
     if like.save
       flash[:success] = 'Like was successfully created'
     else
-      flash.now[:error] = 'Error: Like could not be saved'
+      flash[:error] = 'Error: Like could not be saved'
     end
     redirect_to member_post_path(author, post)
   end
