@@ -8,15 +8,11 @@ class LikesController < ApplicationController
     like = Like.new
     like.post = post
     like.author = current_member
-    respond_to do |format|
-      format.html do
-        if like.save
-          flash[:success] = 'Like was successfully created'
-        else
-          flash.now[:error] = 'Error: Like could not be saved'
-        end
-        redirect_to member_post_path(author, post)
-      end
+    if like.save
+      flash[:success] = 'Like was successfully created'
+    else
+      flash.now[:error] = 'Error: Like could not be saved'
     end
+    redirect_to member_post_path(author, post)
   end
 end
