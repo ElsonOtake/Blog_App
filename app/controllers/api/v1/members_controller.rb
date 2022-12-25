@@ -5,12 +5,12 @@ class Api::V1::MembersController < ApplicationController
   # GET /members
   def index
     @members = Member.all
-    render json: @members, status: :ok
+    render json: @members
   end
 
   # GET /members/:id
   def show
-    render json: @member, status: :ok
+    render json: @member
   end
 
   private
