@@ -7,7 +7,7 @@ class Api::V1::CommentsController < ApplicationController
   def index
     comments = @post.comments
     if comments.size.positive?
-      render json: comments, status: :ok
+      render json: comments
     else
       render json: { error: 'Comments not found' }, status: :not_found
     end
@@ -15,7 +15,7 @@ class Api::V1::CommentsController < ApplicationController
 
   def show
     comment = @post.comments.find_by_id!(params[:id])
-    render json: comment, status: :ok
+    render json: comment
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'Comment not found' }, status: :not_found
   end
@@ -28,7 +28,7 @@ class Api::V1::CommentsController < ApplicationController
     comment.post = @post
     comment.author = current_user
     if comment.save
-      render json: comment, status: :ok
+      render json: comment
     else
       render json: { error: 'Could not create it' }, status: :unprocessable_entity
     end
