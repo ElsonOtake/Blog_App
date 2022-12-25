@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     if comment.save
       flash[:success] = 'Comment was successfully created'
     else
-      flash.now[:error] = 'Error: Comment could not be saved'
+      flash[:error] = 'Error: Comment could not be saved'
     end
     redirect_to member_post_path(member, post)
   end
