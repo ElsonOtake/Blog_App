@@ -20,13 +20,12 @@ class PostsController < ApplicationController
 
   def create
     post = Post.new(post_params)
-    post.author = current_member
+    post.author = current_user
     if post.save
-      # flash[:success] = 'Post was successfully created'
-      redirect_to member_path(current_member), notice: 'Post was successfully created'
+      redirect_to member_path(current_user), notice: 'Post was successfully created'
     else
-      flash[:error] = 'Error: Post could not be saved'
-      render :new, new_member_post_path(current_member)
+      flash.now[:alert] = 'Post could not be saved'
+      render :new, new_member_post_path(current_user)
     end
   end
 
