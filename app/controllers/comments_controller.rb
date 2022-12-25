@@ -8,7 +8,6 @@ class CommentsController < ApplicationController
 
   def create
     post = Post.find(params[:post_id])
-    member = Member.find(params[:member_id])
     comment = Comment.new(comment_params)
     comment.post = post
     comment.author = current_member
@@ -17,7 +16,7 @@ class CommentsController < ApplicationController
     else
       flash[:error] = 'Error: Comment could not be saved'
     end
-    redirect_to member_post_path(member, post)
+    redirect_to member_post_path(current_member, post)
   end
 
   def destroy
