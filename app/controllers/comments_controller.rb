@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
   def create
     post = Post.find(params[:post_id])
     member = Member.find(params[:member_id])
-    comment = Comment.new(params.require(:member_post_comments).permit(:text))
+    comment = Comment.new(comment_params)
     comment.post = post
     comment.author = current_member
     if comment.save
@@ -27,5 +27,11 @@ class CommentsController < ApplicationController
     comment.destroy
 
     redirect_to member_post_path(member, post), notice: 'Comment was successfully deleted.'
+  end
+
+  private
+
+  def comment_params
+    params.require(:member_post_comments).permit(:text)
   end
 end
