@@ -10,7 +10,7 @@ class LikesController < ApplicationController
     if like.save
       flash.notice = 'Like was successfully created'
     else
-      flash.now.alert = 'Error: Like could not be saved'
+      flash.now.alert = 'Like could not be saved'
     end
     redirect_to member_post_path(current_user, post)
   end
