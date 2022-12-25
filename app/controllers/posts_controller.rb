@@ -24,8 +24,8 @@ class PostsController < ApplicationController
     if post.save
       redirect_to member_path(current_user), notice: 'Post was successfully created'
     else
-      flash.now[:alert] = 'Post could not be saved'
-      render :new, new_member_post_path(current_user)
+      flash.alert = 'Post could not be saved'
+      render :new
     end
   end
 
