@@ -19,15 +19,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new
-    post.title = params[:member_posts][:title]
-    post.text = params[:member_posts][:text]
+    post = Post.new(post_params)
     post.author = current_member
     if post.save
       flash[:success] = 'Post was successfully created'
       redirect_to member_path(current_member)
     else
-      flash.now[:error] = 'Error: Post could not be saved'
+      flash[:error] = 'Error: Post could not be saved'
       render :new, new_member_post_path(current_member)
     end
   end
@@ -37,5 +35,11 @@ class PostsController < ApplicationController
     post.destroy
 
     redirect_to root_path, notice: 'Post was successfully deleted.'
+  end
+
+  private
+
+  def post_params
+    params.require(:member_posts).permit(:title, :text)
   end
 end
