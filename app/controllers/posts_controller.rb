@@ -16,9 +16,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    respond_to do |format|
-      format.html { render :new, locals: { post: @post } }
-    end
   end
 
   def create
@@ -26,16 +23,12 @@ class PostsController < ApplicationController
     post.title = params[:member_posts][:title]
     post.text = params[:member_posts][:text]
     post.author = current_member
-    respond_to do |format|
-      format.html do
-        if post.save
-          flash[:success] = 'Post was successfully created'
-          redirect_to member_path(current_member)
-        else
-          flash.now[:error] = 'Error: Post could not be saved'
-          render :new, new_member_post_path(current_member)
-        end
-      end
+    if post.save
+      flash[:success] = 'Post was successfully created'
+      redirect_to member_path(current_member)
+    else
+      flash.now[:error] = 'Error: Post could not be saved'
+      render :new, new_member_post_path(current_member)
     end
   end
 
@@ -43,9 +36,6 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     post.destroy
 
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Post was successfully deleted.' }
-      format.json { head :no_content }
-    end
+    redirect_to root_path, notice: 'Post was successfully deleted.'
   end
 end
