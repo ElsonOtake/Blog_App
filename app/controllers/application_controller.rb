@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def posts_per_page
-    @posts_per_page = 3
+    @posts_per_page = 2
   end
 
   def json_payload
