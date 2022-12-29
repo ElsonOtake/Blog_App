@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     current_member
   end
 
+  def posts_per_page
+    @posts_per_page = 3
+  end
+
   def json_payload
     return [] if request.raw_post.empty?
 

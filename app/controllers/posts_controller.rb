@@ -3,10 +3,9 @@ class PostsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @posts_per_page = 2
     @member = Member.find(params[:member_id])
     @page = params.fetch(:page, 1)
-    @posts = @member.posts[@posts_per_page * (@page.to_i - 1), @posts_per_page]
+    @posts = @member.posts[posts_per_page * (@page.to_i - 1), posts_per_page]
   end
 
   def show
