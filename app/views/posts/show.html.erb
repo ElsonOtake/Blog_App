@@ -1,7 +1,9 @@
 <div class="card m-3">
   <div class="card-body">
     <h5 class="card-title"><%= @post.title %> by <%= @post.author.name %></h5>
+    <i class="bi-star-fill" style="color: goldenrod;"></i> <%= @post.likes_counter %>
     <p class="mb-2 text-muted text-end"><small>Comments: <%= @post.comments_counter %> Likes: <%= @post.likes_counter %></small></p>
+    
     <p class="card-text"><%= @post.text %></p>
     <%= form_with model: @likes, url: member_post_likes_path(current_member, @post), method: :post, local: true, scope: :member_post_likes do |form| %>
 
