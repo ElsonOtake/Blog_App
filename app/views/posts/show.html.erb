@@ -1,18 +1,14 @@
 <div class="card m-3">
   <div class="card-body">
     <h5 class="card-title"><%= @post.title %> by <%= @post.author.name %></h5>
-    <div data-controller="like">
-      <i id="likes_counter" class="bi-star-fill" data-action="click->like#change"></i>
-    </div>
+    <% liked = @like.count > 0 ? "bi-star-fill" : "bi-star" %>
+    <span data-controller="like">
+      <i id="likes_counter" class=<%= liked %> data-action="click->like#change"></i>
+    </span>
     <span class="counter"> <%= @post.likes_counter %></span>
-    <p class="mb-2 text-muted text-end"><small>Comments: <%= @post.comments_counter %> Likes: <%= @post.likes_counter %></small></p>
+    <p class="mb-2 text-muted text-end"><small>Comments: <%= @post.comments_counter %></small></p>
     
     <p class="card-text"><%= @post.text %></p>
-    <%= form_with model: @likes, url: member_post_likes_path(current_member, @post), method: :post, local: true, scope: :member_post_likes do |form| %>
-
-      <%= form.submit value: 'Add Like', class:'btn btn-secondary m-2' %>
-
-    <% end %>
     <% if can? :destroy, @post %>
       <%= button_to 'Delete', member_post_path(@post.author, @post), method: :delete, class: "btn btn-danger m-2" %>
     <% end %>
