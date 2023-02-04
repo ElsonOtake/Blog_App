@@ -20,8 +20,8 @@ class Api::V1::LikesController < ApplicationController
   private
 
   def find_member_post
-    @member = Member.find_by_id!(params[:member_id])
-    @post = @member.posts.find_by_id!(params[:post_id])
+    @member = current_user
+    @post = Post.find_by_id!(params[:post_id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'Member and/or post not found' }, status: :not_found
   end
