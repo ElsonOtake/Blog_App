@@ -2,7 +2,7 @@
   <div class="card-body">
     <h5 class="card-title"><%= @post.title %> by <%= @post.author.name %></h5>
     <div data-controller="like">
-      <i class="bi-star-fill"></i> <%= @post.likes_counter %>
+      <i id="likes_counter" class="bi-star-fill" data-action="click->like#change"></i> <%= @post.likes_counter %>
     </div>
     <p class="mb-2 text-muted text-end"><small>Comments: <%= @post.comments_counter %> Likes: <%= @post.likes_counter %></small></p>
     
