@@ -4,17 +4,13 @@ Rails.application.routes.draw do
   devise_for :members
 
   resources :members, only: %i[index show] do
-    resources :posts, only: %i[index show new create delete] do
-      resources :comments, only: %i[create delete]
+    resources :posts, only: %i[index show new create destroy] do
+      resources :comments, only: %i[show create destroy]
       resources :likes, only: %i[create]
     end
   end
 
   root 'members#index'
-
-  delete '/members/:member_id/posts/:id', to: 'posts#destroy'
-  get '/members/:member_id/posts/:post_id/comments/:id', to: 'comments#show', as: 'member_post_comment'
-  delete '/members/:member_id/posts/:post_id/comments/:id', to: 'comments#destroy'
 
   # routes for spec
   get '/members/index'
@@ -23,7 +19,7 @@ Rails.application.routes.draw do
   get '/posts/show'
   get '/comments/create'
   get '/likes/create'
-  resources :members, param: :_member_id
+  # resources :members, param: :_member_id
   post 'api/v1/auth/login', to: 'authentication#login'
 
   namespace :api, defaults: { format: :json } do
@@ -31,14 +27,9 @@ Rails.application.routes.draw do
       resources :members, only: %i[index show] do
         resources :posts, only: %i[index show] do
           resources :comments, only: %i[index show create]
+          resources :likes, only: %i[create destroy]
         end
       end
     end
   end
-
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

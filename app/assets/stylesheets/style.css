@@ -1,0 +1,13 @@
+.success {
+  color: blue;
+}
+
+.error {
+  color: red;
+}
+
+.bi-star,
+.bi-star-fill {
+  cursor: pointer;
+  color: goldenrod;
+}
