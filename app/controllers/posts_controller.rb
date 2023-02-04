@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_member!
   before_action :set_post, only: %i[show destroy]
-  before_action :set_member, only: %i[index show]
+  before_action :set_member, only: %i[index]
   load_and_authorize_resource
 
   def index
@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   def show
     @comms = @post.comments.includes(:author)
-    @like = Like.where(post: @post, author: @member)
+    @like = Like.where(post: @post, author: current_user)
   end
 
   def new
