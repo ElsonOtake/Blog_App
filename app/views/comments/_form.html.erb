@@ -1,0 +1,8 @@
+<%= form_with model: comment, url: member_post_comments_path(current_member, @post) do |form| %>
+
+  <div class="form-group m-3">
+    <%= form.text_field :text, class: "form-control m-2 w-75", placeholder: "Comment" %>
+  </div>
+
+  <%= form.submit value: 'Add comment', class:'btn btn-secondary mx-4' %>
+<% end %>

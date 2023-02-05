@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_member!
   before_action :set_post, only: %i[show destroy]
-  before_action :set_member, only: %i[index]
+  before_action :set_member, only: %i[index show]
   load_and_authorize_resource
 
   def index

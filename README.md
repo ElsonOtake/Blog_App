@@ -51,6 +51,7 @@
     <li><a href="https://github.com/teamcapybara/capybara">Capybara</a></li>
     <li><a href="https://github.com/thoughtbot/factory_bot">Factory Bot</a></li>
     <li><a href="https://github.com/rubocop/rubocop">Rubocop</a></li>
+    <li><a href="https://stimulus.hotwired.dev/">Stimulus</a></li>
   </ul>
 </details>
 
