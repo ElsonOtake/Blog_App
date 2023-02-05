@@ -1,17 +1,27 @@
+<% liked = @like.count > 0 ? "bi-star-fill" : "bi-star" %>
 <div class="card m-3">
   <div class="card-body">
-    <h5 class="card-title"><%= @post.title %> by <%= @post.author.name %></h5>
-    <% liked = @like.count > 0 ? "bi-star-fill" : "bi-star" %>
-    <span data-controller="like">
-      <i id="likes_counter" class=<%= liked %> data-action="click->like#change"></i>
-    </span>
-    <span class="counter"> <%= @post.likes_counter %></span>
-    <p class="mb-2 text-muted text-end"><small>Comments: <%= @post.comments_counter %></small></p>
+    <div class="header">
+      <div>
+        <span>
+          <span class="card-title">
+            <%= @post.title %> by <%= @post.author.name %>
+          </span>
+          <span data-controller="like">
+            <i id="likes_counter" class=<%= liked %> data-action="click->like#change"></i>
+          </span>
+          <span class="counter"> <%= @post.likes_counter %></span>
+        </span>
+
+      </div>
+      <div>
+        <% if can? :destroy, @post %>
+          <%= button_to 'Delete', member_post_path(@post.author, @post), method: :delete, class: "btn btn-danger m-2" %>
+        <% end %>
+      </div>
+    </div>
     
     <p class="card-text"><%= @post.text %></p>
-    <% if can? :destroy, @post %>
-      <%= button_to 'Delete', member_post_path(@post.author, @post), method: :delete, class: "btn btn-danger m-2" %>
-    <% end %>
   </div>
 </div>
 <div class="card m-3">
