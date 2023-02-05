@@ -5,21 +5,13 @@ Rails.application.routes.draw do
 
   resources :members, only: %i[index show] do
     resources :posts, only: %i[index show new create destroy] do
-      resources :comments, only: %i[show create destroy]
+      resources :comments, only: %i[show new create destroy]
       resources :likes, only: %i[create]
     end
   end
 
   root 'members#index'
 
-  # routes for spec
-  get '/members/index'
-  get '/members/show'
-  get '/posts/index'
-  get '/posts/show'
-  get '/comments/create'
-  get '/likes/create'
-  # resources :members, param: :_member_id
   post 'api/v1/auth/login', to: 'authentication#login'
 
   namespace :api, defaults: { format: :json } do
