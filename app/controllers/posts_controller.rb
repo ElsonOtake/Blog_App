@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comms = @post.comments.includes(:author)
+    @comments = @post.comments.includes(:author)
     @like = Like.where(post: @post, author: current_user)
   end
 
@@ -24,8 +24,7 @@ class PostsController < ApplicationController
     if post.save
       redirect_to member_path(current_user), notice: 'Post was successfully created'
     else
-      flash.alert = 'Post could not be saved'
-      render :new
+      render :new, alert: 'Post could not be saved'
     end
   end
 

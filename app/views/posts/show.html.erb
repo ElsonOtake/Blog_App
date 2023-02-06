@@ -34,7 +34,7 @@
       <% end %>
     </div>
     <div>
-      <%= link_to "Create comment", new_member_post_comment_path(@member, @post), class: "btn btn-secondary m-2" %>
+      <%= link_to "New comment", new_member_post_comment_path(@member, @post), class: "btn btn-secondary m-2" %>
     </div>
   </div>
 </div>
@@ -47,15 +47,17 @@
           <th scope="col">Author</th>
           <th scope="col">Comment</th>
           <th scope="col"></th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <% @comms.each do |comment| %>
+        <% @comments.each do |comment| %>
           <tr>
             <td><%= comment.author.name %></td>
             <td><%= comment.text %></td>
             <% if can? :destroy, comment %>
-              <td><%= button_to 'Delete', member_post_comment_path(@post.author, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %></td>
+              <td><%= link_to 'Edit', edit_member_post_comment_path(@member, @post, comment), class: "btn btn-secondary btn-sm" %></td>
+              <td><%= button_to 'Delete', member_post_comment_path(@member, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %></td>
             <% else %>
               <td></td>
             <% end %>
