@@ -1,3 +1,5 @@
 <h1>Create comment</h1>
 
-<%= render "form", comment: @comment %>
+<%= turbo_frame_tag "new_comment_tag" do %>
+  <%= render "form", comment: @comment %>
+<% end %>
