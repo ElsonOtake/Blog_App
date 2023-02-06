@@ -9,9 +9,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    puts "comment_params #{comment_params}"
     @comment = @post.comments.new(comment_params)
-    # @comment.post = @post
     @comment.author = current_user
     if @comment.save
       flash.notice = 'Comment was successfully created'
