@@ -1,8 +1,9 @@
 <%= form_with model: [@member, @post, comment] do |form| %>
+  <div class="header">
+    <div class="form-group m-3 w-75">
+      <%= form.text_field :text, class: "form-control m-2", placeholder: "Comment" %>
+    </div>
 
-  <div class="form-group m-3">
-    <%= form.text_field :text, class: "form-control m-2 w-75", placeholder: "Comment" %>
+    <%= form.submit class:'btn btn-secondary mx-4' %>
   </div>
-
-  <%= form.submit class:'btn btn-secondary mx-4' %>
 <% end %>
