@@ -25,25 +25,26 @@
   </div>
 </div>
 <div class="card m-3">
-  <%= turbo_frame_tag "new_comment_tag" do %>
-    <div class="card-body header">
-      <div>
-        <% if @post.comments_counter.zero? %>
-          <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
-        <% else %>
-          <p class="mb-2 text-muted"><small><%= pluralize(@post.comments_counter, "comment") %></small></p>
-        <% end %>
-      </div>
-      <div>
-        <%= link_to "New comment", new_member_post_comment_path(@member, @post), class: "btn btn-secondary m-2" %>
-      </div>
+  <div class="card-body header">
+    <div>
+      <h5>Comments</h5>
     </div>
-  <% end %>
-</div>
-<% if !@post.comments_counter.zero? %>
-  <div class="card m-3">
-    <div class="card-body">
-      <%= render "posts/comment" %>
+    <div>
+      <%= link_to "New comment",
+        new_member_post_comment_path(@member, @post),
+        class: "btn btn-secondary m-2",
+        data: { turbo_frame: dom_id(Comment.new) } %>
     </div>
   </div>
-<% end %>
+</div>
+<%= turbo_frame_tag Comment.new %>
+<div class="card m-3">
+  <div class="card-body">
+    <%= turbo_frame_tag "comments" do %>
+      <% @comments.each do |comment| %>
+        <%= render "posts/comment", comment: comment %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
