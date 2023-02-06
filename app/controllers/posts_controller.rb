@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comments = @post.comments.includes(:author)
+    @comments = @post.comments.ordered.includes(:author)
     @like = Like.where(post: @post, author: current_user)
   end
 
@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     if post.save
       redirect_to member_path(current_user), notice: 'Post was successfully created'
     else
-      render :new, alert: 'Post could not be saved'
+      render :new, status: :unprocessable_entity
     end
   end
 
