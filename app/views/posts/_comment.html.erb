@@ -1,5 +1,5 @@
 <% @comments.each do |comment| %>
-  <%= turbo_frame_tag "comment_#{comment.id}" do %>
+  <%= turbo_frame_tag comment do %>
     <div class="comment">
       <%= comment.author.name %> - <%= comment.text %>
       <div class="comment_actions">
