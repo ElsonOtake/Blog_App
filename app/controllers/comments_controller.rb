@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
   before_action :authenticate_member!
-  before_action :set_post, only: %i[new create destroy]
-  before_action :set_comment, only: %i[destroy]
+  before_action :set_member, only: %i[new create edit update destroy]
+  before_action :set_post, only: %i[new create edit update destroy]
+  before_action :set_comment, only: %i[edit update destroy]
   load_and_authorize_resource
 
   def new
@@ -12,20 +13,33 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.author = current_user
     if @comment.save
-      flash.notice = 'Comment was successfully created'
+      redirect_to member_post_path(@member, @post), notice: 'Comment was successfully created'
     else
-      flash.now.alert = 'Comment could not be saved'
+      render :new
     end
-    redirect_to member_post_path(current_user, @post)
+  end
+
+  def edit; end
+
+  def update
+    if @comment.update(comment_params)
+      redirect_to member_post_path(@member, @post), notice: 'Comment was successfully updated'
+    else
+      render :edit
+    end
   end
 
   def destroy
     @comment.destroy
 
-    redirect_to member_post_path(current_user, @post), notice: 'Comment was successfully deleted'
+    redirect_to member_post_path(@member, @post), notice: 'Comment was successfully deleted'
   end
 
   private
+
+  def set_member
+    @member = Member.find(params[:member_id])
+  end
 
   def set_post
     @post = Post.find(params[:post_id])
