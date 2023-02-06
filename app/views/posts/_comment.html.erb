@@ -1,0 +1,13 @@
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.author.name %></td>
+        <td><%= comment.text %></td>
+        <% if can? :destroy, comment %>
+          <td><%= link_to 'Edit', edit_member_post_comment_path(@member, @post, comment), class: "btn btn-secondary btn-sm" %></td>
+          <td><%= button_to 'Delete', member_post_comment_path(@member, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %></td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end %>
