@@ -1,5 +1,5 @@
 <h1>Update comment</h1>
 
-<%= turbo_frame_tag "comment_#{@comment.id}" do %>
+<%= turbo_frame_tag @comment do %>
   <%= render "form", comment: @comment %>
 <% end %>
