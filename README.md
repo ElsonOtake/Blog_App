@@ -137,9 +137,8 @@ Open `http://localhost:3000/` on your browser.
 To run tests, run the following command:
 
 ```sh
-  rspec spec/features
-  rspec spec/models
-  rspec spec/requests
+  bundle exec rspec spec/features
+  bundle exec rspec spec/models
 ```
 
 To generate the API documentation:
