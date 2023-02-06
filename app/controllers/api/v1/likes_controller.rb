@@ -2,8 +2,7 @@ class Api::V1::LikesController < ApplicationController
   before_action :find_member_post
 
   def create
-    like = Like.new
-    like.post = @post
+    like = @post.likes.new
     like.author = @member
     if like.save
       render json: like

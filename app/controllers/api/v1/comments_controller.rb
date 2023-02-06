@@ -21,7 +21,6 @@ class Api::V1::CommentsController < ApplicationController
     return render json: { error: 'Empty body. Could not create it' }, status: :unprocessable_entity if data.empty?
 
     comment = @post.comments.new(data)
-    # comment.post = @post
     comment.author = current_user
     if comment.save
       render json: comment
