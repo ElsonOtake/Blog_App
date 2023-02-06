@@ -1,13 +1,11 @@
-<% @comments.each do |comment| %>
-  <%= turbo_frame_tag comment do %>
-    <div class="comment">
-      <%= comment.author.name %> - <%= comment.text %>
-      <div class="comment_actions">
-        <% if can? :destroy, comment %>
-          <%= link_to 'Edit', edit_member_post_comment_path(@member, @post, comment), class: "btn btn-secondary btn-sm" %>
-          <%= button_to 'Delete', member_post_comment_path(@member, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %>
-        <% end %>
-      </div>
+<%= turbo_frame_tag comment do %>
+  <div class="comment">
+    <%= comment.author.name %> - <%= comment.text %>
+    <div class="comment_actions">
+      <% if can? :destroy, comment %>
+        <%= link_to 'Edit', edit_member_post_comment_path(@member, @post, comment), class: "btn btn-secondary btn-sm" %>
+        <%= button_to 'Delete', member_post_comment_path(@member, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 <% end %>
