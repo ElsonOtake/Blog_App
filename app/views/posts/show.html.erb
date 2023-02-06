@@ -27,45 +27,24 @@
 <div class="card m-3">
   <div class="card-body header">
     <div>
-      <% if @post.comments_counter.zero? %>
-        <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
-      <% else %>
-        <p class="mb-2 text-muted"><small><%= pluralize(@post.comments_counter, "comment") %></small></p>
-      <% end %>
+      <h5>Comments</h5>
     </div>
     <div>
-      <%= link_to "New comment", new_member_post_comment_path(@member, @post), class: "btn btn-secondary m-2" %>
+      <%= link_to "New comment",
+        new_member_post_comment_path(@member, @post),
+        class: "btn btn-secondary m-2",
+        data: { turbo_frame: dom_id(Comment.new) } %>
     </div>
   </div>
 </div>
-<% if !@post.comments_counter.zero? %>
+<%= turbo_frame_tag Comment.new %>
 <div class="card m-3">
   <div class="card-body">
-    <table class="table table-sm">
-      <thead>
-        <tr>
-          <th scope="col">Author</th>
-          <th scope="col">Comment</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @comments.each do |comment| %>
-          <tr>
-            <td><%= comment.author.name %></td>
-            <td><%= comment.text %></td>
-            <% if can? :destroy, comment %>
-              <td><%= link_to 'Edit', edit_member_post_comment_path(@member, @post, comment), class: "btn btn-secondary btn-sm" %></td>
-              <td><%= button_to 'Delete', member_post_comment_path(@member, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %></td>
-            <% else %>
-              <td></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= turbo_frame_tag "comments" do %>
+      <% @comments.each do |comment| %>
+        <%= render "posts/comment", comment: comment %>
+      <% end %>
+    <% end %>
   </div>
 </div>
-<% end %>
-<br/><br/>
+

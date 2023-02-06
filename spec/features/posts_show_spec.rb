@@ -41,19 +41,12 @@ RSpec.describe 'Post show page', type: :feature do
       expect(page).to_not have_content('by Luna')
     end
 
-    # it 'Shows how many comments it has' do
-    #   sign_in @member
-    #   visit member_post_path(@lilly, @hello)
-    #   expect(page).to have_content('Comments: 5')
-    #   expect(page).to_not have_content('Comments: 3')
-    # end
-
-    # it 'Show how many likes it has' do
-    #   sign_in @member
-    #   visit member_post_path(@lilly, @hello)
-    #   expect(page).to have_content('Likes: 3')
-    #   expect(page).to_not have_content('Likes: 5')
-    # end
+    it 'Show how many likes it has' do
+      sign_in @member
+      visit member_post_path(@lilly, @hello)
+      expect(page).to have_content('3')
+      expect(page).to_not have_content('4')
+    end
 
     it "Show some of the post's body" do
       sign_in @member
