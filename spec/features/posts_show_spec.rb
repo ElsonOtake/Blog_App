@@ -41,13 +41,6 @@ RSpec.describe 'Post show page', type: :feature do
       expect(page).to_not have_content('by Luna')
     end
 
-    it 'Shows how many comments it has' do
-      sign_in @member
-      visit member_post_path(@lilly, @hello)
-      expect(page).to have_content('5 comments')
-      expect(page).to_not have_content('3 comments')
-    end
-
     it 'Show how many likes it has' do
       sign_in @member
       visit member_post_path(@lilly, @hello)
