@@ -41,22 +41,9 @@
   <% end %>
 </div>
 <% if !@post.comments_counter.zero? %>
-<div class="card m-3">
-  <div class="card-body">
-    <table class="table table-sm">
-      <thead>
-        <tr>
-          <th scope="col">Author</th>
-          <th scope="col">Comment</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render "posts/comment" %>
-      </tbody>
-    </table>
+  <div class="card m-3">
+    <div class="card-body">
+      <%= render "posts/comment" %>
+    </div>
   </div>
-</div>
 <% end %>
-<br/><br/>
