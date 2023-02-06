@@ -4,11 +4,7 @@ class Api::V1::PostsController < ApplicationController
 
   def index
     posts = @member.posts
-    if posts.size.positive?
-      render json: posts
-    else
-      render json: { errors: 'Posts not found' }, status: :not_found
-    end
+    render json: posts
   end
 
   def show
