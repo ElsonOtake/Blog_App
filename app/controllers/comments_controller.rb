@@ -13,9 +13,12 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     @comment.author = current_user
     if @comment.save
-      redirect_to member_post_path(@member, @post), notice: 'Comment was successfully created'
+      respond_to do |format|
+        format.html { redirect_to member_post_path(@member, @post), notice: 'Comment was successfully created' }
+        format.turbo_stream
+      end
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -25,7 +28,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to member_post_path(@member, @post), notice: 'Comment was successfully updated'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
