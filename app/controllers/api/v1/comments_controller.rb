@@ -6,11 +6,7 @@ class Api::V1::CommentsController < ApplicationController
 
   def index
     comments = @post.comments
-    if comments.size.positive?
-      render json: comments
-    else
-      render json: { error: 'Comments not found' }, status: :not_found
-    end
+    render json: comments
   end
 
   def show
@@ -24,8 +20,7 @@ class Api::V1::CommentsController < ApplicationController
     data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
     return render json: { error: 'Empty body. Could not create it' }, status: :unprocessable_entity if data.empty?
 
-    comment = Comment.new(data)
-    comment.post = @post
+    comment = @post.comments.new(data)
     comment.author = current_user
     if comment.save
       render json: comment
