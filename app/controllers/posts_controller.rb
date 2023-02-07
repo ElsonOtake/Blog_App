@@ -12,6 +12,7 @@ class PostsController < ApplicationController
   def show
     @comments = @post.comments.ordered.includes(:author)
     @like = Like.where(post: @post, author: current_user)
+    @current_user = current_user
   end
 
   def new
