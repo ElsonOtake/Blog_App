@@ -52,6 +52,7 @@
     <li><a href="https://github.com/thoughtbot/factory_bot">Factory Bot</a></li>
     <li><a href="https://github.com/rubocop/rubocop">Rubocop</a></li>
     <li><a href="https://stimulus.hotwired.dev/">Stimulus</a></li>
+    <li><a href="https://github.com/hotwired/turbo-rails">Turbo Rails</a></li>
   </ul>
 </details>
 
