@@ -8,7 +8,9 @@ class Comment < ApplicationRecord
 
   scope :ordered, -> { order(id: :desc) }
 
-  after_create_commit -> { broadcast_prepend_to 'comments', partial: 'posts/comment', locals: { comment: self }, target: 'comments' }
+  after_create_commit -> { broadcast_prepend_later_to 'comments', partial: 'posts/comment' }
+  after_update_commit -> { broadcast_replace_later_to 'comments', partial: 'posts/comment' }
+  after_destroy_commit -> { broadcast_remove_to 'comments' }
 
   def update_comments_counter
     post.update(comments_counter: post.comments.count)
