@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
   before_action :set_member, only: %i[new create edit update destroy]
   before_action :set_post, only: %i[new create edit update destroy]
   before_action :set_comment, only: %i[edit update destroy]
-  load_and_authorize_resource
 
   def new
     @comment = @post.comments.new
