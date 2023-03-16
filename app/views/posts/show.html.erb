@@ -42,7 +42,7 @@
   <div class="card-body">
     <%= turbo_frame_tag "comments" do %>
       <% @comments.each do |comment| %>
-        <%= render "posts/comment", comment: comment %>
+        <%= render "comments/comment", comment: comment %>
       <% end %>
     <% end %>
   </div>
