@@ -3,7 +3,11 @@
     <div class="card m-3 border-0">
       <div class="row g-0">
         <div class="col-md-1">
-          <img src=<%= member.photo %> class="img-fluid rounded" alt="member photo">
+          <% if member.avatar.attached? %>
+            <%= image_tag member.avatar.variant(:thumb) %>
+          <% else %>
+            <img src=<%= member.photo %> class="img-fluid rounded" alt="member photo">
+          <% end %>
         </div>
         <div class="col-md-11">
           <div class="card m-2">
