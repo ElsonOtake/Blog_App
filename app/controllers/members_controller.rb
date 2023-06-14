@@ -3,7 +3,7 @@ class MembersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @members = Member.all
+    @members = Member.all.includes([:avatar_attachment])
   end
 
   def show
