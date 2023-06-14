@@ -11,6 +11,10 @@ class Member < ApplicationRecord
 
   validates :name, presence: true
   validates :post_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :avatar, content_type: ['image/png', 'image/jpeg'], size: {
+    less_than: 1.megabytes,
+    message: 'is greater than 1 megabyte'
+  }
 
   def is?(requested_role)
     role == requested_role.to_s
