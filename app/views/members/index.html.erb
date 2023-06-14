@@ -4,7 +4,7 @@
       <div class="row g-0">
         <div class="col-md-1">
           <% if member.avatar.attached? %>
-            <%= image_tag member.avatar %>
+            <%= image_tag member.avatar.variant(:thumb) %>
           <% else %>
             <img src=<%= member.photo %> class="img-fluid rounded" alt="member photo">
           <% end %>
