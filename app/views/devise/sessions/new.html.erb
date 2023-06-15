@@ -6,20 +6,21 @@
     </div>
   </div>
 
-  <h1 class="title has-text-info">Log in</h1>
-
   <div class="field">
-    <%= f.password_field :password, class: "form-control m-2 w-75", placeholder: "current-password" %>
+    <%= f.label :password, style: "display: block", class: "label" %>
+    <div class="control">
+      <%= f.password_field :password, class: "input", placeholder: "current-password" %>
+    </div>
   </div>
 
   <% if devise_mapping.rememberable? %>
-    <div class="form-group mx-3">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="control">
+      <%= f.check_box :remember_me, type: "checkbox" %>
+      <%= f.label :remember_me, class: "checkbox" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in", class: "btn btn-secondary m-2 w-75" %>
+  <div class="control mt-3">
+    <%= f.submit "Log in", class: "button is-link is-light" %>
   </div>
 <% end %>
