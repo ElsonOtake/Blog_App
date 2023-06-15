@@ -66,8 +66,6 @@ gem 'aws-sdk-s3', require: false
 gem 'image_processing', '~> 1.2'
 
 gem 'rswag'
-
-gem 'bulma-rails', '~> 0.9.4'
 gem 'faker'
 
 group :development, :test do
@@ -97,3 +95,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+gem 'jsbundling-rails', '~> 1.1'

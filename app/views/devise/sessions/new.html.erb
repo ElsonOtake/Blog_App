@@ -1,9 +1,14 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-group">
-    <%= f.email_field :email, class: "form-control m-2 w-75", placeholder: "email" %>
+  <div class="field">
+    <%= f.label :email, style: "display: block", class: "label" %>
+    <div class="control">
+      <%= f.email_field :email, class: "input", placeholder: "email" %>
+    </div>
   </div>
 
-  <div class="form-group">
+  <h1 class="title has-text-info">Log in</h1>
+
+  <div class="field">
     <%= f.password_field :password, class: "form-control m-2 w-75", placeholder: "current-password" %>
   </div>
 
