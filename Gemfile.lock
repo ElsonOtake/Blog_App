@@ -98,6 +98,8 @@ GEM
     bullet (7.0.3)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
+    bulma-rails (0.9.4)
+      sassc (~> 2.0)
     cancancan (3.4.0)
     capybara (3.38.0)
       addressable
@@ -295,6 +297,8 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.6.1)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -347,6 +351,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   bullet
+  bulma-rails (~> 0.9.4)
   cancancan
   capybara
   database_cleaner

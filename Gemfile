@@ -59,13 +59,15 @@ gem 'bootsnap', require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'active_storage_validations'
 gem 'aws-sdk-s3', require: false
+
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'image_processing', '~> 1.2'
 
 gem 'rswag'
 
+gem 'bulma-rails', '~> 0.9.4'
 gem 'faker'
 
 group :development, :test do
