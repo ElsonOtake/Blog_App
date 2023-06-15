@@ -2,14 +2,14 @@
   <div class="field">
     <%= f.label :email, style: "display: block", class: "label" %>
     <div class="control">
-      <%= f.email_field :email, class: "input", placeholder: "email" %>
+      <%= f.email_field :email, class: "input", autocomplete: "email" %>
     </div>
   </div>
 
   <div class="field">
     <%= f.label :password, style: "display: block", class: "label" %>
     <div class="control">
-      <%= f.password_field :password, class: "input", placeholder: "current-password" %>
+      <%= f.password_field :password, class: "input", autocomplete: "current-password" %>
     </div>
   </div>
 
@@ -24,3 +24,5 @@
     <%= f.submit "Log in", class: "button is-link is-light" %>
   </div>
 <% end %>
+
+<%= link_to "Forgot your password?", new_password_path(resource_name), class: "button is-danger is-light mt-6" %>
