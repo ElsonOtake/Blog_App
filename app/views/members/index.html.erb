@@ -3,18 +3,15 @@
   <% if (columns % 3).zero? %>
     <div class="columns">
   <% end %>
-  <div class="card column">
-    <div class="card-image">
-      <figure class="image is-128x128">
-        <% if member.avatar.attached? %>
-          <%= image_tag member.avatar.variant(:thumb), class: "is-rounded" %>
-        <% else %>
-          <img src=<%= member.photo %> alt="member photo" class="is-rounded">
-        <% end %>
-      </figure>
-    </div>
+  <div class="card column p-4 m-4">
+
     <div class="card-content">
       <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <%= image_tag member.avatar_as_thumbnail, class: "is-rounded" %>
+          </figure>
+        </div>
         <div class="media-content">
           <p class="title is-4"><%= member.name %></p>
           <p class="subtitle is-6"><%= member.email %></p>
