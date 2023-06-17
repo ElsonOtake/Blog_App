@@ -1,4 +1,4 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar" role="navigation" aria-label="main navigation" class="mx-6">
   <div class="navbar-brand">
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBlog">
@@ -11,11 +11,14 @@
   <div id="navbarBlog" class="navbar-menu">
     <div class="navbar-start">
       <% if member_signed_in? %>
-        <%= link_to current_member.name, root_path, class: "navbar-item" %>
-        <%= link_to 'Edit profile', edit_member_registration_path, class: "navbar-item" %>
+        <%= link_to root_path, class: "navbar-item" do %>
+          <figure class="image">
+            <%= image_tag current_member.avatar_as_thumbnail, class: "is-rounded nav-item" %>
+          </figure>
+        <% end %>
         <%= link_to 'Add post', new_member_post_path(current_member), class: "navbar-item" %>
       <% else %>
-        <%= link_to 'Blog App', nil, class: "navbar-item" %>
+        <p class="navbar-item has-text-info has-text-weight-semibold">Blog App</p>
       <% end %>
     </div>
 
@@ -23,6 +26,7 @@
       <div class="navbar-item">
         <div class="buttons">
           <% if member_signed_in? %>
+            <%= link_to 'Edit profile', edit_member_registration_path, class: "button" %>
             <%= button_to 'Sign out', destroy_member_session_path, method: :delete, class: "button" %>
           <% else %>
             <%= link_to 'Sign up', new_member_registration_path, class: "button" %>
