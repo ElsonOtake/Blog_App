@@ -2,7 +2,9 @@ class PostsController < ApplicationController
   before_action :authenticate_member!
   before_action :set_post, only: %i[show destroy]
   before_action :set_member, only: %i[index show]
+
   load_and_authorize_resource
+
   include Pagy::Backend
 
   def index
@@ -20,10 +22,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
-    post.author = current_user
-    if post.save
-      redirect_to member_path(current_user), notice: 'Post was successfully created'
+    @post = Post.new(post_params)
+    @post.author = current_user
+    if @post.save
+      redirect_to member_posts_path(current_user), notice: 'Post was successfully created'
     else
       render :new, status: :unprocessable_entity
     end
