@@ -1,1 +1,7 @@
-<span><i class="comment_icon fa-regular fa-comment"></i> <span class="comments_counter"><%= post.comments_counter %></span> · </span>
+<span>
+  <a>
+    <i id=<%= "comment_icon_#{post.id}" %> class="fa-regular fa-comment"></i>
+  </a>
+  <span> </span>
+  <span id=<%= "comments_counter_#{post.id}" %>><%= post.comments_counter %></span>
+</span>
