@@ -13,7 +13,7 @@
           <br>
           <%= post.text%>
           <br>
-          <small><a>Like</a> · <%= distance_of_time_in_words_to_now(post.created_at) %></small>
+          <small><%= "Comments #{post.comments_counter} · " unless post.comments_counter.zero? %><a>Like</a> · <%= distance_of_time_in_words_to_now(post.created_at) %></small>
         </p>
       </div>
       <% post.recent_comments.each do |comment| %>
