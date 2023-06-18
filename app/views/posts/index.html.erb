@@ -37,24 +37,7 @@
       <% end %>
     </div>
   </article>
-
-  <article class="media">
-    <figure class="media-left">
-      <p class="image is-48x48">
-        <%= image_tag current_member.avatar_as_thumbnail, class: "is-rounded" %>
-      </p>
-    </figure>
-    <div class="media-content">
-      <div class="field">
-        <p class="control">
-          <textarea class="textarea" placeholder="Add a comment..." rows="1"></textarea>
-        </p>
-      </div>
-      <div class="field">
-        <p class="control">
-          <button class="button is-small is-link is-light">Post comment</button>
-        </p>
-      </div>
-    </div>
-  </article>
+  
+  <%= render "comments/form", member: current_member, post: post, comment: Comment.new %>
+  
 <% end %>

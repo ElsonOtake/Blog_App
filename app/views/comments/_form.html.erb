@@ -1,9 +1,17 @@
-<%= form_with model: [@member, @post, comment] do |form| %>
-  <div class="comment header">
-    <div class="form-group m-3 w-75">
-      <%= form.text_field :text, class: "form-control m-2", placeholder: "Comment" %>
+<%= form_with model: [member, post, comment] do |form| %>
+  <article class="media py-4 my-4" style="border-style:solid;border-width:0.1px 0px;border-color:#cdcdcd;">
+    <figure class="media-left image is-48x48">
+        <%= image_tag current_member.avatar_as_thumbnail, class: "is-rounded" %>
+    </figure>
+    <div class="media-content">
+      <div class="field">
+        <p class="control">
+          <%= form.text_area :text, class: "input", autocomplete: "Add a comment..." %>
+        </p>
+      </div>
+      <div class="control">
+        <%= form.submit "Post comment", class: "button is-link is-light is-small" %>
+      </div>
     </div>
-    <%= link_to "Cancel", member_post_path(@member, @post), class: "btn btn-light" %>
-    <%= form.submit class:'btn btn-secondary mx-4' %>
-  </div>
+  </article>
 <% end %>
