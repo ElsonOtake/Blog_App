@@ -1,3 +1,4 @@
+<%= render "member", member: current_member %>
 <% @members.each do |member| %>
-  <%= render "member", member: member %>
+  <%= render "member", member: member unless member == current_member %>
 <% end %>
