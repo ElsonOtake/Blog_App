@@ -2,7 +2,7 @@
   <div class="card-content">
     <div class="media">
       <div class="media-left">
-        <figure class="image is-48x48">
+        <figure class="image is-64x64">
           <%= image_tag member.avatar_as_thumbnail, class: "is-rounded" %>
         </figure>
       </div>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="buttons">
-      <%= link_to "Posts", member_posts_path(member), class: "button is-link is-light" %>
+      <%= link_to "Show posts", member_posts_path(member), class: "button is-link is-light" %>
       <%= link_to 'Add post', new_member_post_path(current_member), class: "button is-link is-light" if member == current_member %>
     </div>
   </div>
