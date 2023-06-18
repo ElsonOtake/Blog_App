@@ -15,7 +15,7 @@ class Member < ApplicationRecord
   }
 
   def avatar_as_thumbnail
-    avatar.variant(resize_to_limit: [48, 48]).processed
+    avatar.variant(resize_to_limit: [96, 96]).processed
   end
 
   def is?(requested_role)
