@@ -8,12 +8,12 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong><%= @member.name %></strong><br>
-          <strong><%= post.title %></strong>
+          <strong class="has-text-link"><%= @member.name %></strong><br>
+          <strong class="has-text-info"><%= post.title %></strong>
           <br>
           <%= post.text%>
           <br>
-          <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+          <small><a>Like</a> · <%= distance_of_time_in_words_to_now(post.created_at) %></small>
         </p>
       </div>
       <% post.recent_comments.each do |comment| %>
@@ -26,10 +26,10 @@
           <div class="media-content">
             <div class="content">
               <p>
-                <strong><%= comment.author.name %></strong><br>
+                <strong class="has-text-link"><%= comment.author.name %></strong><br>
                 <%= comment.text %>
                 <br>
-                <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                <small><a>Like</a> · <%= distance_of_time_in_words_to_now(comment.created_at) %></small>
               </p>
             </div>
           </div>
@@ -40,7 +40,7 @@
 
   <article class="media">
     <figure class="media-left">
-      <p class="image is-64x64">
+      <p class="image is-48x48">
         <%= image_tag current_member.avatar_as_thumbnail, class: "is-rounded" %>
       </p>
     </figure>
