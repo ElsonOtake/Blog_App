@@ -1,7 +1,16 @@
 <% @posts.each do |post| %>
   <div class="card m-3">
     <div class="card-body">
-      <h5 class="card-title"><%= link_to post.title, member_post_path(@member.id, post.id), class: "text-decoration-none" %></h5>
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <%= image_tag @member.avatar_as_thumbnail, class: "is-rounded" %>
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="subtitle is-6 has-text-info"><%= post.title %></p>
+        </div>
+      </div>
       <% if post.text.size > 70 %>
         <p class="card-text"><%= post.text[0, 70] %>...</p>
       <% else %>
@@ -16,12 +25,53 @@
         <p class="mb-2 text-muted"><small>There are no comments yet</small></p>
       <% else %>
         <% post.recent_comments.each do |comment| %>
-          <%= comment.author.name %>: <%= comment.text %><br/>
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-48x48">
+                <%= image_tag comment.author.avatar_as_thumbnail, class: "is-rounded" %>
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p><%= comment.text %></p>
+              </div>
+              <%# <nav class="level is-mobile">
+                <div class="level-left">
+                  <a class="level-item">
+                    <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                  </a>
+                  <a class="level-item">
+                    <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                  </a>
+                  <a class="level-item">
+                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                  </a>
+                </div>
+              </nav> %>
+            </div>
+          </article>
         <% end %>
         <% if post.comments_counter > 5 %>
           <p>...</p>
         <% end %>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-48x48">
+              <%= image_tag current_member.avatar_as_thumbnail, class: "is-rounded" %>
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="field">
+              <p class="control">
+                <textarea class="textarea" placeholder="Add a comment..."></textarea>
+              </p>
+            </div>
+            <a class="button is-info">Submit</a>
+          </div>
+        </article>
       <% end %>
     </div>
   </div>
 <% end %>
+
+
