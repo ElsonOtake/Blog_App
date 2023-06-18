@@ -14,7 +14,7 @@
           <%= post.text%>
           
           <br>
-          <small><%= render "comments", post: post %><%= render "likes", post: post %><%= distance_of_time_in_words_to_now(post.created_at) %></small>
+          <small><%= render "comments", post: post %> · <%= render "likes", post: post %> · <%= "#{distance_of_time_in_words_to_now(post.created_at)} ago" %></small>
         </p>
       </div>
       <% post.recent_comments.each do |comment| %>
@@ -30,7 +30,7 @@
                 <strong class="has-text-link"><%= comment.author.name %></strong><br>
                 <%= comment.text %>
                 <br>
-                <small><a>Like</a> · <%= distance_of_time_in_words_to_now(comment.created_at) %></small>
+                <small><%= "#{distance_of_time_in_words_to_now(comment.created_at)} ago" %></small>
               </p>
             </div>
           </div>
