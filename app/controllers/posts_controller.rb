@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   include Pagy::Backend
 
   def index
-    @pagy, @posts = pagy(@member.posts)
+    @pagy, @posts = pagy(@member.posts.order(updated_at: :desc))
   end
 
   def show
