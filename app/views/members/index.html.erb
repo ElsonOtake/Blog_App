@@ -22,7 +22,11 @@
         <%= member.bio %>
         <p class="is-size-7">Number of posts: <%= member.post_counter %></p>
       </div>
-      <%= link_to "Posts", member_posts_path(member), class: "button is-link is-light" %>
+
+      <div class="buttons">
+        <%= link_to "Posts", member_posts_path(member), class: "button is-link is-light" %>
+        <%= link_to 'Add post', new_member_post_path(current_member), class: "button is-link is-light" if member == current_member %>
+      </div>
     </div>
   </div>
   <% columns += 1 %>
