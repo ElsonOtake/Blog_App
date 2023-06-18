@@ -97,3 +97,4 @@ group :test do
 end
 
 gem 'jsbundling-rails', '~> 1.1'
+gem 'pagy', '~> 6.0' # omit patch digit
