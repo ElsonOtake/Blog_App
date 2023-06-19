@@ -7,7 +7,7 @@
           <span class="card-title">
             <%= @post.title %> by <%= @post.author.name %>
           </span>
-          <span data-controller="like">
+          <span data-controller="like" data-like-post-value=<%= @post.id %> data-like-member-value=<%= current_member.id %>>
             <i id="likes_counter" class=<%= liked %> data-action="click->like#change"></i>
           </span>
           <span class="counter"> <%= @post.likes_counter %></span>

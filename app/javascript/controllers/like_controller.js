@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="like"
 export default class extends Controller {
+  static values = { post: { type: String, default: "" }, member: { type: String, default: "" }}
   add_like() {
     const configObj = {
       method: 'POST',
@@ -10,8 +11,8 @@ export default class extends Controller {
         Accept: "application/json"
       }
     };
-    let user_id = window.location.pathname.split("/")[2];
-    let post_id = window.location.pathname.split("/")[4];
+    let user_id = this.memberValue;
+    let post_id = this.postValue;
     fetch(`../../../api/v1/members/${user_id}/posts/${post_id}/likes`, configObj);
   }
 
@@ -23,8 +24,8 @@ export default class extends Controller {
         Accept: "application/json"
       }
     };
-    let user_id = window.location.pathname.split("/")[2];
-    let post_id = window.location.pathname.split("/")[4];
+    let user_id = this.memberValue;
+    let post_id = this.postValue;
     fetch(`../../../api/v1/members/${user_id}/posts/${post_id}/likes/0`, configObj);
   }
 
