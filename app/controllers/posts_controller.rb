@@ -2,11 +2,13 @@ class PostsController < ApplicationController
   before_action :authenticate_member!
   before_action :set_post, only: %i[show destroy]
   before_action :set_member, only: %i[index show]
+
+  include Pagy::Backend
+
   load_and_authorize_resource
 
   def index
-    @page = params.fetch(:page, 1)
-    @posts = @member.posts.offset(posts_per_page * (@page.to_i - 1)).limit(posts_per_page)
+    @pagy, @posts = pagy(@member.posts)
   end
 
   def show
