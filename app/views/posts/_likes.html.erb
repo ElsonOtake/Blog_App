@@ -1,6 +1,7 @@
+<% icon = post.likes.where(author_id: current_member).count.zero? ? "fa-regular" : "fa-solid" %>
 <span>
-  <a>
-    <i id=<%= "like_icon_#{post.id}" %> class="fa-regular fa-thumbs-up"></i>
+  <a data-controller="stimulus" data-stimulus-member-value=<%= current_member.id %> data-stimulus-post-value=<%= post.id %> >
+    <i id=<%= "like_icon_#{post.id}" %> data-action="click->stimulus#toggle_likes" class="<%= "#{icon}" %> fa-thumbs-up"></i>
   </a>
   <span> </span>
   <span id=<%= "likes_counter_#{post.id}" %> ><%= post.likes_counter %></span>
