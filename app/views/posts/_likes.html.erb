@@ -1,1 +1,5 @@
-<a>Likes: <%= post.likes_counter %></a>
+<span>
+  <a id=<%= "like_from_#{post.id}" %> >Likes</a>
+  <span> </span>
+  <span id=<%= "likes_counter_#{post.id}" %> ><%= post.likes_counter %></span>
+</span>

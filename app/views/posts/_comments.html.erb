@@ -1,1 +1,5 @@
-<a>Comments: <%= post.comments_counter %></a>
+<span>
+  <a id=<%= "comment_from_#{post.id}" %> >Comments</a>
+  <span> </span>
+  <span id=<%= "comments_counter_#{post.id}" %> ><%= post.comments_counter %></span>
+</span>
