@@ -1,19 +1,24 @@
-<div class="card m-3 border-0">
-  <div class="row g-0">
-    <div class="col-md-1">
-      <% if member.avatar.attached? %>
-        <%= image_tag member.avatar.variant(:thumb) %>
-      <% else %>
-        <img src=<%= member.photo %> class="img-fluid rounded" alt="member photo">
-      <% end %>
-    </div>
-    <div class="col-md-11">
-      <div class="card m-2">
-        <div class="card-body">
-          <h5 class="card-title"><%= link_to member.name, member, class: "text-decoration-none" %></h5>
-          <p class="card-text text-end" class="text-muted"><small>Number of posts: <%= member.post_counter %></small></p>
-        </div>
+<div class="card">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <% if member.avatar.attached? %>
+            <%= image_tag member.avatar.variant(:thumb), class: "is-rounded" %>
+          <% else %>
+            <img src=<%= member.photo %> class="is-rounded" alt="member photo">
+          <% end %>
+        </figure>
       </div>
+      <div class="media-content">
+        <p class="title is-4 has-text-info"><%= member.name %></p>
+        <p class="subtitle is-6 has-text-link"><%= member.email %></p>
+      </div>
+    </div>
+    <div class="content">
+      <%= member.bio %>    
+      <br>
+      <p><small>Number of posts: <%= member.post_counter %></small></p>
     </div>
   </div>
 </div>
