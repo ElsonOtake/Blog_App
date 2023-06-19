@@ -1,8 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="like"
+// Connects to data-controller="stimulus"
 export default class extends Controller {
   static values = { post: { type: String, default: "" }, member: { type: String, default: "" }}
+
   add_like() {
     const configObj = {
       method: 'POST',
@@ -29,7 +30,7 @@ export default class extends Controller {
     fetch(`../../../api/v1/members/${user_id}/posts/${post_id}/likes/0`, configObj);
   }
 
-  change() {
+  toggle_like() {
     const icon = document.getElementById("likes_counter");
     const counter = document.querySelector(".counter");
     if (icon.className == "bi-star") {
