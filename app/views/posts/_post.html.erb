@@ -17,7 +17,7 @@
           <%= post.text %>
         <% end %>
         <br>
-        <small><a>Comments: <%= post.comments_counter %></a> · <a>Likes: <%= post.likes_counter %></a> · 3 hrs ago</small>
+        <small><a>Comments: <%= post.comments_counter %></a> · <a>Likes: <%= post.likes_counter %></a> · <%= "#{distance_of_time_in_words_to_now(post.updated_at)} ago" %></small>
       </p>
     </div>
     <%= turbo_frame_tag "comments" do %>
@@ -35,7 +35,7 @@
                 <br>
                 <%= comment.text %>
                 <br>
-                <small>2 hrs ago</small>
+                <small><%= "#{distance_of_time_in_words_to_now(comment.updated_at)} ago" %></small>
               </p>
             </div>
           </div>
