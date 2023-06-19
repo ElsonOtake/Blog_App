@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     post = Post.new(post_params)
     post.author = current_user
     if post.save
-      redirect_to member_path(current_user), notice: 'Post was successfully created'
+      redirect_to member_posts_path(current_user), notice: 'Post was successfully created'
     else
       render :new, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:member_posts).permit(:title, :text)
+    params.require(:post).permit(:title, :text)
   end
 end
