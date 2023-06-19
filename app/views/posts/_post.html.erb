@@ -20,25 +20,29 @@
         <small><a>Comments: <%= post.comments_counter %></a> · <a>Likes: <%= post.likes_counter %></a> · 3 hrs ago</small>
       </p>
     </div>
-    <% post.recent_comments.each do |comment| %>
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-48x48">
-            <%= render "members/thumb", member: comment.author %>
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <strong><%= comment.author.name %></strong>
-              <br>
-              <%= comment.text %>
-              <br>
-              <small>2 hrs ago</small>
+    <%= turbo_frame_tag "comments" do %>
+      <% post.recent_comments.each do |comment| %>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-48x48">
+              <%= render "members/thumb", member: comment.author %>
             </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <p>
+                <strong><%= comment.author.name %></strong>
+                <br>
+                <%= comment.text %>
+                <br>
+                <small>2 hrs ago</small>
+              </p>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      <% end %>
     <% end %>
   </div>
 </article>
+
+<%= render "comments/form", comment: Comment.new, post: post %>
