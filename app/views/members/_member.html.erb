@@ -3,11 +3,7 @@
     <div class="media">
       <div class="media-left">
         <figure class="image is-64x64">
-          <% if member.avatar.attached? %>
-            <%= image_tag member.avatar.variant(:thumb), class: "is-rounded" %>
-          <% else %>
-            <img src=<%= member.photo %> class="is-rounded" alt="member photo">
-          <% end %>
+          <%= render "thumb", member: member %>
         </figure>
       </div>
       <div class="media-content">
