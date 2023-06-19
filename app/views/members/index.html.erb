@@ -1,4 +1,17 @@
-<%= render "member", member: current_member %>
-<% @members.each do |member| %>
-  <%= render "member", member: member unless member == current_member %>
-<% end %>
+<div class="columns">
+  <%= render "member", member: current_member %>
+  <% columns = 1 %>
+  <% @members.each do |member| %>
+    <% unless member == current_member %>
+      <% if (columns % 3).zero? %>
+        <div class="columns">
+      <% end %>
+
+      <%= render "member", member: member %>
+
+      <% columns += 1 %>
+      <% if (columns % 3).zero? %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
