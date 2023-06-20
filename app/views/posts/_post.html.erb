@@ -23,24 +23,7 @@
     <%= turbo_frame_tag "comments" do %>
       <div id=<%= "comments_#{post.id}" %> class="hidden_comments">
         <% post.recent_comments.each do |comment| %>
-          <article class="media">
-            <figure class="media-left">
-              <p class="image is-48x48">
-                <%= render "members/thumb", member: comment.author %>
-              </p>
-            </figure>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong><%= comment.author.name %></strong>
-                  <br>
-                  <%= comment.text %>
-                  <br>
-                  <small><%= "#{distance_of_time_in_words_to_now(comment.updated_at)} ago" %></small>
-                </p>
-              </div>
-            </div>
-          </article>
+          <%= render "comments/comment", comment: comment %>
         <% end %>
       </div>
     <% end %>
