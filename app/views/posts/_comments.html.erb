@@ -1,6 +1,6 @@
 <span>
-  <a>
-    <i id=<%= "comment_icon_#{post.id}" %> class="fa-regular fa-comment"></i>
+  <a data-controller="stimulus" data-stimulus-post-value=<%= post.id %> >
+    <i id=<%= "comment_icon_#{post.id}" %>  data-action="click->stimulus#toggle_comments" class="fa-regular fa-comment"></i>
   </a>
   <span> </span>
   <span id=<%= "comments_counter_#{post.id}" %> ><%= post.comments_counter %></span>

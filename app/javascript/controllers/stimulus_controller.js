@@ -31,10 +31,9 @@ export default class extends Controller {
   }
 
   toggle_likes() {
-    console.log("Toggle likes started");
     const icon = document.getElementById(`like_icon_${this.postValue}`);
     const counter = document.getElementById(`likes_counter_${this.postValue}`);
-    if (icon.classList[0] == "fa-regular") {
+    if (icon.classList[0] == "fa-regular" || icon.classList[1] == "fa-regular") {
       icon.classList.add("fa-solid");
       icon.classList.remove("fa-regular");
       this.add_like();
@@ -44,6 +43,20 @@ export default class extends Controller {
       icon.classList.remove("fa-solid");
       this.remove_like();
       counter.innerHTML = parseInt(counter.innerHTML) - 1;
+    }
+  }
+
+  toggle_comments() {
+    const icon = document.getElementById(`comment_icon_${this.postValue}`);
+    const comments = document.getElementById(`comments_${this.postValue}`);
+    if (icon.classList[0] == "fa-regular" || icon.classList[1] == "fa-regular") {
+      icon.classList.add("fa-solid");
+      icon.classList.remove("fa-regular");
+      comments.classList.remove("hidden_comments");
+    } else {
+      icon.classList.add("fa-regular");
+      icon.classList.remove("fa-solid");
+      comments.classList.add("hidden_comments");
     }
   }
 }
