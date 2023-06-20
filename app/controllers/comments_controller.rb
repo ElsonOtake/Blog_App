@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
     @comment.author = current_user
     if @comment.save
       respond_to do |format|
-        format.html { redirect_to member_post_path(@member, @post), notice: 'Comment was successfully created' }
+        format.html { redirect_to member_posts_path(@member), notice: 'Comment was successfully created' }
         format.turbo_stream
       end
     else
