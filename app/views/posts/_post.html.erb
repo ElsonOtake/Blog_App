@@ -30,4 +30,13 @@
   </div>
 </article>
 
-<%= render "comments/form", comment: Comment.new, post: post %>
+  <article class="media py-4 my-4" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px;">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <%= render "members/thumb", member: current_member %>
+      </p>
+    </figure>
+    <div class="media-content">
+      <%= render "comments/form", url: member_post_comments_path(current_member, post) %>
+    </div>
+  </article>
