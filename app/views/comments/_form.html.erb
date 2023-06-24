@@ -1,10 +1,10 @@
 <%= form_with model: Comment.new, url: url do |form| %>
   <div class="field">
     <div class="control">
-      <%= form.text_field :text, class: "input", autocomplete: "Comment" %>
+      <%= form.text_field :text, class: "input", required: true %>
     </div>
   </div>
-  <div class="control">
-    <%= form.submit class: "button is-link is-light" %>
+  <div class="control" data-controller="stimulus" data-stimulus-post-value=<%= post.id %> >
+    <%= form.submit class: "button is-link is-light", data: { action: "stimulus#add_comment" } %>
   </div>
 <% end %>

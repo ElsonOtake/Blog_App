@@ -59,4 +59,12 @@ export default class extends Controller {
       comments.classList.add("hidden_comments");
     }
   }
+
+  add_comment() {
+    const counter = document.getElementById(`comments_counter_${this.postValue}`);
+
+    if (this.element.parentElement.elements[1].value != "") {
+      counter.innerHTML = parseInt(counter.innerHTML) + 1;
+    }
+  }
 }
