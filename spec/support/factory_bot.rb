@@ -1,4 +1,4 @@
-require_relative './controller_macros'
+require_relative 'controller_macros'
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
