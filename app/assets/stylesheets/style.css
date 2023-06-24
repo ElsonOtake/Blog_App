@@ -39,3 +39,7 @@
   align-self: flex-start;
   gap: 0.5rem;
 }
+
+.hidden_comments {
+  display: none;
+}

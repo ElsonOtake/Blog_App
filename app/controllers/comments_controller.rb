@@ -11,9 +11,9 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.new(comment_params)
     @comment.author = current_user
-    if @comment.save
+    if @comment.save!
       respond_to do |format|
-        format.html { redirect_to member_post_path(@member, @post), notice: 'Comment was successfully created' }
+        format.html { redirect_to member_posts_path(@member), notice: 'Comment was successfully created' }
         format.turbo_stream
       end
     else

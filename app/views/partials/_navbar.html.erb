@@ -1,0 +1,32 @@
+<nav class="navbar mx-6">
+  <div class="navbar-brand">
+    <%= link_to member_signed_in? ? current_member.name : 'Blog app', root_path, class: "p-3" %>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBlog">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu" id="navbarBlog">
+    <div class="navbar-start">
+      <%= link_to 'Add post', new_member_post_path(current_member), class: "navbar-item" %>
+    </div>
+    <div class="navbar-end">
+      <% if member_signed_in? %>
+        <div class="navbar-item">
+          <div class="buttons">
+            <%= button_to 'Sign out', destroy_member_session_path, method: :delete, class: "button is-link is-light" %>
+            <%= link_to 'Edit profile', edit_member_registration_path, class: "button is-link is-light" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="navbar-item">
+          <div class="buttons">
+            <%= link_to 'Sign up', new_member_registration_path, class: "button is-link is-light" %>
+            <%= link_to 'Sign in', new_member_session_path, class: "button is-link is-light" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</nav>

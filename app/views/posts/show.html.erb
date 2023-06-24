@@ -7,8 +7,8 @@
           <span class="card-title">
             <%= @post.title %> by <%= @post.author.name %>
           </span>
-          <span data-controller="like">
-            <i id="likes_counter" class=<%= liked %> data-action="click->like#change"></i>
+          <span data-controller="stimulus" data-stimulus-post-value=<%= @post.id %> data-stimulus-member-value=<%= current_member.id %>>
+            <i id="likes_counter" class=<%= liked %> data-action="click->stimulus#toggle_like"></i>
           </span>
           <span class="counter"> <%= @post.likes_counter %></span>
         </span>

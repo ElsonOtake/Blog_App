@@ -6,6 +6,8 @@ class Post < ApplicationRecord
   validates :comments_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :likes_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  default_scope { order('created_at DESC') }
+
   after_save :update_member_counter
   after_destroy :update_member_counter
 

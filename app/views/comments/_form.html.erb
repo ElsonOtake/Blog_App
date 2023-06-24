@@ -1,9 +1,10 @@
-<%= form_with model: [@member, @post, comment] do |form| %>
-  <div class="comment header">
-    <div class="form-group m-3 w-75">
-      <%= form.text_field :text, class: "form-control m-2", placeholder: "Comment" %>
+<%= form_with model: Comment.new, url: url do |form| %>
+  <div class="field">
+    <div class="control">
+      <%= form.text_field :text, class: "input", required: true %>
     </div>
-    <%= link_to "Cancel", member_post_path(@member, @post), class: "btn btn-light" %>
-    <%= form.submit class:'btn btn-secondary mx-4' %>
+  </div>
+  <div class="control" data-controller="stimulus" data-stimulus-post-value=<%= post.id %> >
+    <%= form.submit class: "button is-link is-light", data: { action: "stimulus#add_comment" } %>
   </div>
 <% end %>

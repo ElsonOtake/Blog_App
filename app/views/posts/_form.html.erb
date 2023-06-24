@@ -1,0 +1,17 @@
+<%= form_with model: post, url: member_posts_path(current_member) do |form| %>
+  <div class="field">
+    <%= form.label :title, class: "label" %>
+    <div class="control">
+      <%= form.text_field :title, class: "input", autocomplete: "Title" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :text, class: "label" %>
+    <div class="control">
+      <%= form.text_field :text, class: "input", autocomplete: "Post text" %>
+    </div>
+  </div>
+
+  <%= form.submit class:'button is-link is-light' %>
+<% end %>

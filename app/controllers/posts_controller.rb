@@ -2,15 +2,17 @@ class PostsController < ApplicationController
   before_action :authenticate_member!
   before_action :set_post, only: %i[show destroy]
   before_action :set_member, only: %i[index show]
+
+  include Pagy::Backend
+
   load_and_authorize_resource
 
   def index
-    @page = params.fetch(:page, 1)
-    @posts = @member.posts.offset(posts_per_page * (@page.to_i - 1)).limit(posts_per_page)
+    @pagy, @posts = pagy(@member.posts)
   end
 
   def show
-    @comments = @post.comments.ordered.includes(:author)
+    @comments = @post.comments.includes(:author)
     @like = Like.where(post: @post, author: current_user)
     @current_user = current_user
   end
@@ -23,7 +25,7 @@ class PostsController < ApplicationController
     post = Post.new(post_params)
     post.author = current_user
     if post.save
-      redirect_to member_path(current_user), notice: 'Post was successfully created'
+      redirect_to member_posts_path(current_user), notice: 'Post was successfully created'
     else
       render :new, status: :unprocessable_entity
     end
@@ -46,6 +48,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:member_posts).permit(:title, :text)
+    params.require(:post).permit(:title, :text)
   end
 end

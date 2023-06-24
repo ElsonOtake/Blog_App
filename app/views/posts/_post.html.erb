@@ -1,0 +1,42 @@
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-48x48">
+      <%= render "members/thumb", member: member %>
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong><%= member.name %></strong>
+        <br>
+        <strong><%= post.title %></strong>
+        <br>
+        <% if post.text.size > 70 %>
+          <%= post.text[0, 70] %>...
+        <% else %>
+          <%= post.text %>
+        <% end %>
+        <br>
+        <small><%= render "comments", post: post %> · <%= render "likes", post: post %> · <%= "#{distance_of_time_in_words_to_now(post.updated_at)} ago" %></small>
+      </p>
+    </div>
+      <div id=<%= "comments_#{post.id}" %> class="hidden_comments">
+        <%= turbo_frame_tag "comments_#{post.id}" do %>
+          <% post.recent_comments.each do |comment| %>
+            <%= render "comments/comment", comment: comment %>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
+</article>
+
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-48x48">
+      <%= render "members/thumb", member: current_member %>
+    </p>
+  </figure>
+  <div class="media-content">
+    <%= render "comments/form", url: member_post_comments_path(current_member, post), post: post %>
+  </div>
+</article>

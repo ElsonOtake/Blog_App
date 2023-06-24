@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
   after_save :update_comments_counter
   after_destroy :update_comments_counter
 
-  scope :ordered, -> { order(id: :desc) }
+  default_scope { order('created_at DESC') }
 
   def update_comments_counter
     post.update(comments_counter: post.comments.count)
