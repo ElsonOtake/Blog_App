@@ -8,9 +8,11 @@
     </a>
   </div>
   <div class="navbar-menu" id="navbarBlog">
-    <div class="navbar-start">
-      <%= link_to 'Add post', new_member_post_path(current_member), class: "navbar-item" %>
-    </div>
+    <% if member_signed_in? %>
+      <div class="navbar-start">
+        <%= link_to 'Add post', new_member_post_path(current_member), class: "navbar-item" %>
+      </div>
+    <% end %>
     <div class="navbar-end">
       <% if member_signed_in? %>
         <div class="navbar-item">
