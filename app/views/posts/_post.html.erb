@@ -20,13 +20,13 @@
         <small><%= render "comments", post: post %> · <%= render "likes", post: post %> · <%= "#{distance_of_time_in_words_to_now(post.updated_at)} ago" %></small>
       </p>
     </div>
-    <%= turbo_frame_tag "comments" do %>
       <div id=<%= "comments_#{post.id}" %> class="hidden_comments">
-        <% post.recent_comments.each do |comment| %>
-          <%= render "comments/comment", comment: comment %>
+        <%= turbo_frame_tag "comments_#{post.id}" do %>
+          <% post.recent_comments.each do |comment| %>
+            <%= render "comments/comment", comment: comment %>
+          <% end %>
         <% end %>
       </div>
-    <% end %>
   </div>
 </article>
 
