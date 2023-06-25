@@ -25,7 +25,7 @@ class PostsController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
         flash.now[:notice] = @person.errors.full_messages[0]
-        format.turbo_stream { render turbo_stream: turbo_stream.append('flash', partial: 'shared/flash') }
+        format.turbo_stream { render turbo_stream: helpers.render_turbo_stream_inline_flash_messages }
       end
     end
   end
