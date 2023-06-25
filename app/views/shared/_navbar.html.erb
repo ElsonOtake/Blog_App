@@ -1,6 +1,15 @@
 <nav class="navbar mx-6">
   <div class="navbar-brand" data-controller="stimulus">
-    <%= link_to member_signed_in? ? current_member.name : 'Blog app', root_path, class: "p-3" %>
+    <% if member_signed_in? %>
+      <%= link_to root_path, class: "p-3" do %>
+        <figure class="image is-48x48">
+          <%= render "members/thumb", member: current_member %>
+        </figure>
+        <span><%= current_member.name[0, 6] %></span>
+      <% end %>
+    <% else %>
+      <h1 class="title has-text-info">Blog app</h1>
+    <% end %>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBlog" data-action="stimulus#mobile_menu">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
