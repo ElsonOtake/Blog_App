@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if post.save
         format.html { redirect_to member_posts_path(current_user), notice: 'Post was successfully created' }
-        format.turbo_stream { flash.now[:notice] = 'Comment was successfully created' }
+        format.turbo_stream { flash.now[:notice] = 'Post was successfully created' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
