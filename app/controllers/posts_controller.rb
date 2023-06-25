@@ -11,12 +11,6 @@ class PostsController < ApplicationController
     @pagy, @posts = pagy(@member.posts)
   end
 
-  def show
-    @comments = @post.comments.includes(:author)
-    @like = Like.where(post: @post, author: current_user)
-    @current_user = current_user
-  end
-
   def new
     @post = Post.new
   end

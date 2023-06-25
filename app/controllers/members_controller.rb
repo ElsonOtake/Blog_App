@@ -5,8 +5,4 @@ class MembersController < ApplicationController
   def index
     @members = Member.all.includes([:avatar_attachment]).order(updated_at: :desc)
   end
-
-  def show
-    @member = Member.find(params[:id])
-  end
 end
