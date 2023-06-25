@@ -1,5 +1,17 @@
-<h1>Create comment</h1>
+<%# <h1>Create comment</h1> %>
 
-<%= turbo_frame_tag @comment do %>
-  <%= render "form", comment: @comment %>
+<%#= turbo_frame_tag @comment do %>
+  <%#= render "form", comment: @comment %>
+<%# end %>
+<%= turbo_frame_tag "new_comment_#{@post.id}" do %>
+  <article class="media">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <%= render "members/thumb", member: current_member %>
+      </p>
+    </figure>
+    <div class="media-content">
+      <%= render "comments/form", url: member_post_comments_path(current_member, @post), post: @post %>
+    </div>
+  </article>
 <% end %>

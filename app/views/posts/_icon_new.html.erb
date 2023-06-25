@@ -1,5 +1,10 @@
 <span>
-  <a data-controller="stimulus" data-stimulus-post-value=<%= post.id %> >
+  <%= link_to new_member_post_comment_path(current_member, post),
+    data: {
+      turbo_frame: "new_comment_#{post.id}",
+      controller: "stimulus",
+      stimulus_post_value: post.id
+    } do %>
     <i id=<%= "new_comment_icon_#{post.id}" %>  data-action="click->stimulus#toggle_new_comment" class="fa-regular fa-comment"></i>
-  </a>
+  <% end %>
 </span>
