@@ -1,0 +1,12 @@
+<%= turbo_stream.append "posts" do %>
+  <%= render "posts/posts", posts: @posts, member: @member %>
+<% end %>
+
+<%= turbo_stream.replace :pagination do %>
+  <% if @pagy.next.present? %>
+    <%= turbo_frame_tag :pagination,
+      loading: :lazy,
+      src: member_posts_path(@member, format: :turbo_stream, page: @pagy.next)
+    %>
+  <% end %>
+<% end %>

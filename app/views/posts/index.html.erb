@@ -1,1 +1,8 @@
-<%= render "posts", posts: @posts, member: @member, pagy: @pagy %>
+<%= turbo_frame_tag "posts" do %>
+  <%= render "posts", posts: @posts, member: @member %>
+<% end %>
+
+<%= turbo_frame_tag :pagination,
+  loading: :lazy,
+  src: member_posts_path(@member, format: :turbo_stream)
+%>

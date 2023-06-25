@@ -1,5 +1,3 @@
 <% posts.each do |post| %>
   <%= render "post", post: post, member: member %>
 <% end %>
-
-<%== pagy_nav(pagy) if pagy.pages > 1 %>
