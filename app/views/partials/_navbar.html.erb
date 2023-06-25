@@ -1,7 +1,7 @@
 <nav class="navbar mx-6">
-  <div class="navbar-brand">
+  <div class="navbar-brand" data-controller="stimulus">
     <%= link_to member_signed_in? ? current_member.name : 'Blog app', root_path, class: "p-3" %>
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBlog">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBlog" data-action="stimulus#mobile_menu">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
