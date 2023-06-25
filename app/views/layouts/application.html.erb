@@ -22,14 +22,13 @@
         <%= yield %>
       </div>
     </section>
-    
+
     <div id="modal-blog" class="modal">
       <div class="modal-background"></div>
 
       <div class="modal-content">
         <div class="box">
-          <p>Modal JS example</p>
-          <!-- Your content -->
+          <%= turbo_frame_tag "new_post" %>
         </div>
       </div>
 

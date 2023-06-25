@@ -10,7 +10,15 @@
   <div class="navbar-menu" id="navbarBlog">
     <% if member_signed_in? %>
       <div class="navbar-start">
-        <%= link_to 'Add post', new_member_post_path(current_member), class: "navbar-item" %>
+        <%= link_to 'Add post',
+          new_member_post_path(current_member),
+          class: "navbar-item",
+          data: {
+            turbo_frame: "new_post",
+            controller: "stimulus",
+            action: "stimulus#open_modal"  
+          }
+        %>
       </div>
     <% end %>
     <div class="navbar-end">
