@@ -1,10 +1,5 @@
-<%# <h1>Create comment</h1> %>
-
-<%#= turbo_frame_tag @comment do %>
-  <%#= render "form", comment: @comment %>
-<%# end %>
 <%= turbo_frame_tag "new_comment_#{@post.id}" do %>
-  <article class="media">
+  <article class="media pt-2" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px 0px;">
     <figure class="media-left">
       <p class="image is-48x48">
         <%= render "members/thumb", member: current_member %>

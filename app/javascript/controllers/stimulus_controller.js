@@ -46,17 +46,6 @@ export default class extends Controller {
     }
   }
 
-  toggle_new_comment() {
-    const icon = document.getElementById(`new_comment_icon_${this.postValue}`);
-    if (icon.classList[0] == "fa-regular" || icon.classList[1] == "fa-regular") {
-      icon.classList.add("fa-solid");
-      icon.classList.remove("fa-regular");
-    } else {
-      icon.classList.add("fa-regular");
-      icon.classList.remove("fa-solid");
-    }
-  }
-
   toggle_comments() {
     const icon = document.getElementById(`comment_icon_${this.postValue}`);
     const comments = document.getElementById(`comments_${this.postValue}`);
@@ -73,7 +62,9 @@ export default class extends Controller {
 
   add_comment() {
     const counter = document.getElementById(`comments_counter_${this.postValue}`);
-
+    console.log("post", this.postValue);
+    console.log("counter", counter);
+    console.log("value", this.element.parentElement.elements[1].value);
     if (this.element.parentElement.elements[1].value != "") {
       counter.innerHTML = parseInt(counter.innerHTML) + 1;
     }
@@ -118,7 +109,6 @@ export default class extends Controller {
     // Add a keyboard event to close all modals
     document.addEventListener('keydown', (event) => {
       const e = event;
-      console.log(e.code);
       if (e.code === "Escape") { // Escape key
         this.closeAllModals();
       }
