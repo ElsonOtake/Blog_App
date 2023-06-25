@@ -4,7 +4,11 @@
       <%= form.text_field :text, class: "input", required: true %>
     </div>
   </div>
-  <div class="control" data-controller="stimulus" data-stimulus-post-value=<%= post.id %> >
-    <%= form.submit class: "button is-link is-light", data: { action: "stimulus#add_comment" } %>
+  <div class="control pb-2" data-controller="stimulus" data-stimulus-post-value=<%= post.id %> >
+    <%= form.submit class: "button is-link is-light",
+      data: {
+        action: "stimulus#add_comment"
+      }
+    %>
   </div>
 <% end %>

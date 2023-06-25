@@ -1,2 +1,4 @@
-<h2 class="title has-text-info">Create a post</h2>
-<%= render "form", post: @post %>
+<%= turbo_frame_tag "new_post" do %>
+  <h2 class="title has-text-info">Create a post</h2>
+  <%= render "form", post: @post %>
+<% end %>

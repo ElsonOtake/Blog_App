@@ -13,5 +13,15 @@
     </div>
   </div>
 
-  <%= form.submit class:'button is-link is-light' %>
+  <div class="buttons">
+    <%= form.submit class:'button is-link is-light' %>
+    <%= link_to "Cancel",
+      nil,
+      class: "button is-danger is-light",
+      data: {
+        controller: "stimulus",
+        action: "stimulus#close_modal"
+      }
+    %>
+  </div>
 <% end %>

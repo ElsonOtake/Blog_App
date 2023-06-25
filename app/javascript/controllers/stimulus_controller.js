@@ -62,9 +62,60 @@ export default class extends Controller {
 
   add_comment() {
     const counter = document.getElementById(`comments_counter_${this.postValue}`);
-
     if (this.element.parentElement.elements[1].value != "") {
       counter.innerHTML = parseInt(counter.innerHTML) + 1;
     }
+  }
+
+  openModal($el) {
+    $el.classList.add('is-active');
+  }
+
+  closeModal($el) {
+    $el.classList.remove('is-active');
+  }
+
+  closeAllModals() {
+    (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+      this.closeModal($modal);
+    });
+  }
+
+  open_modal() {
+    const $target = document.getElementById("modal-blog");
+    
+    this.openModal($target);
+  }
+
+  close_modal() {
+    const $target = document.getElementById("modal-blog");
+    
+    this.closeModal($target);
+  }
+
+  // Add a click event on various child elements to close the parent modal
+  initialize() {
+    (document.querySelectorAll('.modal-background, .modal-close') || []).forEach(($close) => {
+      const $target = $close.closest('.modal');
+      
+      $close.addEventListener('click', () => {
+        this.closeModal($target);
+      });
+    });
+
+    // Add a keyboard event to close all modals
+    document.addEventListener('keydown', (event) => {
+      const e = event;
+      if (e.code === "Escape") { // Escape key
+        this.closeAllModals();
+      }
+    });
+  }
+
+  mobile_menu() {
+    const burger = document.querySelector('.navbar-burger');
+    const menu = document.querySelector("#"+burger.dataset.target);
+    burger.classList.toggle('is-active');
+    menu.classList.toggle('is-active');
   }
 }

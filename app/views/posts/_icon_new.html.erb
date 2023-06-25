@@ -1,0 +1,8 @@
+<span>
+  <%= link_to new_member_post_comment_path(current_member, post),
+    data: {
+      turbo_frame: "new_comment_#{post.id}"
+    } do %>
+    <i class="fa-regular fa-comment"></i>
+  <% end %>
+</span>
