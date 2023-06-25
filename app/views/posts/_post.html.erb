@@ -1,6 +1,6 @@
-<article class="media">
+<article class="media pt-2" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px 0px;"
   <figure class="media-left">
-    <p class="image is-48x48">
+    <p class="image is-48x48 p-2">
       <%= render "members/thumb", member: member %>
     </p>
   </figure>
@@ -22,7 +22,7 @@
     </div>
     <div id=<%= "comments_#{post.id}" %> class="hidden_comments">
       <%= turbo_frame_tag "comments_#{post.id}" do %>
-        <% post.recent_comments.each do |comment| %>
+        <% post.comments.each do |comment| %>
           <%= render "comments/comment", comment: comment %>
         <% end %>
       <% end %>
