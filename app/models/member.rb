@@ -16,6 +16,9 @@ class Member < ApplicationRecord
     message: 'is greater than 1 megabyte'
   }
 
+  extend FriendlyId
+  friendly_id :name, use: %i[slugged finders history]
+
   def is?(requested_role)
     role == requested_role.to_s
   end

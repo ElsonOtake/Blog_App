@@ -65,6 +65,7 @@ gem 'aws-sdk-s3', require: false
 gem 'image_processing', '~> 1.2'
 
 gem 'faker'
+gem 'friendly_id', '~> 5.4.0'
 gem 'pagy', '~> 6.0' # omit patch digit
 gem 'rswag'
 
