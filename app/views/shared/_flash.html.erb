@@ -1,0 +1,6 @@
+<% flash.each do |msg_type, message| %>
+  <div class="notification flash__message" data-controller="stimulus" data-action="animationend->stimulus#closeNotification">
+    <button class="delete" data-action="stimulus#closeNotification"></button>
+    <%= message %>
+  </div>
+<% end %>

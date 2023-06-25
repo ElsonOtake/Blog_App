@@ -118,4 +118,9 @@ export default class extends Controller {
     burger.classList.toggle('is-active');
     menu.classList.toggle('is-active');
   }
+
+  closeNotification() {
+    const notification = document.querySelectorAll("#flash div");
+    notification[0].parentNode.removeChild(notification[0]);
+  }
 }

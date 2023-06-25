@@ -43,3 +43,20 @@
 .hidden_comments {
   display: none;
 }
+
+@keyframes appear-then-fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  5%,
+  60% {
+    opacity: 1;
+  }
+}
+
+.flash__message {
+  animation-name: appear-then-fade;
+  animation-duration: 6s;
+}
