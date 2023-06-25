@@ -8,8 +8,8 @@
     </a>
   </div>
   <div class="navbar-menu" id="navbarBlog">
-    <% if member_signed_in? %>
-      <div class="navbar-start">
+    <div class="navbar-start">
+      <% if member_signed_in? %>
         <%= link_to 'Add post',
           new_member_post_path(current_member),
           class: "navbar-item",
@@ -19,19 +19,24 @@
             action: "stimulus#open_modal"  
           }
         %>
-      </div>
-    <% end %>
+        <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: "is-hidden-desktop navbar-item" %>
+        <%= link_to 'Edit profile', edit_member_registration_path, class: "is-hidden-desktop navbar-item" %>
+      <% else %>
+        <%= link_to 'Sign up', new_member_registration_path, class: "is-hidden-desktop navbar-item" %>
+        <%= link_to 'Sign in', new_member_session_path, class: "is-hidden-desktop navbar-item" %>
+      <% end %>
+    </div>
     <div class="navbar-end">
       <% if member_signed_in? %>
         <div class="navbar-item">
-          <div class="buttons">
+          <div class="buttons is-hidden-touch">
             <%= button_to 'Sign out', destroy_member_session_path, method: :delete, class: "button is-link is-light" %>
             <%= link_to 'Edit profile', edit_member_registration_path, class: "button is-link is-light" %>
           </div>
         </div>
       <% else %>
         <div class="navbar-item">
-          <div class="buttons">
+          <div class="buttons is-hidden-touch">
             <%= link_to 'Sign up', new_member_registration_path, class: "button is-link is-light" %>
             <%= link_to 'Sign in', new_member_session_path, class: "button is-link is-light" %>
           </div>
