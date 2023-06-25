@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     if @comment.save!
       respond_to do |format|
         format.html { redirect_to member_posts_path(@member), notice: 'Comment was successfully created' }
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = 'Comment was successfully created' }
       end
     else
       render :new, status: :unprocessable_entity
@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
   def update
     if @comment.update(comment_params)
       redirect_to member_post_path(@member, @post), notice: 'Comment was successfully updated'
+      format.turbo_stream { flash.now[:notice] = 'Comment was successfully updated' }
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,7 +37,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to member_post_path(@member, @post), notice: 'Comment was successfully deleted' }
-      format.turbo_stream
+      format.turbo_stream { flash.now[:notice] = 'Comment was successfully deleted' }
     end
   end
 

@@ -1,2 +1,3 @@
 <%= turbo_stream.prepend "comments_#{@post.id}", partial: "comments/comment", locals: { comment: @comment } %>
 <%= turbo_stream.update "new_comment_#{@post.id}", "" %>
+<%= turbo_stream.append "flash", partial: "shared/flash" %>

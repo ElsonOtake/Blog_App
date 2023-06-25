@@ -18,17 +18,22 @@ class PostsController < ApplicationController
   def create
     post = Post.new(post_params)
     post.author = current_user
-    if post.save
-      redirect_to member_posts_path(current_user), notice: 'Post was successfully created'
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if post.save
+        format.html { redirect_to member_posts_path(current_user), notice: 'Post was successfully created' }
+        format.turbo_stream { flash.now[:notice] = 'Comment was successfully created' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @post.destroy
-
-    redirect_to root_path, notice: 'Post was successfully deleted'
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Post was successfully deleted' }
+      format.turbo_stream { flash.now[:notice] = 'Post was successfully deleted' }
+    end
   end
 
   private
