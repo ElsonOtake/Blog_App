@@ -15,10 +15,11 @@
 
   <body>
     <%= render 'shared/navbar' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <section class="section">
       <div class="container">
+        <div id="flash">
+          <%= render "shared/flash" %>
+        </div>
         <%= yield %>
       </div>
     </section>
