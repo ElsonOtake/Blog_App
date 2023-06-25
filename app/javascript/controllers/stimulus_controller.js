@@ -46,6 +46,17 @@ export default class extends Controller {
     }
   }
 
+  toggle_new_comment() {
+    const icon = document.getElementById(`new_comment_icon_${this.postValue}`);
+    if (icon.classList[0] == "fa-regular" || icon.classList[1] == "fa-regular") {
+      icon.classList.add("fa-solid");
+      icon.classList.remove("fa-regular");
+    } else {
+      icon.classList.add("fa-regular");
+      icon.classList.remove("fa-solid");
+    }
+  }
+
   toggle_comments() {
     const icon = document.getElementById(`comment_icon_${this.postValue}`);
     const comments = document.getElementById(`comments_${this.postValue}`);
