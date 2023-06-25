@@ -62,9 +62,6 @@ export default class extends Controller {
 
   add_comment() {
     const counter = document.getElementById(`comments_counter_${this.postValue}`);
-    console.log("post", this.postValue);
-    console.log("counter", counter);
-    console.log("value", this.element.parentElement.elements[1].value);
     if (this.element.parentElement.elements[1].value != "") {
       counter.innerHTML = parseInt(counter.innerHTML) + 1;
     }
