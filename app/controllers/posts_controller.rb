@@ -24,6 +24,8 @@ class PostsController < ApplicationController
         format.turbo_stream { flash.now[:notice] = 'Post was successfully created' }
       else
         format.html { render :new, status: :unprocessable_entity }
+        flash.now[:notice] = @person.errors.full_messages[0]
+        format.turbo_stream { render turbo_stream: turbo_stream.append('flash', partial: 'shared/flash') }
       end
     end
   end

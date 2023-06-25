@@ -11,24 +11,30 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.new(comment_params)
     @comment.author = current_user
-    if @comment.save!
-      respond_to do |format|
+    respond_to do |format|
+      if @comment.save!
         format.html { redirect_to member_posts_path(@member), notice: 'Comment was successfully created' }
         format.turbo_stream { flash.now[:notice] = 'Comment was successfully created' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        flash.now[:notice] = @person.errors.full_messages[0]
+        format.turbo_stream { render turbo_stream: turbo_stream.append('flash', partial: 'shared/flash') }
       end
-    else
-      render :new, status: :unprocessable_entity
     end
   end
 
   def edit; end
 
   def update
-    if @comment.update(comment_params)
-      redirect_to member_post_path(@member, @post), notice: 'Comment was successfully updated'
-      format.turbo_stream { flash.now[:notice] = 'Comment was successfully updated' }
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to member_post_path(@member, @post), notice: 'Comment was successfully updated' }
+        format.turbo_stream { flash.now[:notice] = 'Comment was successfully updated' }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        flash.now[:notice] = @person.errors.full_messages[0]
+        format.turbo_stream { render turbo_stream: turbo_stream.append('flash', partial: 'shared/flash') }
+      end
     end
   end
 
