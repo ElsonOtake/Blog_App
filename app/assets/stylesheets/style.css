@@ -45,11 +45,14 @@
 }
 
 @keyframes appear-then-fade {
-  0%, 100% {
-    opacity:0
+  0%,
+  100% {
+    opacity: 0;
   }
-  5%, 60% {
-    opacity:1
+
+  5%,
+  60% {
+    opacity: 1;
   }
 }
 
