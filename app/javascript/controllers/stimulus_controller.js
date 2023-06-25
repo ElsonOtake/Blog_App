@@ -88,6 +88,12 @@ export default class extends Controller {
     this.openModal($target);
   }
 
+  close_modal() {
+    const $target = document.getElementById("modal-blog");
+    
+    this.closeModal($target);
+  }
+
   // Add a click event on various child elements to close the parent modal
   initialize() {
     (document.querySelectorAll('.modal-background, .modal-close') || []).forEach(($close) => {
