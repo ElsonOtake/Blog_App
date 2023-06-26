@@ -44,8 +44,8 @@
   <summary>Server</summary>
   <ul>
     <li><a href="https://github.com/igorkasyanchuk/active_storage_validations">Active Storage Validation</a></li>
-    <li><a href="https://github.com/igorkasyanchuk/active_storage_validations">Active Storage Validation</a></li>
     <li><a href="https://github.com/flyerhzm/bullet">Bullet</a></li>
+    <li><a href="https://bulma.io/">Bulma</a></li>
     <li><a href="https://github.com/CanCanCommunity/cancancan">Cancancan</a></li>
     <li><a href="https://github.com/teamcapybara/capybara">Capybara</a></li>
     <li><a href="https://rubygems.org/gems/devise/">Devise</a></li>
