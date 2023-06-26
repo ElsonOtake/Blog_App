@@ -43,13 +43,18 @@
 <details>
   <summary>Server</summary>
   <ul>
-    <li><a href="https://rubygems.org/gems/devise/">Devise</a></li>
-    <li><a href="https://jwt.io/">JWT</a></li>
-    <li><a href="https://github.com/CanCanCommunity/cancancan">Cancancan</a></li>
+    <li><a href="https://github.com/igorkasyanchuk/active_storage_validations">Active Storage Validation</a></li>
     <li><a href="https://github.com/flyerhzm/bullet">Bullet</a></li>
-    <li><a href="https://github.com/rspec/rspec-rails">RSpec Rails</a></li>
+    <li><a href="https://bulma.io/">Bulma</a></li>
+    <li><a href="https://github.com/CanCanCommunity/cancancan">Cancancan</a></li>
     <li><a href="https://github.com/teamcapybara/capybara">Capybara</a></li>
+    <li><a href="https://rubygems.org/gems/devise/">Devise</a></li>
     <li><a href="https://github.com/thoughtbot/factory_bot">Factory Bot</a></li>
+    <li><a href="https://github.com/faker-ruby/faker">Faker</a></li>
+    <li><a href="https://github.com/norman/friendly_id">FriendlyId</a></li>
+    <li><a href="https://jwt.io/">JWT</a></li>
+    <li><a href="https://github.com/ddnexus/pagy">Pagy</a></li>
+    <li><a href="https://github.com/rspec/rspec-rails">RSpec Rails</a></li>
     <li><a href="https://github.com/rubocop/rubocop">Rubocop</a></li>
     <li><a href="https://stimulus.hotwired.dev/">Stimulus</a></li>
     <li><a href="https://github.com/hotwired/turbo-rails">Turbo Rails</a></li>
@@ -60,6 +65,7 @@
 <summary>Database</summary>
   <ul>
     <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+    <li><a href="https://www.elephantsql.com/">ElephantSQL</a></li>
   </ul>
 </details>
 

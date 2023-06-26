@@ -26,4 +26,8 @@ class Member < ApplicationRecord
   def recent_posts
     posts.order(created_at: :desc).first(3)
   end
+
+  def should_generate_new_friendly_id?
+    name_changed?
+  end
 end
