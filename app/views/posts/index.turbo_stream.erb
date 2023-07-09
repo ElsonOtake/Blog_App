@@ -1,5 +1,5 @@
-<%= turbo_stream.append "posts" do %>
-  <%= render "posts/posts", posts: @posts, member: @member %>
+<%= turbo_stream.append :posts do %>
+  <%= render @posts %>
 <% end %>
 
 <%= turbo_stream.replace :pagination do %>
