@@ -41,8 +41,12 @@ RSpec.describe 'Member index page', type: :feature do
       expect(page).to_not have_content('Number of posts: 1')
     end
 
-    it 'will have link to "Show posts"' do
+    it 'will have links' do
+      expect(page).to have_link('API endpoints')
+      expect(page).to have_link('Sign out')
+      expect(page).to have_link('Edit profile')
       expect(page).to have_link('Show posts')
+      expect(page).to have_link('Add post')
     end
   end
 
@@ -85,8 +89,12 @@ RSpec.describe 'Member index page', type: :feature do
       expect(page).to_not have_content('Number of posts: 2')
     end
 
-    it 'will have link to "Show posts"' do
+    it 'will have links' do
+      expect(page).to have_link('API endpoints')
+      expect(page).to have_link('Sign out')
+      expect(page).to have_link('Edit profile')
       expect(page).to have_link('Show posts')
+      expect(page).to have_link('Add post')
     end
   end
 end
