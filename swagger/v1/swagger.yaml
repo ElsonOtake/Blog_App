@@ -294,10 +294,11 @@ paths:
         '404':
           description: Not found
 servers:
-- url: http://localhost:3000
+- url: https://elsonotake-blog.onrender.com
   variables:
     defaultHost:
-      default: localhost:3000
+      default: elsonotake-blog.onrender.com
+- url: http://localhost:3000
 components:
   securitySchemes:
     ApiKeyAuth:
