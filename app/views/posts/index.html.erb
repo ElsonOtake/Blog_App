@@ -2,7 +2,9 @@
   <%= render @posts %>
 <% end %>
 
-<%= turbo_frame_tag :pagination,
-  loading: :lazy,
-  src: member_posts_path(@member, format: :turbo_stream, page: @pagy.next)
-%>
+<% if @pagy.next.present? %>
+  <%= turbo_frame_tag :pagination,
+    loading: :lazy,
+    src: member_posts_path(@member, format: :turbo_stream, page: @pagy.next)
+  %>
+<% end %>
