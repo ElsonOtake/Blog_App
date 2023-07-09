@@ -39,7 +39,7 @@
       <% if member_signed_in? %>
         <div class="navbar-item">
           <div class="buttons is-hidden-touch">
-            <%= button_to 'Sign out', destroy_member_session_path, method: :delete, class: "button is-link is-light" %>
+            <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: "button is-link is-light" %>
             <%= link_to 'Edit profile', edit_member_registration_path, class: "button is-link is-light" %>
           </div>
         </div>
