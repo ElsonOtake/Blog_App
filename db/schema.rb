@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_25_203740) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_09_192957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "btree_gist"
@@ -98,7 +98,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_25_203740) do
     t.string "bio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "photo"
     t.integer "post_counter", default: 0
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

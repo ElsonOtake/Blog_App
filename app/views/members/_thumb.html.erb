@@ -1,5 +1,5 @@
 <% if member.avatar.attached? %>
   <%= image_tag member.avatar.variant(:thumb), class: "is-rounded" %>
 <% else %>
-  <img src=<%= member.photo %> class="is-rounded" alt="member photo">
+  <img src=<%= image_path 'profile-picture.jpg' %> class="is-rounded" alt="member photo">
 <% end %>
