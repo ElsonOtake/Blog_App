@@ -2,7 +2,11 @@
 openapi: 3.0.1
 info:
   title: Blog app API V1
-  description: This is a sample server Blog app.
+  description: |-
+    To run the endpoints. Open the endpoint. Click the "Try it out" button. Fill in the parameters, if necessary, and click the "Execute" button. \
+              \
+              Endpoints with an open lock require the user to be logged in. Execute the login endpoint and copy the generated token. Click the "Authorize" button at the top of the main page, \
+              paste the token, and click the "Authorize" button.
   version: v1
 paths:
   "/api/v1/auth/login":
@@ -155,6 +159,56 @@ paths:
                     type: integer
         '404':
           description: Not found
+  "/api/v1/members":
+    get:
+      summary: Retrieves members
+      tags:
+      - Members
+      responses:
+        '200':
+          description: OK
+  "/api/v1/members/{id}":
+    get:
+      summary: Retrieve a member
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Members
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: member id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  bio:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  photo:
+                    type: string
+                  post_counter:
+                    type: integer
+                  email:
+                    type: string
+                  role:
+                    type: string
+        '404':
+          description: Not found
   "/api/v1/members/{id}/posts":
     get:
       summary: Retrieves posts
@@ -239,56 +293,6 @@ paths:
                     type: string
                   author_id:
                     type: integer
-        '404':
-          description: Not found
-  "/api/v1/members":
-    get:
-      summary: Retrieves members
-      tags:
-      - Members
-      responses:
-        '200':
-          description: OK
-  "/api/v1/members/{id}":
-    get:
-      summary: Retrieve a member
-      security:
-      - ApiKeyAuth: []
-      tags:
-      - Members
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: member id
-        schema:
-          type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  bio:
-                    type: string
-                  created_at:
-                    type: string
-                  updated_at:
-                    type: string
-                  photo:
-                    type: string
-                  post_counter:
-                    type: integer
-                  email:
-                    type: string
-                  role:
-                    type: string
         '404':
           description: Not found
 servers:

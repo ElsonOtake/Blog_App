@@ -150,7 +150,7 @@ To run tests, run the following command:
 
 To generate the API documentation:
 ```sh
-  rake rswag:specs:swaggerize
+  rake rswag
 ```
 [API documentation](http://localhost:3000/api-docs/index.html) address.
 
