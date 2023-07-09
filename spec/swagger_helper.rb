@@ -6,7 +6,10 @@ RSpec.configure do |config|
       openapi: '3.0.1',
       info: {
         title: 'Blog app API V1',
-        description: 'This is a sample server Blog app.',
+        description: 'To run the endpoints. Open the endpoint. Click the "Try it out" button. Fill in the parameters, if necessary, and click the "Execute" button. \
+          \
+          Endpoints with an open lock require the user to be logged in. Execute the login endpoint and copy the generated token. Click the "Authorize" button at the top of the main page, \
+          paste the token, and click the "Authorize" button.',
         version: 'v1'
       },
       paths: {},
