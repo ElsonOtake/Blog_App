@@ -13,7 +13,7 @@ RSpec.describe 'Member index page', type: :feature do
     end
 
     it 'shows the member index view path' do
-      expect(page).to have_xpath('/')
+      expect(page).to have_current_path('/')
     end
 
     it "shows Lilly's username" do
