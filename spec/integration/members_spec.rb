@@ -13,7 +13,6 @@ describe 'Members' do
           bio: { type: :string },
           created_at: { type: :string },
           updated_at: { type: :string },
-          photo: { type: :string },
           post_counter: { type: :integer },
           email: { type: :string },
           role: { type: :string }
@@ -39,7 +38,6 @@ describe 'Members' do
                  bio: { type: :string },
                  created_at: { type: :string },
                  updated_at: { type: :string },
-                 photo: { type: :string },
                  post_counter: { type: :integer },
                  email: { type: :string },
                  role: { type: :string }

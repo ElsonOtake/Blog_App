@@ -199,8 +199,6 @@ paths:
                     type: string
                   updated_at:
                     type: string
-                  photo:
-                    type: string
                   post_counter:
                     type: integer
                   email:
