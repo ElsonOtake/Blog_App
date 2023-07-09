@@ -1,13 +1,13 @@
 <article class="media pt-2" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px 0px;">
   <figure class="media-left">
     <p class="image is-48x48">
-      <%= render "members/thumb", member: member %>
+      <%= render "members/thumb", member: post.author %>
     </p>
   </figure>
   <div class="media-content">
     <div class="content">
       <p>
-        <strong><%= member.name %></strong>
+        <strong><%= post.author.name %></strong>
         <br>
         <strong><%= post.title %></strong>
         <br>
