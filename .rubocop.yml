@@ -12,6 +12,8 @@ AllCops:
 
 Layout/LineLength:
   Max: 120
+  Exclude:
+  - "spec/swagger_helper.rb"
 Metrics/MethodLength:
   Include:
     - "app/controllers/*"
@@ -27,6 +29,8 @@ Metrics/ClassLength:
 Metrics/BlockLength:
   AllowedMethods: ['describe']
   Max: 30
+  Exclude:
+  - "spec/swagger_helper.rb"
 
 Style/Documentation:
   Enabled: false
