@@ -1,30 +1,35 @@
-<h2 class="title has-text-info">Log in</h2>
+<h2 class='title has-text-info'>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email, class: "label" %>
-    <div class="control">
-      <%= f.email_field :email, class: "input", autocomplete: "email" %>
+  <div class='field'>
+    <%= f.label :email, class: 'label' %>
+    <div class='control has-icons-left'>
+      <%= f.email_field :email, class: 'input', autofocus: true, autocomplete: 'email' %>
+      <span class='icon is-small is-left'>
+        <i class='fas fa-envelope'></i>
+      </span>
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password, class: "label" %>
-    <div class="control">
-      <%= f.password_field :password, class: "input", autocomplete: "current-password" %>
+  <div class='field'>
+    <%= f.label :password, class: 'label' %>
+    <div class='control has-icons-left'>
+      <%= f.password_field :password, class: 'input', autocomplete: 'current-password' %>
+      <span class='icon is-small is-left'>
+        <i class='fas fa-lock'></i>
+      </span>
     </div>
   </div>
 
   <% if devise_mapping.rememberable? %>
-    <div class="field">
+    <div class='field'>
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
   <% end %>
 
-  <div class="control">
-    <%= f.submit "Log in", class: "button is-link is-light" %>
+  <div class='control buttons'>
+    <%= f.submit 'Log in', class: 'button is-link is-light' %>
+    <%= link_to 'Forgot your password?', new_password_path(resource_name), class: 'button is-danger is-light' %>
   </div>
 <% end %>
-
-<%= link_to "Forgot your password?", new_password_path(resource_name), class: "button is-danger is-light mt-6" %>

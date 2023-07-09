@@ -1,53 +1,53 @@
-<nav class="navbar mx-6">
-  <div class="navbar-brand" data-controller="stimulus">
+<nav class='navbar mx-6'>
+  <div class='navbar-brand' data-controller='stimulus'>
     <% if member_signed_in? %>
-      <%= link_to root_path, class: "p-3" do %>
-        <figure class="image is-48x48">
-          <%= render "members/thumb", member: current_member %>
+      <%= link_to root_path, class: 'p-3' do %>
+        <figure class='image is-48x48'>
+          <%= render 'members/thumb', member: current_member %>
         </figure>
         <span><%= current_member.name[0, 6] %></span>
       <% end %>
     <% else %>
-      <h1 class="title has-text-info pt-2">Blog app</h1>
+      <h1 class='title has-text-info pt-2'>Blog app</h1>
     <% end %>
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBlog" data-action="stimulus#mobile_menu">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
+    <a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' data-target='navbarBlog' data-action='stimulus#mobile_menu'>
+      <span aria-hidden='true'></span>
+      <span aria-hidden='true'></span>
+      <span aria-hidden='true'></span>
     </a>
   </div>
-  <div class="navbar-menu" id="navbarBlog">
-    <div class="navbar-start">
+  <div class='navbar-menu' id='navbarBlog'>
+    <div class='navbar-start'>
       <% if member_signed_in? %>
         <%= link_to 'Add post',
           new_member_post_path(current_member),
-          class: "navbar-item",
+          class: 'navbar-item',
           data: {
-            turbo_frame: "new_post",
-            controller: "stimulus",
-            action: "stimulus#open_modal"  
+            turbo_frame: 'new_post',
+            controller: 'stimulus',
+            action: 'stimulus#open_modal'  
           }
         %>
-        <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: "is-hidden-desktop navbar-item" %>
-        <%= link_to 'Edit profile', edit_member_registration_path, class: "is-hidden-desktop navbar-item" %>
+        <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: 'is-hidden-desktop navbar-item' %>
+        <%= link_to 'Edit profile', edit_member_registration_path, class: 'is-hidden-desktop navbar-item' %>
       <% else %>
-        <%= link_to 'Sign up', new_member_registration_path, class: "is-hidden-desktop navbar-item" %>
-        <%= link_to 'Sign in', new_member_session_path, class: "is-hidden-desktop navbar-item" %>
+        <%= link_to 'Sign up', new_member_registration_path, class: 'is-hidden-desktop navbar-item' %>
+        <%= link_to 'Sign in', new_member_session_path, class: 'is-hidden-desktop navbar-item' %>
       <% end %>
     </div>
-    <div class="navbar-end">
+    <div class='navbar-end'>
       <% if member_signed_in? %>
-        <div class="navbar-item">
-          <div class="buttons is-hidden-touch">
-            <%= button_to 'Sign out', destroy_member_session_path, method: :delete, class: "button is-link is-light" %>
-            <%= link_to 'Edit profile', edit_member_registration_path, class: "button is-link is-light" %>
+        <div class='navbar-item'>
+          <div class='buttons is-hidden-touch'>
+            <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: 'button is-link is-light' %>
+            <%= link_to 'Edit profile', edit_member_registration_path, class: 'button is-link is-light' %>
           </div>
         </div>
       <% else %>
-        <div class="navbar-item">
-          <div class="buttons is-hidden-touch">
-            <%= link_to 'Sign up', new_member_registration_path, class: "button is-link is-light" %>
-            <%= link_to 'Sign in', new_member_session_path, class: "button is-link is-light" %>
+        <div class='navbar-item'>
+          <div class='buttons is-hidden-touch'>
+            <%= link_to 'Sign up', new_member_registration_path, class: 'button is-link is-light' %>
+            <%= link_to 'Sign in', new_member_session_path, class: 'button is-link is-light' %>
           </div>
         </div>
       <% end %>

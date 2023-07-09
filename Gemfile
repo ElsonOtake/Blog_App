@@ -15,7 +15,7 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.1'
 
 # Use the devise gem as the session and account manager for the application
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'main'
 
 gem 'cancancan'
 
