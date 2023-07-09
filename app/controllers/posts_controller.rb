@@ -8,7 +8,11 @@ class PostsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @pagy, @posts = pagy(@member.posts)
+    @pagy, @posts = pagy_countless(@member.posts.includes(:author))
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def new
