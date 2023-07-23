@@ -225,6 +225,11 @@ GEM
     omniauth-github (2.0.1)
       omniauth (~> 2.0)
       omniauth-oauth2 (~> 1.8)
+    omniauth-google-oauth2 (1.1.1)
+      jwt (>= 2.0)
+      oauth2 (~> 2.0.6)
+      omniauth (~> 2.0)
+      omniauth-oauth2 (~> 1.8.0)
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
@@ -413,6 +418,7 @@ DEPENDENCIES
   kramdown
   letter_opener
   omniauth-github (~> 2.0.0)
+  omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pagy (~> 6.0)
   pg (~> 1.1)
