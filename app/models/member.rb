@@ -37,8 +37,7 @@ class Member < ApplicationRecord
 
     member ||= Member.create(name: data['name'],
                              email: data['email'],
-                             password: Devise.friendly_token[0, 20]
-                            )
+                             password: Devise.friendly_token[0, 20])
     member
   end
 end
