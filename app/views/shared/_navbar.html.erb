@@ -6,6 +6,9 @@
           <%= render 'members/thumb', member: current_member %>
         </figure>
       <% end %>
+      <div class="navbar-item has-text-warning-dark">
+        <%= current_member.email %>
+      </div>
     <% else %>
       <h1 class='has-text-info-dark has-text-weight-semibold is-size-4 navbar-item'>Blog app</h1>
     <% end %>
@@ -18,14 +21,12 @@
   <div class='navbar-menu' id='navbarBlog'>
     <div class='navbar-start'>
       <div class="navbar-item">
-        <%= link_to 'API endpoints', rswag_api_path, class: 'button is-warning is-hidden-touch', target: :_blank %>
+        <%= link_to 'API endpoints', rswag_api_path, target: :_blank %>
       </div>
-      <%= link_to 'API endpoints', rswag_api_path, class: 'is-hidden-desktop navbar-item', target: :_blank %>
       <% if member_signed_in? %>
-        <div class="navbar-item is-hidden-touch">
+        <div class="navbar-item">
           <%= link_to 'Add post',
             new_member_post_path(current_member),
-            class: 'button is-warning',
             data: {
               turbo_frame: 'new_post',
               controller: 'stimulus',
@@ -33,39 +34,22 @@
             }
           %>
         </div>
-        <%= link_to 'Add post',
-          new_member_post_path(current_member),
-          class: 'is-hidden-desktop navbar-item',
-          data: {
-            turbo_frame: 'new_post',
-            controller: 'stimulus',
-            action: 'stimulus#open_modal'  
-          }
-        %>
-        <%= link_to 'Edit profile', edit_member_registration_path, class: 'is-hidden-desktop navbar-item' %>
-        <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: 'is-hidden-desktop navbar-item' %>
-      <% else %>
-        <%= link_to 'Sign up', new_member_registration_path, class: 'is-hidden-desktop navbar-item' %>
-        <%= link_to 'Sign in', new_member_session_path, class: 'is-hidden-desktop navbar-item' %>
       <% end %>
     </div>
-    <div class='navbar-end is-hidden-touch'>
+    <div class='navbar-end'>
       <% if member_signed_in? %>
-        <div class="navbar-item has-text-warning-dark">
-          <%= current_member.email %>
+        <div class='navbar-item'>
+          <%= link_to 'Edit profile', edit_member_registration_path %>
         </div>
         <div class='navbar-item'>
-          <%= link_to 'Edit profile', edit_member_registration_path, class: 'button is-warning' %>
-        </div>
-        <div class='navbar-item'>
-          <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: 'button is-warning' %>
+          <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete } %>
         </div>
       <% else %>
         <div class='navbar-item'>
-          <%= link_to 'Sign up', new_member_registration_path, class: 'button is-warning' %>
+          <%= link_to 'Sign up', new_member_registration_path %>
         </div>
         <div class='navbar-item'>
-          <%= link_to 'Sign in', new_member_session_path, class: 'button is-warning' %>
+          <%= link_to 'Sign in', new_member_session_path %>
         </div>
       <% end %>
     </div>
