@@ -42,7 +42,7 @@
       class: 'button is-link is-light is-large' do %>
       <span>Sign in with</span>
       <span class="icon is-small">
-        <i class="fab fa-github"></i>
+        <i class="fab fa-<%= provider.to_s.delete_suffix('_oauth2') %>"></i>
       </span>
     <% end %>
   <% end %>
