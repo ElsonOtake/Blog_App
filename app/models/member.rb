@@ -38,6 +38,13 @@ class Member < ApplicationRecord
     member ||= Member.create(name: data['name'],
                              email: data['email'],
                              password: Devise.friendly_token[0, 20])
+
+    if !member.avatar.attached? && !data['image'].empty?
+      filename = File.basename(url.path)
+      downloaded_image = URI.parse(data['image']).open
+      member.avatar.attach(io: downloaded_image, filename:)
+      member.save!
+    end
     member
   end
 end
