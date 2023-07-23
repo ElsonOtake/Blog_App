@@ -1,7 +1,7 @@
 class Member < ApplicationRecord
   # :confirmable removed from the list on the deployed version
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-         :validatable, :omniauthable, omniauth_providers: [:github]
+         :validatable, :omniauthable, omniauth_providers: %i[github google_oauth2]
   has_many :comments, foreign_key: 'author_id'
   has_many :likes, foreign_key: 'author_id'
   has_many :posts, foreign_key: 'author_id'
@@ -40,7 +40,7 @@ class Member < ApplicationRecord
                              password: Devise.friendly_token[0, 20])
 
     if !member.avatar.attached? && !data['image'].empty?
-      filename = File.basename(url.path)
+      filename = File.basename(URI.parse(data['image']).path)
       downloaded_image = URI.parse(data['image']).open
       member.avatar.attach(io: downloaded_image, filename:)
       member.save!
