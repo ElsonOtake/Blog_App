@@ -32,16 +32,15 @@ class Member < ApplicationRecord
   end
 
   def self.from_omniauth(access_token)
-    data = access_token.info
-    member = Member.where(email: data['email']).first
+    member = Member.where(email: access_token.info.email).first
 
-    member ||= Member.create(name: data['name'],
-                             email: data['email'],
+    member ||= Member.create(name: access_token.info.name,
+                             email: access_token.info.email,
                              password: Devise.friendly_token[0, 20])
 
-    if !member.avatar.attached? && !data['image'].empty?
-      filename = File.basename(URI.parse(data['image']).path)
-      downloaded_image = URI.parse(data['image']).open
+    if !member.avatar.attached? && !access_token.info.image.empty?
+      filename = File.basename(URI.parse(access_token.info.image).path)
+      downloaded_image = URI.parse(access_token.info.image).open
       member.avatar.attach(io: downloaded_image, filename:)
       member.save!
     end
