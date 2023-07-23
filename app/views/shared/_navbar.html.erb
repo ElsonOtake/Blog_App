@@ -42,8 +42,8 @@
             action: 'stimulus#open_modal'  
           }
         %>
-        <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: 'is-hidden-desktop navbar-item' %>
         <%= link_to 'Edit profile', edit_member_registration_path, class: 'is-hidden-desktop navbar-item' %>
+        <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: 'is-hidden-desktop navbar-item' %>
       <% else %>
         <%= link_to 'Sign up', new_member_registration_path, class: 'is-hidden-desktop navbar-item' %>
         <%= link_to 'Sign in', new_member_session_path, class: 'is-hidden-desktop navbar-item' %>
@@ -55,10 +55,10 @@
           <%= current_member.email %>
         </div>
         <div class='navbar-item'>
-          <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: 'button is-warning is-light' %>
+          <%= link_to 'Edit profile', edit_member_registration_path, class: 'button is-warning is-light' %>
         </div>
         <div class='navbar-item'>
-          <%= link_to 'Edit profile', edit_member_registration_path, class: 'button is-warning is-light' %>
+          <%= link_to 'Sign out', destroy_member_session_path, data: { turbo_method: :delete }, class: 'button is-warning is-light' %>
         </div>
       <% else %>
         <div class='navbar-item'>

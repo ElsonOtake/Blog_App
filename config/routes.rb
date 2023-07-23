@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
-  devise_for :members
+  devise_for :members, controllers: { omniauth_callbacks: 'members/omniauth_callbacks' }
 
   resources :members, only: %i[index show] do
     resources :posts, only: %i[index show new create destroy] do

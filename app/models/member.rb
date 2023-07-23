@@ -1,7 +1,7 @@
 class Member < ApplicationRecord
   # :confirmable removed from the list on the deployed version
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+         :validatable, :omniauthable, omniauth_providers: %i[github google_oauth2]
   has_many :comments, foreign_key: 'author_id'
   has_many :likes, foreign_key: 'author_id'
   has_many :posts, foreign_key: 'author_id'
@@ -29,5 +29,21 @@ class Member < ApplicationRecord
 
   def should_generate_new_friendly_id?
     name_changed?
+  end
+
+  def self.from_omniauth(access_token)
+    member = Member.where(email: access_token.info.email).first
+
+    member ||= Member.create(name: access_token.info.name,
+                             email: access_token.info.email,
+                             password: Devise.friendly_token[0, 20])
+
+    if !member.avatar.attached? && !access_token.info.image.empty?
+      filename = File.basename(URI.parse(access_token.info.image).path)
+      downloaded_image = URI.parse(access_token.info.image).open
+      member.avatar.attach(io: downloaded_image, filename:)
+      member.save!
+    end
+    member
   end
 end
