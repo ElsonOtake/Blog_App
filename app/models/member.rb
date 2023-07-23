@@ -30,4 +30,15 @@ class Member < ApplicationRecord
   def should_generate_new_friendly_id?
     name_changed?
   end
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    member = Member.where(email: data['email']).first
+
+    member ||= Member.create(name: data['name'],
+                             email: data['email'],
+                             password: Devise.friendly_token[0, 20]
+                            )
+    member
+  end
 end
