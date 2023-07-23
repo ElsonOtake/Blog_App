@@ -68,8 +68,9 @@
     <span class='help has-text-info'>We need your current password to confirm your changes</span>
   </div>
 
-  <div class='control'>
+  <div class='control buttons'>
     <%= f.submit 'Update', class:'button is-link is-light' %>
+    <%= link_to "Back", :back, class: "button is-link is-light" %>
   </div>
 <% end %>
 <br /><br />
