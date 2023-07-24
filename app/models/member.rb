@@ -1,7 +1,7 @@
 class Member < ApplicationRecord
   # :confirmable removed from the list on the deployed version
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-         :validatable, :omniauthable, omniauth_providers: %i[github google_oauth2]
+         :validatable, :omniauthable, omniauth_providers: %i[github google_oauth2 facebook]
   has_many :comments, foreign_key: 'author_id'
   has_many :likes, foreign_key: 'author_id'
   has_many :posts, foreign_key: 'author_id'
