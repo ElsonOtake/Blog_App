@@ -101,4 +101,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "cssbundling-rails", "~> 1.2"
+gem 'cssbundling-rails', '~> 1.2'
