@@ -1,4 +1,4 @@
-<h2 class='title has-text-info'>Log in</h2>
+<h2 class='title has-text-warning-dark'>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class='field'>
@@ -29,8 +29,8 @@
   <% end %>
 
   <div class='control buttons'>
-    <%= f.submit 'Log in', class: 'button is-link is-light' %>
-    <%= link_to 'Forgot your password?', new_password_path(resource_name), class: 'button is-danger is-light' %>
+    <%= f.submit 'Log in', class: 'button is-primary' %>
+    <%= link_to 'Forgot your password?', new_password_path(resource_name), class: 'button is-danger' %>
   </div>
 <% end %>
 
@@ -39,7 +39,7 @@
     <br />
     <%= button_to omniauth_authorize_path(resource_name, provider),
       data: { turbo: false },
-      class: 'button is-link is-light is-large' do %>
+      class: 'button is-primary is-large' do %>
       <span>Sign in with</span>
       <span class="icon is-small">
         <i class="fab fa-<%= provider.to_s.delete_suffix('_oauth2') %>"></i>

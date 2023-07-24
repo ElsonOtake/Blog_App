@@ -122,6 +122,8 @@ GEM
       xpath (~> 3.2)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    cssbundling-rails (1.2.0)
+      railties (>= 6.0.0)
     database_cleaner (2.0.2)
       database_cleaner-active_record (>= 2, < 3)
     database_cleaner-active_record (2.1.0)
@@ -404,6 +406,7 @@ DEPENDENCIES
   bullet
   cancancan
   capybara
+  cssbundling-rails (~> 1.2)
   database_cleaner
   debug
   devise!

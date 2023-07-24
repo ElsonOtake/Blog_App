@@ -7,7 +7,7 @@
         </figure>
       </div>
       <div class="media-content">
-        <p class="title is-4 has-text-info"><%= member.name %></p>
+        <p class="title is-4 has-text-warning-dark"><%= member.name %></p>
         <p class="subtitle is-6 has-text-link"><%= member.email %></p>
       </div>
     </div>
@@ -17,10 +17,10 @@
       <p><small>Number of posts: <%= member.post_counter %></small></p>
     </div>
     <div class="buttons">
-      <%= link_to "Show posts", member_posts_path(member), class: "button is-link is-light" %>
+      <%= link_to "Show posts", member_posts_path(member), class: "button is-primary" %>
       <%= link_to "Add post",
         new_member_post_path(member),
-        class: "button is-link is-light",
+        class: "button is-primary",
         data: {
           controller: "stimulus",
           action: "stimulus#open_modal",
