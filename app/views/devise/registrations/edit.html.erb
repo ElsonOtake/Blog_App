@@ -1,4 +1,4 @@
-<h2 class='title has-text-info'>Edit profile</h2>
+<h2 class='title has-text-warning-dark'>Edit profile</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render 'devise/shared/error_messages', resource: resource %>
@@ -41,9 +41,9 @@
       </span>
     </div>
     <% if @minimum_password_length %>
-      <span class='help has-text-danger'>(<%= @minimum_password_length %> characters minimum) <span class='has-text-info'>leave blank if you don't want to change it</span></span>
+      <span class='help has-text-danger'>(<%= @minimum_password_length %> characters minimum) <span class='has-text-warning-dark'>leave blank if you don't want to change it</span></span>
     <% else %>
-      <span class='help has-text-info'>leave blank if you don't want to change it</span>
+      <span class='help has-text-warning-dark'>leave blank if you don't want to change it</span>
     <% end %>
   </div>
 
@@ -65,7 +65,7 @@
         <i class='fas fa-lock'></i>
       </span>
     </div>
-    <span class='help has-text-info'>We need your current password to confirm your changes</span>
+    <span class='help has-text-warning-dark'>We need your current password to confirm your changes</span>
   </div>
 
   <div class='control buttons'>
