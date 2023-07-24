@@ -127,6 +127,16 @@ using GitHub CLI:
 
 ### Install
 
+Fill in the environment variables
+```sh
+  DATABASE_DEV_USERNAME=postgres_username
+  DATABASE_DEV_PASSWORD=postgres_password
+  GITHUB_ID=github_client_id
+  GITHUB_SECRET=github_client_secret
+  GOOGLE_ID=google_client_id
+  GOOGLE_SECRET=google_secret_key
+```
+
 Install this project with:
 ```sh
   bundle install
