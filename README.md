@@ -46,6 +46,9 @@
     <li><a href="https://github.com/igorkasyanchuk/active_storage_validations">Active Storage Validation</a></li>
     <li><a href="https://github.com/flyerhzm/bullet">Bullet</a></li>
     <li><a href="https://bulma.io/">Bulma</a></li>
+    <li><a href="https://github.com/cookpad/omniauth-rails_csrf_protection">OmniAuth Rails CSRF Protection</a></li>
+    <li><a href="https://github.com/omniauth/omniauth-github">OmniAuth GitHub</a></li>
+    <li><a href="https://github.com/zquestz/omniauth-google-oauth2">OmniAuth Google OAuth2</a></li>
     <li><a href="https://github.com/CanCanCommunity/cancancan">Cancancan</a></li>
     <li><a href="https://github.com/teamcapybara/capybara">Capybara</a></li>
     <li><a href="https://rubygems.org/gems/devise/">Devise</a></li>
@@ -75,7 +78,7 @@
 
 - **REST API**
 - **Authentication**
-- **Tests**
+- **Omniauth**
 - **[API documentation](https://swagger.io/solutions/api-documentation/)**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

@@ -1,49 +1,55 @@
 <h2 class='title has-text-warning-dark'>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class='field'>
-    <%= f.label :email, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.email_field :email, class: 'input', autofocus: true, autocomplete: 'email' %>
-      <span class='icon is-small is-left'>
-        <i class='fas fa-envelope'></i>
-      </span>
-    </div>
-  </div>
+<div class="columns">
+  <div class="column">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class='field'>
+        <%= f.label :email, class: 'label' %>
+        <div class='control has-icons-left'>
+          <%= f.email_field :email, class: 'input', autofocus: true, autocomplete: 'email' %>
+          <span class='icon is-small is-left'>
+            <i class='fas fa-envelope'></i>
+          </span>
+        </div>
+      </div>
 
-  <div class='field'>
-    <%= f.label :password, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.password_field :password, class: 'input', autocomplete: 'current-password' %>
-      <span class='icon is-small is-left'>
-        <i class='fas fa-lock'></i>
-      </span>
-    </div>
-  </div>
+      <div class='field'>
+        <%= f.label :password, class: 'label' %>
+        <div class='control has-icons-left'>
+          <%= f.password_field :password, class: 'input', autocomplete: 'current-password' %>
+          <span class='icon is-small is-left'>
+            <i class='fas fa-lock'></i>
+          </span>
+        </div>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class='field'>
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+      <% if devise_mapping.rememberable? %>
+        <div class='field'>
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
 
-  <div class='control buttons'>
-    <%= f.submit 'Log in', class: 'button is-primary' %>
-    <%= link_to 'Forgot your password?', new_password_path(resource_name), class: 'button is-danger' %>
-  </div>
-<% end %>
-
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <br />
-    <%= button_to omniauth_authorize_path(resource_name, provider),
-      data: { turbo: false },
-      class: 'button is-primary is-large' do %>
-      <span>Sign in with</span>
-      <span class="icon is-small">
-        <i class="fab fa-<%= provider.to_s.delete_suffix('_oauth2') %>"></i>
-      </span>
+      <div class='control buttons'>
+        <%= f.submit 'Log in', class: 'button is-primary' %>
+        <%= link_to 'Forgot your password?', new_password_path(resource_name), class: 'button is-danger' %>
+      </div>
     <% end %>
-  <% end %>
-<% end %>
+  </div>
+  <div class="is-divider-vertical" data-content="OR"></div>
+  <div class="column">
+    <%- if devise_mapping.omniauthable? %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <br />
+        <%= button_to omniauth_authorize_path(resource_name, provider),
+          data: { turbo: false },
+          class: 'button is-primary is-large' do %>
+          <span>Sign in with</span>
+          <span class="icon is-small">
+            <i class="fab fa-<%= provider.to_s.delete_suffix('_oauth2') %>"></i>
+          </span>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
