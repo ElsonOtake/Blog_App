@@ -2,13 +2,15 @@ class Ability
   include CanCan::Ability
 
   def initialize(member)
-    member ||= Member.new
+    can %i[read create], :all
 
-    can :destroy, Post, author_id: member.id
-    can :update, Comment, author_id: member.id
-    can :destroy, Comment, author_id: member.id
-    can :destroy, :all if member.is? :admin
-    can :read, :all
-    can :create, :all
+    return unless member.present?
+
+    can %i[update destroy], Post, author: member
+    can %i[update destroy], Comment, author: member
+
+    return unless member.is? :admin
+
+    can :manage, :all
   end
 end
