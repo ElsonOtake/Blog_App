@@ -5,8 +5,6 @@ class PostsController < ApplicationController
 
   include Pagy::Backend
 
-  load_and_authorize_resource
-
   def index
     @pagy, @posts = pagy_countless(@member.posts.includes(:author))
     respond_to do |format|
