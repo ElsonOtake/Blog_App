@@ -7,6 +7,10 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     handle_auth 'Google'
   end
 
+  def twitter2
+    handle_auth 'Twitter'
+  end
+
   def handle_auth(auth)
     @member = Member.from_omniauth(request.env['omniauth.auth'])
 

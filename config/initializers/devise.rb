@@ -274,6 +274,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   config.omniauth :github, ENV.fetch('GITHUB_ID'), ENV.fetch('GITHUB_SECRET')
   config.omniauth :google_oauth2, ENV.fetch('GOOGLE_ID'), ENV.fetch('GOOGLE_SECRET')
+  config.omniauth :twitter2, ENV.fetch('TWITTER_ID'), ENV.fetch('TWITTER_SECRET'), callback_path: '/members/auth/twitter2/callback', scope: 'tweet.read users.read'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
