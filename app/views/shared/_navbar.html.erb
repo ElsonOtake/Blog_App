@@ -28,7 +28,7 @@
           <%= link_to 'Add post',
             new_member_post_path(current_member),
             data: {
-              turbo_frame: 'new_post',
+              turbo_frame: 'post_modal',
               controller: 'stimulus',
               action: 'stimulus#open_modal'  
             }

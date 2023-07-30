@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "new_post" do %>
+<%= turbo_frame_tag "post_modal" do %>
   <h2 class="title has-text-warning-dark">Update post</h2>
   <%= render "form", post: @post, url: member_post_path(current_member, @post) %>
 <% end %>

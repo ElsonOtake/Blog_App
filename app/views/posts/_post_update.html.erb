@@ -3,7 +3,7 @@
     <span> · </span>
     <%= link_to edit_member_post_path(post.author, post),
       data: {
-        turbo_frame: 'new_post',
+        turbo_frame: 'post_modal',
         controller: 'stimulus',
         action: 'stimulus#open_modal'  
       } do
