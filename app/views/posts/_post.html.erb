@@ -13,7 +13,7 @@
         <br>
         <%= post.text %>
         <br>
-        <small><%= render "icon_new", post: post %> · <%= render "icon_comments", post: post %> · <%= render "icon_likes", post: post %> · <%= "#{distance_of_time_in_words_to_now(post.updated_at)} ago" %></small>
+        <small><%= render "icon_new", post: post %> · <%= render "icon_comments", post: post %> · <%= render "icon_likes", post: post %> · <%= "#{distance_of_time_in_words_to_now(post.updated_at)} ago" %><%= render "icon_updates", post: post %></small>
       </p>
     </div>
     <div id=<%= "comments_#{post.id}" %> class="hidden_comments">
