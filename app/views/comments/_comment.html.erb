@@ -12,7 +12,7 @@
           <br>
           <%= comment.text %>
           <br>
-          <small><%= "#{distance_of_time_in_words_to_now(comment.updated_at)} ago" %><%= render "comment_update", comment: comment %></small>
+          <small><%= "#{distance_of_time_in_words_to_now(comment.updated_at)} ago" %><%= render "posts/comment_update", comment: comment %></small>
         </p>
       </div>
     </div>
