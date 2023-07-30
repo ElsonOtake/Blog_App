@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_member!
-  before_action :set_member, only: %i[new create edit update destroy]
-  before_action :set_post, only: %i[new create edit update destroy]
+  before_action :set_post, only: %i[new create]
   before_action :set_comment, only: %i[edit update destroy]
 
   def new
@@ -13,7 +12,7 @@ class CommentsController < ApplicationController
     @comment.author = current_user
     respond_to do |format|
       if @comment.save!
-        format.html { redirect_to member_posts_path(@member), notice: 'Comment was successfully created' }
+        format.html { redirect_to member_posts_path(@post.author), notice: 'Comment was successfully created' }
         format.turbo_stream { flash.now[:notice] = 'Comment was successfully created' }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -28,7 +27,9 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to member_post_path(@member, @post), notice: 'Comment was successfully updated' }
+        format.html {
+          redirect_to member_post_path(@comment.post.author, @comment.post), notice: 'Comment was successfully updated'
+        }
         format.turbo_stream { flash.now[:notice] = 'Comment was successfully updated' }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -42,16 +43,12 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to member_post_path(@member, @post), notice: 'Comment was successfully deleted' }
+      format.html { redirect_to member_post_path(@comment.post.author, @comment.post), notice: 'Comment was successfully deleted' }
       format.turbo_stream { flash.now[:notice] = 'Comment was successfully deleted' }
     end
   end
 
   private
-
-  def set_member
-    @member = Member.find(params[:member_id])
-  end
 
   def set_post
     @post = Post.find(params[:post_id])

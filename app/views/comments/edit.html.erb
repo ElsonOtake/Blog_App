@@ -1,9 +1,3 @@
-<%# <h1>Update comment</h1> %>
-
-<%#= turbo_frame_tag @comment do %>
-  <%#= render "form", comment: @comment %>
-<%# end %>
-
 <%= turbo_frame_tag @comment do %>
   <article class="media pt-2" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px 0px;">
     <figure class="media-left">
@@ -12,7 +6,7 @@
       </p>
     </figure>
     <div class="media-content">
-      <%= render "comments/form", url: member_post_comment_path(current_member, @post, @comment), comment: @comment %>
+      <%= render "comments/form", url: member_post_comment_path(@comment.post.author, @comment.post, @comment), comment: @comment %>
     </div>
   </article>
 <% end %>
