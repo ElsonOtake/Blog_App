@@ -1,9 +1,15 @@
 <% if can? :update, post %>
   <span>
     <span> · </span>
-    <a>
+    <%= link_to edit_member_post_path(post.author, post),
+      data: {
+        turbo_frame: 'new_post',
+        controller: 'stimulus',
+        action: 'stimulus#open_modal'  
+      } do
+    %>
       <i class="fa-solid fa-pen"></i>
-    </a>
+    <% end %>
     <span> · </span>
     <%= link_to member_post_path(post.author, post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
       <i class="fa-solid fa-trash"></i>
