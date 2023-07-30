@@ -1,10 +1,10 @@
-<%= form_with model: Comment.new, url: url do |form| %>
+<%= form_with model: comment, url: url do |form| %>
   <div class="field">
     <div class="control">
       <%= form.text_field :text, class: "input", required: true %>
     </div>
   </div>
-  <div class="control pb-2" data-controller="stimulus" data-stimulus-post-value=<%= post.id %> >
+  <div class="control pb-2" data-controller="stimulus" data-stimulus-post-value=<%= comment.post.id %> >
     <%= form.submit class: "button is-primary",
       data: {
         action: "stimulus#add_comment"
