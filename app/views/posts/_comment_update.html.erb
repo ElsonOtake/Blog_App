@@ -5,8 +5,8 @@
       <i class="fa-solid fa-pen"></i>
     </a>
     <span> · </span>
-    <a>
+    <%= link_to member_post_comment_path(comment.author, comment.post, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
       <i class="fa-solid fa-trash"></i>
-    </a>
+    <% end %>
   </span>
 <% end %>
