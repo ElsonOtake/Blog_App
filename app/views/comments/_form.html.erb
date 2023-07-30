@@ -4,11 +4,15 @@
       <%= form.text_field :text, class: "input", required: true %>
     </div>
   </div>
-  <div class="control pb-2" data-controller="stimulus" data-stimulus-post-value=<%= comment.post.id %> >
-    <%= form.submit class: "button is-primary",
-      data: {
-        action: "stimulus#add_comment"
-      }
-    %>
-  </div>
+  <% if comment.persisted? %>
+    <%= form.submit class: "button is-primary" %>
+  <% else %>
+    <div class="control pb-2" data-controller="stimulus" data-stimulus-post-value=<%= comment.post.id %> >
+      <%= form.submit class: "button is-primary",
+        data: {
+          action: "stimulus#add_comment"
+        }
+      %>
+    </div>
+  <% end %>
 <% end %>

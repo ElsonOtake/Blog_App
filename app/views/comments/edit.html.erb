@@ -1,5 +1,18 @@
-<h1>Update comment</h1>
+<%# <h1>Update comment</h1> %>
+
+<%#= turbo_frame_tag @comment do %>
+  <%#= render "form", comment: @comment %>
+<%# end %>
 
 <%= turbo_frame_tag @comment do %>
-  <%= render "form", comment: @comment %>
+  <article class="media pt-2" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px 0px;">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <%= render "members/thumb", member: current_member %>
+      </p>
+    </figure>
+    <div class="media-content">
+      <%= render "comments/form", url: member_post_comment_path(current_member, @post, @comment), comment: @comment %>
+    </div>
+  </article>
 <% end %>

@@ -1,9 +1,9 @@
 <% if can? :update, comment %>
   <span>
     <span> · </span>
-    <a>
+    <%= link_to edit_member_post_comment_path(comment.author, comment.post, comment) do %>
       <i class="fa-solid fa-pen"></i>
-    </a>
+    <% end %>
     <span> · </span>
     <%= link_to member_post_comment_path(comment.author, comment.post, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
       <i class="fa-solid fa-trash"></i>
