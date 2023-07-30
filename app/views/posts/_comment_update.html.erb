@@ -1,0 +1,19 @@
+<% if can? :update, comment %>
+  <span>
+    <span> · </span>
+    <%= link_to edit_member_post_comment_path(comment.author, comment.post, comment) do %>
+      <i class="fa-solid fa-pen"></i>
+    <% end %>
+    <span> · </span>
+    <%= link_to member_post_comment_path(comment.author, comment.post, comment),
+      data: {
+        turbo_method: :delete,
+        controller: "stimulus",
+        stimulus_post_value: comment.post.id,
+        action: "stimulus#subtract_comment"
+      } do
+    %>
+      <i class="fa-solid fa-trash"></i>
+    <% end %>
+  </span>
+<% end %>

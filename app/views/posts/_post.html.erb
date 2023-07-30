@@ -1,29 +1,31 @@
-<article class="media pt-2" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px 0px;">
-  <figure class="media-left">
-    <p class="image is-48x48">
-      <%= render "members/thumb", member: post.author %>
-    </p>
-  </figure>
-  <div class="media-content">
-    <div class="content">
-      <p>
-        <strong><%= post.author.name %></strong>
-        <br>
-        <strong><%= post.title %></strong>
-        <br>
-        <%= post.text %>
-        <br>
-        <small><%= render "icon_new", post: post %> · <%= render "icon_comments", post: post %> · <%= render "icon_likes", post: post %> · <%= "#{distance_of_time_in_words_to_now(post.updated_at)} ago" %></small>
+<%= turbo_frame_tag post do %>
+  <article class="media pt-2" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px 0px;">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <%= render "members/thumb", member: post.author %>
       </p>
-    </div>
-    <div id=<%= "comments_#{post.id}" %> class="hidden_comments">
-      <%= turbo_frame_tag "comments_#{post.id}" do %>
-        <% post.comments.includes(:author).each do |comment| %>
-          <%= render "comments/comment", comment: comment %>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong><%= post.author.name %></strong>
+          <br>
+          <strong><%= post.title %></strong>
+          <br>
+          <%= post.text %>
+          <br>
+          <small><%= render "icon_new", post: post %> · <%= render "icon_comments", post: post %> · <%= render "icon_likes", post: post %> · <%= "#{distance_of_time_in_words_to_now(post.updated_at)} ago" %><%= render "post_update", post: post %></small>
+        </p>
+      </div>
+      <div id=<%= "comments_#{post.id}" %> class="hidden_comments">
+        <%= turbo_frame_tag "comments_#{post.id}" do %>
+          <% post.comments.includes(:author).each do |comment| %>
+            <%= render "comments/comment", comment: comment %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
-</article>
+  </article>
 
-<%= turbo_frame_tag "new_comment_#{post.id}" %>
+  <%= turbo_frame_tag "new_comment_#{post.id}" %>
+<% end %>

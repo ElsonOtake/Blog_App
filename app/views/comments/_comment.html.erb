@@ -12,11 +12,9 @@
           <br>
           <%= comment.text %>
           <br>
-          <small><%= "#{distance_of_time_in_words_to_now(comment.updated_at)} ago" %></small>
+          <small><%= "#{distance_of_time_in_words_to_now(comment.updated_at)} ago" %><%= render "posts/comment_update", comment: comment %></small>
         </p>
       </div>
     </div>
   </article>
-  <%#= link_to 'Edit', edit_member_post_comment_path(@member, @post, comment), class: "btn btn-secondary btn-sm" %>
-  <%#= button_to 'Delete', member_post_comment_path(@member, @post, comment), method: :delete, class: "btn btn-danger btn-sm" %>
 <% end %>

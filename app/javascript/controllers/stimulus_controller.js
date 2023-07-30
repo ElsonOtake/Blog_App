@@ -67,6 +67,11 @@ export default class extends Controller {
     }
   }
 
+  subtract_comment() {
+    const counter = document.getElementById(`comments_counter_${this.postValue}`);
+    counter.innerHTML = parseInt(counter.innerHTML) - 1;
+  }
+
   openModal($el) {
     $el.classList.add('is-active');
   }
