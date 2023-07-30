@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
         format.turbo_stream { flash.now[:notice] = 'Comment was successfully created' }
       else
         format.html { render :new, status: :unprocessable_entity }
-        flash.now[:notice] = @person.errors.full_messages[0]
+        flash.now[:notice] = @comment.errors.full_messages[0]
         format.turbo_stream { render turbo_stream: helpers.render_turbo_stream_inline_flash_messages }
       end
     end
@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
         format.turbo_stream { flash.now[:notice] = 'Comment was successfully updated' }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        flash.now[:notice] = @person.errors.full_messages[0]
+        flash.now[:notice] = @comment.errors.full_messages[0]
         format.turbo_stream { render turbo_stream: helpers.render_turbo_stream_inline_flash_messages }
       end
     end
