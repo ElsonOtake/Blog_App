@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_09_192957) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_010134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "btree_gist"
@@ -127,6 +127,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_09_192957) do
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
+  create_table "visitors", force: :cascade do |t|
+    t.string "user_agent"
+    t.bigint "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_visitors_on_member_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "members", column: "author_id"
@@ -134,4 +142,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_09_192957) do
   add_foreign_key "likes", "members", column: "author_id"
   add_foreign_key "likes", "posts", on_delete: :cascade
   add_foreign_key "posts", "members", column: "author_id"
+  add_foreign_key "visitors", "members", on_delete: :cascade
 end
