@@ -61,6 +61,7 @@
     <li><a href="https://github.com/rspec/rspec-rails">RSpec Rails</a></li>
     <li><a href="https://github.com/rubocop/rubocop">Rubocop</a></li>
     <li><a href="https://stimulus.hotwired.dev/">Stimulus</a></li>
+    <li><a href="https://github.com/sidekiq/sidekiq">Sidekiq</a></li>
     <li><a href="https://github.com/hotwired/turbo-rails">Turbo Rails</a></li>
   </ul>
 </details>
@@ -149,7 +150,7 @@ Install this project with:
 To run the project, execute the following command:
 
 ```sh
-  rails server
+  bin/dev
 ```
 Open `http://localhost:3000/` on your browser.
 
