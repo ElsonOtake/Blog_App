@@ -6,6 +6,7 @@ module TrackEvent
     # counter = CounterAnalytic.where(action: session[:action], member_id: session[:post_author]).first_or_create!
     # counter.count += 1
     # counter.save!
+    CreateLengthJob.perform_async(session[:post_author], session[:comment_length]) if session[:action] == 'create'
     CreateBrowserJob.perform_async(session[:post_author], current_visitor.id, current_visitor.user_agent)
     CreateUniqueJob.perform_async(session[:post_author], current_visitor.id)
   end

@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.new(comment_params)
     @comment.author = current_user
-    session[:comment_size] = @comment.text.size
+    session[:comment_length] = @comment.text.size
     respond_to do |format|
       if @comment.save!
         format.html { redirect_to member_posts_path(@post.author), notice: 'Comment was successfully created' }
