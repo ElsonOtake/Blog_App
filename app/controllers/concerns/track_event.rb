@@ -2,12 +2,8 @@ module TrackEvent
   extend ActiveSupport::Concern
 
   def track_event
-    puts "********** request.path #{request.path}"
-    path = Rails.application.routes.recognize_path(request.path)
-
-    controller = path[:controller]
-    action = path[:action]
-    puts "********** controller #{controller}"
-    puts "********** action #{action}"
+    event = CounterAnalytic.where(action: flash[:action] , member: current_user).first_or_create!
+    event.count += 1
+    event.save!
   end
 end

@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
   before_action :authenticate_member!
   before_action :set_post, only: %i[new create]
   before_action :set_comment, only: %i[edit update destroy]
-  before_action :track_event, only: %i[create update destroy]
+  before_action :set_action, only: %i[create update destroy]
+  after_action :track_event, only: %i[create update destroy]
 
   def new
     @comment = @post.comments.new
@@ -64,5 +65,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:text)
+  end
+
+  def set_action
+    flash[:action] = params["action"]
   end
 end
