@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
+  include TrackEvent
   before_action :authenticate_member!
   before_action :set_post, only: %i[new create]
   before_action :set_comment, only: %i[edit update destroy]
+  before_action :track_event, only: %i[create update destroy]
 
   def new
     @comment = @post.comments.new
