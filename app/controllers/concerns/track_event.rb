@@ -7,5 +7,6 @@ module TrackEvent
     # counter.count += 1
     # counter.save!
     CreateBrowserJob.perform_async(session[:post_author], current_visitor.id, current_visitor.user_agent)
+    CreateUniqueJob.perform_async(session[:post_author], current_visitor.id)
   end
 end
