@@ -13,7 +13,7 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @member.persisted?
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: auth
       sign_in_and_redirect @member, event: :authentication
-      current_visitor && current_visitor.update!(member: @member)
+      current_visitor&.update!(member: @member)
     else
       session['devise.auth_data'] = request.env['omniauth.auth'].except('extra')
       redirect_to new_member_registration_url, alert: @member.errors.full_messages.join("\n")

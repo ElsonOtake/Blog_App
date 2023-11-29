@@ -63,9 +63,9 @@ gem 'bootsnap', require: false
 gem 'active_storage_validations'
 gem 'aws-sdk-s3', require: false
 gem 'chartkick'
-gem 'image_processing', '~> 1.2'
 gem 'faker'
 gem 'friendly_id', '~> 5.4.0'
+gem 'image_processing', '~> 1.2'
 gem 'omniauth-github', '~> 2.0.0'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'

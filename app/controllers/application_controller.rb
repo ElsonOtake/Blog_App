@@ -52,11 +52,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  
+
   def create_current_visitor
     visitor = Visitor.create!(user_agent: request.user_agent)
     session[:visitor_id] = visitor.id
-    
+
     visitor
   end
 end
