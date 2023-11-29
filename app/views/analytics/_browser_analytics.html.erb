@@ -6,7 +6,7 @@
     visitor: browser_analytic.visitor_id,
     created: browser_analytic.created_at.strftime("%Y-%m-%d")
   } do %>
-  <p>
+  <p class="is-hidden">
     device: <%= browser_analytic.device.to_s %> 
     platform: <%= browser_analytic.platform %>
     visitor: <%= browser_analytic.visitor_id %>
