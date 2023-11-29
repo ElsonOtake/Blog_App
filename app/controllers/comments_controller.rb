@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_member!
   before_action :set_post, only: %i[new create]
   before_action :set_comment, only: %i[edit update destroy]
-  before_action :set_action, only: %i[create update destroy]
+  before_action :set_event, only: %i[create update destroy]
   after_action :track_event, only: %i[create update destroy]
 
   def new
@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.new(comment_params)
     @comment.author = current_user
+    session[:comment_size] = @comment.text.size
     respond_to do |format|
       if @comment.save!
         format.html { redirect_to member_posts_path(@post.author), notice: 'Comment was successfully created' }
@@ -67,7 +68,8 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:text)
   end
 
-  def set_action
-    flash[:action] = params["action"]
+  def set_event
+    session[:action] = params["action"]
+    session[:post_author] = Post.find(params[:post_id]).author_id
   end
 end
