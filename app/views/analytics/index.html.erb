@@ -1,2 +1,2 @@
-<h1>Analytics#index</h1>
-<p>Find me in app/views/analytics/index.html.erb</p>
+<h1>Analytics</h1>
+<%= line_chart Member.group_by_day(:created_at).count %>

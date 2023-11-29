@@ -46,16 +46,17 @@
     <li><a href="https://github.com/igorkasyanchuk/active_storage_validations">Active Storage Validation</a></li>
     <li><a href="https://github.com/flyerhzm/bullet">Bullet</a></li>
     <li><a href="https://bulma.io/">Bulma</a></li>
-    <li><a href="https://github.com/cookpad/omniauth-rails_csrf_protection">OmniAuth Rails CSRF Protection</a></li>
-    <li><a href="https://github.com/omniauth/omniauth-github">OmniAuth GitHub</a></li>
-    <li><a href="https://github.com/zquestz/omniauth-google-oauth2">OmniAuth Google OAuth2</a></li>
     <li><a href="https://github.com/CanCanCommunity/cancancan">Cancancan</a></li>
     <li><a href="https://github.com/teamcapybara/capybara">Capybara</a></li>
+    <li><a href="https://github.com/ankane/chartkick">Chartkick</a></li>
     <li><a href="https://rubygems.org/gems/devise/">Devise</a></li>
     <li><a href="https://github.com/thoughtbot/factory_bot">Factory Bot</a></li>
     <li><a href="https://github.com/faker-ruby/faker">Faker</a></li>
     <li><a href="https://github.com/norman/friendly_id">FriendlyId</a></li>
     <li><a href="https://jwt.io/">JWT</a></li>
+    <li><a href="https://github.com/cookpad/omniauth-rails_csrf_protection">OmniAuth Rails CSRF Protection</a></li>
+    <li><a href="https://github.com/omniauth/omniauth-github">OmniAuth GitHub</a></li>
+    <li><a href="https://github.com/zquestz/omniauth-google-oauth2">OmniAuth Google OAuth2</a></li>
     <li><a href="https://github.com/ddnexus/pagy">Pagy</a></li>
     <li><a href="https://github.com/rspec/rspec-rails">RSpec Rails</a></li>
     <li><a href="https://github.com/rubocop/rubocop">Rubocop</a></li>
@@ -140,7 +141,7 @@ Fill in the environment variables
 Install this project with:
 ```sh
   bundle install
-  rails db:create db:migrate
+  rails db:create db:migrate db:seed
 ```
 
 ### Usage

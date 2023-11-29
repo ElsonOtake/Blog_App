@@ -62,16 +62,16 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'active_storage_validations'
 gem 'aws-sdk-s3', require: false
+gem 'chartkick'
 gem 'image_processing', '~> 1.2'
-
 gem 'faker'
 gem 'friendly_id', '~> 5.4.0'
-gem 'pagy', '~> 6.0' # omit patch digit
-gem 'rswag'
-
+gem 'groupdate'
 gem 'omniauth-github', '~> 2.0.0'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+gem 'pagy', '~> 6.0' # omit patch digit
+gem 'rswag'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
