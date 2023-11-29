@@ -2,11 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="chart"
 export default class extends Controller {
-  static targets = [ "counterAnalytic", "counter", "browserAnalytic", "devices", "platforms" ]
+  static targets = [ "counterAnalytic", "counter", "browserAnalytic", "devices", "platforms", "uniqueAnalytic", "unique" ]
   static values = { startDate: String, endDate: String }
 
   connect = () => {
     this.counterChart = new Chartkick.ColumnChart(this.counterTarget, this.counterData);
+    this.uniqueChart = new Chartkick.ColumnChart(this.uniqueTarget, this.uniqueData);
     this.devicesChart = new Chartkick.ColumnChart(this.devicesTarget, this.devicesData);
     this.platformsChart = new Chartkick.ColumnChart(this.platformsTarget, this.platformsData);
   }
@@ -14,6 +15,12 @@ export default class extends Controller {
   counterAnalyticTargetConnected = () => {
     if (this.counterChart) {
       this.counterChart.updateData(this.counterData);
+    };
+  }
+
+  uniqueAnalyticTargetConnected = () => {
+    if (this.uniqueChart) {
+      this.uniqueChart.updateData(this.uniqueData);
     };
   }
 
@@ -83,6 +90,14 @@ export default class extends Controller {
       this.loadCounterData(data, target, parseInt(target.dataset.count, 10));
     });
     success(Object.values(data));
+  }
+
+  uniqueData = (success) => {
+    let data = this.createDateRange();
+    this.uniqueAnalyticTargets.forEach(target => {
+      data[target.dataset.created]++;
+    });
+    success(data);
   }
 
   devicesData = (success) => {

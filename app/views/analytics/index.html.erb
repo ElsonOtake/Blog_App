@@ -4,11 +4,12 @@
   data-chart-start-date-value=<%= @start_date %>
   data-chart-end-date-value=<%= @end_date %>
 >
-  <% %w(counter_analytics browser_analytics).each do |analytics| %>
+  <% %w(counter_analytics unique_analytics browser_analytics).each do |analytics| %>
     <%= render "broadcast", id: analytics %>
   <% end %>
 
   <%= render "chart", title: "Counter", target: "counter" %>
+  <%= render "chart", title: "Unique visitors", target: "unique" %>
   <%= render "chart", title: "Browser device", target: "devices" %>
   <%= render "chart", title: "Browser platform", target: "platforms" %>
 </div>

@@ -1,0 +1,11 @@
+<%= tag.div id: dom_id(unique_analytic),
+  data: {
+    chart_target: "uniqueAnalytic",
+    visitor: unique_analytic.visitor_id,
+    created: unique_analytic.created_at.strftime("%Y-%m-%d")
+  } do %>
+  <p>
+    visitor: <%= unique_analytic.visitor_id %> 
+    created: <%= unique_analytic.created_at %>
+  </p>
+<% end %>
