@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'analytics/index', as: 'analytics'
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   devise_for :members, controllers: { omniauth_callbacks: 'members/omniauth_callbacks',
