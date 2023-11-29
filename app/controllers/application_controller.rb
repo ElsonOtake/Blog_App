@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     current_member
   end
 
+  def current_visitor
+    session[:visitor_id] ? Visitor.find(session[:visitor_id]) : create_current_visitor
+  end
+
   def posts_per_page
     @posts_per_page = 2
   end
@@ -45,5 +49,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update) do |u|
       u.permit(:name, :email, :password, :password_confirmation, :current_password, :avatar)
     end
+  end
+
+  private
+
+  def create_current_visitor
+    visitor = Visitor.create!(user_agent: request.user_agent)
+    session[:visitor_id] = visitor.id
+
+    visitor
   end
 end

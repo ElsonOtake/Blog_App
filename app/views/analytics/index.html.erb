@@ -1,0 +1,12 @@
+<h1>Analytics</h1>
+<div
+  data-controller="chart"
+  data-chart-start-date-value=<%= @start_date %>
+  data-chart-end-date-value=<%= @end_date %>
+>
+  <%= render "broadcast", counter_analytics: @counter_analytics %>
+  <p class="text-xl font-semibold">Counter</p>
+  <div data-chart-target="counter"></div>
+</div>
+
+<%= link_to "Back", root_path %>

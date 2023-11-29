@@ -120,7 +120,9 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chartkick (5.0.4)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     cssbundling-rails (1.2.0)
       railties (>= 6.0.0)
@@ -289,6 +291,8 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     redis (4.8.1)
+    redis-client (0.18.0)
+      connection_pool
     regexp_parser (2.8.1)
     reline (0.3.6)
       io-console (~> 0.5)
@@ -353,6 +357,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sidekiq (7.2.0)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -406,6 +415,7 @@ DEPENDENCIES
   bullet
   cancancan
   capybara
+  chartkick
   cssbundling-rails (~> 1.2)
   database_cleaner
   debug
@@ -435,6 +445,7 @@ DEPENDENCIES
   rswag
   rubocop (>= 1.0, < 2.0)
   selenium-webdriver
+  sidekiq
   sprockets-rails
   stimulus-rails
   turbo-rails

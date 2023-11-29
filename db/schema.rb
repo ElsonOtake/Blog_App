@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_09_192957) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_120527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "btree_gist"
@@ -73,6 +73,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_09_192957) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
+  create_table "counter_analytics", force: :cascade do |t|
+    t.string "action"
+    t.integer "count", default: 0
+    t.bigint "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_counter_analytics_on_member_id"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -127,11 +136,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_09_192957) do
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
+  create_table "visitors", force: :cascade do |t|
+    t.string "user_agent"
+    t.bigint "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_visitors_on_member_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "members", column: "author_id"
   add_foreign_key "comments", "posts", on_delete: :cascade
+  add_foreign_key "counter_analytics", "members", on_delete: :cascade
   add_foreign_key "likes", "members", column: "author_id"
   add_foreign_key "likes", "posts", on_delete: :cascade
   add_foreign_key "posts", "members", column: "author_id"
+  add_foreign_key "visitors", "members", on_delete: :cascade
 end
