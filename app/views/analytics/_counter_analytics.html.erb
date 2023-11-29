@@ -1,4 +1,10 @@
-<%= tag.div id: dom_id(counter_analytic) do %>
+<%= tag.div id: dom_id(counter_analytic),
+  data: {
+    chart_target: "counterAnalytic",
+    action: counter_analytic.action.titleize,
+    created: counter_analytic.created_at.strftime("%Y-%m-%d"),
+    count: counter_analytic.count
+  } do %>
   <p>
     Action: <%= counter_analytic.action %> 
     Count: <%= counter_analytic.count %> 

@@ -1,3 +1,5 @@
 <h1>Analytics</h1>
-<%= render "broadcast", counter_analytics: @counter_analytics %>
-<%= column_chart @data %>
+<div data-controller="chart">
+  <%= render "broadcast", counter_analytics: @counter_analytics %>
+  <%= column_chart @data %>
+</div>
