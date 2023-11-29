@@ -1,2 +1,5 @@
 <h1>Analytics</h1>
-<%= line_chart Member.group_by_day(:created_at).count %>
+<% @counter.each do |count| %>
+  <p>Action: <%= count.action %> count: <%= count.count %> created: <%= count.created_at %></p>
+<% end %>
+<%= column_chart @data %>
