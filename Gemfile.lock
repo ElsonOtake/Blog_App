@@ -157,8 +157,6 @@ GEM
       activerecord (>= 4.0.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    groupdate (6.4.0)
-      activesupport (>= 6.1)
     hashie (5.0.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
@@ -418,7 +416,6 @@ DEPENDENCIES
   factory_bot_rails
   faker
   friendly_id (~> 5.4.0)
-  groupdate
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
