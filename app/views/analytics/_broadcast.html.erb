@@ -1,0 +1,6 @@
+<%= turbo_stream_from current_member.id, "counter_analytics" %>
+<div id="counter_analytics">
+  <% counter_analytics.each do |counter_analytic| %>
+    <%= render "counter_analytics", counter_analytic: counter_analytic %>
+  <% end %>
+</div>

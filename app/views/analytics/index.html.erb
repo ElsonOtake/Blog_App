@@ -1,5 +1,3 @@
 <h1>Analytics</h1>
-<% @counter.each do |count| %>
-  <p>Action: <%= count.action %> count: <%= count.count %> created: <%= count.created_at %></p>
-<% end %>
+<%= render "broadcast", counter_analytics: @counter_analytics %>
 <%= column_chart @data %>
