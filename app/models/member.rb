@@ -8,6 +8,7 @@ class Member < ApplicationRecord
   has_many :counter_analytics
   has_many :browser_analytics
   has_many :unique_analytics
+  has_many :length_analytics
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_limit: [110, 110]
   end

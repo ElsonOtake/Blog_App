@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_29_224155) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_233514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "btree_gist"
@@ -104,6 +104,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_224155) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "length_analytics", force: :cascade do |t|
+    t.integer "comment_length"
+    t.bigint "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_length_analytics_on_member_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -171,6 +179,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_224155) do
   add_foreign_key "comments", "members", column: "author_id"
   add_foreign_key "comments", "posts", on_delete: :cascade
   add_foreign_key "counter_analytics", "members", on_delete: :cascade
+  add_foreign_key "length_analytics", "members", on_delete: :cascade
   add_foreign_key "likes", "members", column: "author_id"
   add_foreign_key "likes", "posts", on_delete: :cascade
   add_foreign_key "posts", "members", column: "author_id"
