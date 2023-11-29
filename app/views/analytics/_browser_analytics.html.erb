@@ -1,0 +1,15 @@
+<%= tag.div id: dom_id(browser_analytic),
+  data: {
+    chart_target: "browserAnalytic",
+    device: browser_analytic.device.to_s.titleize,
+    platform: browser_analytic.platform.titleize,
+    visitor: browser_analytic.visitor_id,
+    created: browser_analytic.created_at.strftime("%Y-%m-%d")
+  } do %>
+  <p>
+    device: <%= browser_analytic.device.to_s %> 
+    platform: <%= browser_analytic.platform %>
+    visitor: <%= browser_analytic.visitor_id %>
+    created: <%= browser_analytic.created_at %>
+  </p>
+<% end %>

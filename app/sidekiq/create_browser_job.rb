@@ -2,11 +2,12 @@ class CreateBrowserJob
   include Sidekiq::Job
   require "browser"
 
-  def perform(member, agent)
+  def perform(member, visitor, agent)
     browser = Browser.new(agent, accept_language: "en-us")
     device = device_type(browser)
     platform = browser.platform.name
     BrowserAnalytic.where(member_id: member,
+                          visitor_id: visitor,
                           device: device,
                           platform: platform).first_or_create
   end
