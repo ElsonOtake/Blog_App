@@ -2,9 +2,10 @@ module TrackEvent
   extend ActiveSupport::Concern
 
   def track_event
-    # CreateCounterJob.perform_async(session[:action], session[:post_author])
-    event = CounterAnalytic.where(action: session[:action], member_id: session[:post_author]).first_or_create!
-    event.count += 1
-    event.save!
+    CreateCounterJob.perform_async(session[:action], session[:post_author])
+    # counter = CounterAnalytic.where(action: session[:action], member_id: session[:post_author]).first_or_create!
+    # counter.count += 1
+    # counter.save!
+    CreateBrowserJob.perform_async(session[:post_author], current_visitor.user_agent)
   end
 end
