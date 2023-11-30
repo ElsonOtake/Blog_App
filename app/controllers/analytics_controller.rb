@@ -1,4 +1,6 @@
 class AnalyticsController < ApplicationController
+  before_action :authenticate_member!
+  
   def index
     @start_date = params[:start_date] || (Date.today - 6.days).to_s
     @end_date = params[:end_date] || Date.today.to_s
