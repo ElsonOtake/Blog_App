@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="chart"
 export default class extends Controller {
   static targets = [ "counterAnalytic", "counter", "lengthAnalytic", "length", "uniqueAnalytic", "unique",
-                     "browserAnalytic", "devices", "platforms" ]
+                     "browserAnalytic", "devices", "platforms", "startDate", "endDate", "btnSubmit" ]
   static values = { startDate: String, endDate: String }
 
   connect = () => {
@@ -138,5 +138,11 @@ export default class extends Controller {
       this.loadPlatformData(data, target);
     });
     success(Object.values(data));
+  }
+
+  new_range = () => {
+    const startDate = new Date(this.startDateTarget.value);
+    const endDate = new Date(this.endDateTarget.value);
+    startDate < endDate && this.btnSubmitTarget.click();
   }
 }
