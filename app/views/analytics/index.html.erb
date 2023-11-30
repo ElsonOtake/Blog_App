@@ -1,4 +1,4 @@
-<h1>Analytics</h1>
+<h1 class="title">Analytics</h1>
 <div
   data-controller="chart"
   data-chart-start-date-value=<%= @start_date %>
@@ -15,4 +15,4 @@
   <%= render "chart", title: "Browser platform", target: "platforms" %>
 </div>
 
-<%= link_to "Back", root_path %>
+<%= link_to "Back", root_path, class: "button is-primary mt-5" %>
