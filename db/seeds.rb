@@ -69,12 +69,12 @@ unless CounterAnalytic.any?
     rand(0..10).times do
       visitor = Visitor.where(
         user_agent: "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0",
-        member_id: members[rand(1..members.size) - 1],
+        member_id: members[rand(members.size)],
         created_at: created).first_or_create.id
-      device = devices[rand(1..devices.size) - 1]
-      platform = platforms[rand(1..platforms.size) - 1]
+      device = devices[rand(devices.size)]
+      platform = platforms[rand(platforms.size)]
       rand(0..5).times do
-        member = members[rand(1..members.size) - 1]
+        member = members[rand(members.size)]
         UniqueAnalytic.where(
           visitor_id: visitor,
           member_id: member,
