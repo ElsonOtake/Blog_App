@@ -59,3 +59,49 @@ unless Like.any?
     end
   end
 end
+
+unless CounterAnalytic.any?
+  members = Member.pluck(:id)
+  devices = %w[mobile tablet console bot desktop other]
+  platforms = %w[android ios mac ubuntu windows]
+  actions = %w[create update delete]
+  ((Date.today - 9.day)..Date.today).each do |created|
+    rand(0..10).times do
+      visitor = Visitor.where(
+        user_agent: "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0",
+        member_id: members[rand(1..members.size) - 1],
+        created_at: created).first_or_create.id
+      device = devices[rand(1..devices.size) - 1]
+      platform = platforms[rand(1..platforms.size) - 1]
+      rand(0..5).times do
+        member = members[rand(1..members.size) - 1]
+        UniqueAnalytic.where(
+          visitor_id: visitor,
+          member_id: member,
+          created_at: created).first_or_create
+        BrowserAnalytic.where(
+          visitor_id: visitor,
+          member_id: member,
+          device: device,
+          platform: platform,
+          created_at: created).first_or_create
+        actions.sample(rand(0..3)).each do |action|
+          count = rand(1..5)
+          CounterAnalytic.create!(
+            action: action,
+            count: count,
+            member_id: member,
+            created_at: created)
+          if action == "create"
+            count.times do
+              LengthAnalytic.create!(
+                comment_length: rand(5..50),
+                member_id: member,
+                created_at: created)
+            end
+          end
+        end
+      end
+    end
+  end
+end
