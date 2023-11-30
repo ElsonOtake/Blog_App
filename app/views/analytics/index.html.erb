@@ -1,4 +1,4 @@
-<h1 class="title">Analytics</h1>
+<h1 class="title">Comment analytics</h1>
 <div data-controller="chart">
   <%= form_with(url: analytics_url, method: :get, class: "is-flex is-justify-content-center my-4") do |form| %>
     <div class="is-flex is-flex-wrap-wrap is-align-items-center">
@@ -31,7 +31,7 @@
     <%= render "broadcast", analytics: analytics %>
   <% end %>
 
-  <%= render "chart", title: "Counter", target: "counter" %>
+  <%= render "chart", title: "Comments", target: "counter" %>
   <%= render "chart", title: "Average comment length", target: "length" %>
   <%= render "chart", title: "Unique visitors", target: "unique" %>
   <%= render "chart", title: "Browser device", target: "devices" %>
