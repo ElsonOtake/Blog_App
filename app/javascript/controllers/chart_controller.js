@@ -110,7 +110,9 @@ export default class extends Controller {
       averageLength[target.dataset.created].count++;
     });
     for (const created in averageLength) {
-      data[created] = averageLength[created].totalLength / averageLength[created].count;
+      if (data[created] != null) {
+        data[created] = averageLength[created].totalLength / averageLength[created].count;
+      };
     };
     success(data);
   }
@@ -118,7 +120,9 @@ export default class extends Controller {
   uniqueData = (success) => {
     let data = this.createDateRange();
     this.uniqueAnalyticTargets.forEach(target => {
-      data[target.dataset.created]++;
+      if (data[target.dataset.created] != null) {
+        data[target.dataset.created]++;
+      };
     });
     success(data);
   }
