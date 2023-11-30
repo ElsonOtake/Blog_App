@@ -1,19 +1,19 @@
 class CreateBrowserJob
   include Sidekiq::Job
-  require "browser"
+  require 'browser'
 
   def perform(member, visitor, agent)
-    browser = Browser.new(agent, accept_language: "en-us")
+    browser = Browser.new(agent, accept_language: 'en-us')
     device = device_type(browser)
     platform = browser.platform.name
     BrowserAnalytic.where(member_id: member,
                           visitor_id: visitor,
-                          device: device,
-                          platform: platform).first_or_create
+                          device:,
+                          platform:).first_or_create
   end
-  
+
   def device_type(browser)
-    device_type = if browser.device.mobile?
+    if browser.device.mobile?
       :mobile
     elsif browser.device.tablet?
       :tablet
@@ -21,7 +21,7 @@ class CreateBrowserJob
       :console
     elsif browser.bot?
       :bot
-    elsif [:chrome_os, :linux, :mac, :windows].any? { |computer| computer == browser.platform.id }
+    elsif %i[chrome_os linux mac windows].any? { |computer| computer == browser.platform.id }
       :desktop
     else
       :other

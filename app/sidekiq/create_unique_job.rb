@@ -5,5 +5,4 @@ class CreateUniqueJob
     UniqueAnalytic.where(member_id: member,
                          visitor_id: visitor).first_or_create
   end
-
 end
