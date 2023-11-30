@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% names = { :regular => [:one, :two, :three], :admin => [:four, :five] } %>
+
+<% (0..9).each do |n| %>
+length_<%= n * 2 %>:
+  comment_length: <%= rand(5..50) %>
+  member: admin
+  created_at: <%= (Date.today - n.day).to_date %>
+
+length_<%= n * 2 + 1 %>:
+  comment_length: <%= rand(5..50) %>
+  member: regular
+  created_at: <%= (Date.today - n.day).to_date %>
+<% end %>

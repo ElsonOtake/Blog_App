@@ -1,0 +1,34 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% devices = %w[mobile tablet console bot desktop other] %>
+<% platforms = %w[android ios mac ubuntu windows] %>
+
+<% (0..9).each do |n| %>
+browser_<%= n * 4 %>:
+  device: <%= devices[rand(devices.size)] %>
+  platform: <%= platforms[rand(platforms.size)] %>
+  member: admin
+  visitor: regular
+  created_at: <%= (Date.today - n.day).to_date %>
+
+browser_<%= n * 4 + 1 %>:
+  device: <%= devices[rand(devices.size)] %>
+  platform: <%= platforms[rand(platforms.size)] %>
+  member: regular
+  visitor: admin
+  created_at: <%= (Date.today - n.day).to_date %>
+
+browser_<%= n * 4 + 2 %>:
+  device: <%= devices[rand(devices.size)] %>
+  platform: <%= platforms[rand(platforms.size)] %>
+  member: regular
+  visitor: regular
+  created_at: <%= (Date.today - n.day).to_date %>
+
+browser_<%= n * 4 + 3 %>:
+  device: <%= devices[rand(devices.size)] %>
+  platform: <%= platforms[rand(platforms.size)] %>
+  member: admin
+  visitor: admin
+  created_at: <%= (Date.today - n.day).to_date %>
+<% end %>
