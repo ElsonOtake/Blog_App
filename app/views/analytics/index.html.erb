@@ -1,36 +1,32 @@
 <h1 class="title">Analytics</h1>
-<%= form_with(url: analytics_url, method: :get, class: "is-flex is-justify-content-center my-4") do |form| %>
-  <div class="is-flex is-flex-wrap-wrap is-align-items-center" data-controller="chart">
-    <%= form.date_field :start_date,
-      value: @start_date,
-      class: "input is-primary",
-      data: {
-        chart_target: "startDate",
-        action: "change->chart#new_range"
-      },
-      placeholder: "Select start date" %>
-    <span class="mx-auto">to</span>
-    <%= form.date_field :end_date,
-      value: @end_date,
-      class: "input is-primary",
-      data: {
-        chart_target: "endDate",
-        action: "change->chart#new_range"
-      },
-      placeholder: "Select end date" %>
-    <%= form.submit "Ok",
-      class: "is-hidden",
-      data: {
-        chart_target: "btnSubmit"
-      } %>
-  </div>
-<% end %>
+<div data-controller="chart">
+  <%= form_with(url: analytics_url, method: :get, class: "is-flex is-justify-content-center my-4") do |form| %>
+    <div class="is-flex is-flex-wrap-wrap is-align-items-center">
+      <%= form.date_field :start_date,
+        value: @start_date,
+        class: "input is-primary",
+        data: {
+          chart_target: "startDate",
+          action: "change->chart#new_range"
+        },
+        placeholder: "Select start date" %>
+      <span class="mx-auto">to</span>
+      <%= form.date_field :end_date,
+        value: @end_date,
+        class: "input is-primary",
+        data: {
+          chart_target: "endDate",
+          action: "change->chart#new_range"
+        },
+        placeholder: "Select end date" %>
+      <%= form.submit "Ok",
+        class: "is-hidden",
+        data: {
+          chart_target: "btnSubmit"
+        } %>
+    </div>
+  <% end %>
 
-<div
-  data-controller="chart"
-  data-chart-start-date-value=<%= @start_date %>
-  data-chart-end-date-value=<%= @end_date %>
->
   <% %w(counter_analytics length_analytics unique_analytics browser_analytics).each do |analytics| %>
     <%= render "broadcast", analytics: analytics %>
   <% end %>

@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ "counterAnalytic", "counter", "lengthAnalytic", "length", "uniqueAnalytic", "unique",
                      "browserAnalytic", "devices", "platforms", "startDate", "endDate", "btnSubmit" ]
-  static values = { startDate: String, endDate: String }
 
   connect = () => {
     this.counterChart = new Chartkick.ColumnChart(this.counterTarget, this.counterData);
@@ -43,9 +42,9 @@ export default class extends Controller {
 
   createDateRange = () => {
     const result = {};
-    const currentDate = new Date(this.startDateValue);
+    const currentDate = new Date(this.startDateTarget.value);
   
-    while (currentDate <= new Date(this.endDateValue)) {
+    while (currentDate <= new Date(this.endDateTarget.value)) {
       const formattedDate = currentDate.toISOString().split('T')[0];
       result[formattedDate] = 0;
       currentDate.setDate(currentDate.getDate() + 1);
