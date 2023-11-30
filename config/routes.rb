@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+
   get 'analytics/index', as: 'analytics'
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
@@ -24,5 +26,9 @@ Rails.application.routes.draw do
         end
       end
     end
+  end
+
+  authenticate :member, lambda { |m| m.role == "admin" } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 end
