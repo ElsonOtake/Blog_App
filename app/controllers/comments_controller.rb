@@ -69,7 +69,7 @@ class CommentsController < ApplicationController
   end
 
   def set_event
-    session[:action] = params['action']
+    session[:action] = params['action'] == 'destroy' ? 'delete' : params['action']
     session[:post_author] = Post.find(params[:post_id]).author_id
   end
 end
