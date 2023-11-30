@@ -5,7 +5,7 @@
   data-chart-end-date-value=<%= @end_date %>
 >
   <% %w(counter_analytics length_analytics unique_analytics browser_analytics).each do |analytics| %>
-    <%= render "broadcast", id: analytics %>
+    <%= render "broadcast", analytics: analytics %>
   <% end %>
 
   <%= render "chart", title: "Counter", target: "counter" %>

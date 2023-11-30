@@ -2,7 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="chart"
 export default class extends Controller {
-  static targets = [ "counterAnalytic", "counter", "lengthAnalytic", "length", "uniqueAnalytic", "unique", "browserAnalytic", "devices", "platforms" ]
+  static targets = [ "counterAnalytic", "counter", "lengthAnalytic", "length", "uniqueAnalytic", "unique",
+                     "browserAnalytic", "devices", "platforms" ]
   static values = { startDate: String, endDate: String }
 
   connect = () => {
