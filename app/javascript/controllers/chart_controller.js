@@ -2,11 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="chart"
 export default class extends Controller {
-  static targets = [ "counterAnalytic", "counter", "browserAnalytic", "devices", "platforms", "uniqueAnalytic", "unique" ]
+  static targets = [ "counterAnalytic", "counter", "lengthAnalytic", "length", "uniqueAnalytic", "unique", "browserAnalytic", "devices", "platforms" ]
   static values = { startDate: String, endDate: String }
 
   connect = () => {
     this.counterChart = new Chartkick.ColumnChart(this.counterTarget, this.counterData);
+    this.lengthChart = new Chartkick.ColumnChart(this.lengthTarget, this.lengthData);
     this.uniqueChart = new Chartkick.ColumnChart(this.uniqueTarget, this.uniqueData);
     this.devicesChart = new Chartkick.ColumnChart(this.devicesTarget, this.devicesData);
     this.platformsChart = new Chartkick.ColumnChart(this.platformsTarget, this.platformsData);
@@ -15,6 +16,12 @@ export default class extends Controller {
   counterAnalyticTargetConnected = () => {
     if (this.counterChart) {
       this.counterChart.updateData(this.counterData);
+    };
+  }
+
+  lengthAnalyticTargetConnected = () => {
+    if (this.lengthChart) {
+      this.lengthChart.updateData(this.lengthData);
     };
   }
 
@@ -90,6 +97,22 @@ export default class extends Controller {
       this.loadCounterData(data, target, parseInt(target.dataset.count, 10));
     });
     success(Object.values(data));
+  }
+
+  lengthData = (success) => {
+    let averageLength = {};
+    let data = this.createDateRange();
+    this.lengthAnalyticTargets.forEach(target => {
+      if (!averageLength[target.dataset.created]) {
+        averageLength[target.dataset.created] = { totalLength: 0, count: 0 };
+      };
+      averageLength[target.dataset.created].totalLength += parseInt(target.dataset.length);
+      averageLength[target.dataset.created].count++;
+    });
+    for (const created in averageLength) {
+      data[created] = averageLength[created].totalLength / averageLength[created].count;
+    };
+    success(data);
   }
 
   uniqueData = (success) => {
