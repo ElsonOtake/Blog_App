@@ -31,6 +31,9 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert Sidekiq::Testing.fake?
     # remove jobs from the queue
     CreateCounterJob.clear
+    CreateLengthJob.clear
+    CreateUniqueJob.clear
+    CreateBrowserJob.clear
     assert_equal 0, CreateCounterJob.jobs.size
     assert_equal 0, CreateLengthJob.jobs.size
     assert_equal 0, CreateUniqueJob.jobs.size
@@ -54,6 +57,9 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert Sidekiq::Testing.fake?
     # remove jobs from the queue
     CreateCounterJob.clear
+    CreateLengthJob.clear
+    CreateUniqueJob.clear
+    CreateBrowserJob.clear
     assert_equal 0, CreateCounterJob.jobs.size
     assert_equal 0, CreateLengthJob.jobs.size
     assert_equal 0, CreateUniqueJob.jobs.size
@@ -82,6 +88,9 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert Sidekiq::Testing.fake?
     # remove jobs from the queue
     CreateCounterJob.clear
+    CreateLengthJob.clear
+    CreateUniqueJob.clear
+    CreateBrowserJob.clear
     assert_equal 0, CreateCounterJob.jobs.size
     assert_equal 0, CreateLengthJob.jobs.size
     assert_equal 0, CreateUniqueJob.jobs.size
@@ -107,13 +116,14 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert Sidekiq::Testing.fake?
     # remove jobs from the queue
     CreateCounterJob.clear
+    CreateLengthJob.clear
+    CreateUniqueJob.clear
+    CreateBrowserJob.clear
     assert_equal 0, CreateCounterJob.jobs.size
     assert_equal 0, CreateLengthJob.jobs.size
     assert_equal 0, CreateUniqueJob.jobs.size
     assert_equal 0, CreateBrowserJob.jobs.size
     sign_in @member
-    Post.first
-    Comment.first
     delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
            params: { comment: { member: @member, post: @post, id: @comment.id } }
     assert_response :redirect
