@@ -60,7 +60,7 @@ unless Like.any?
   end
 end
 
-unless CounterAnalytic.any?
+unless BrowserAnalytic.any?
   members = Member.pluck(:id)
   devices = %w[mobile tablet console bot desktop other]
   platforms = %w[android ios mac ubuntu windows]
