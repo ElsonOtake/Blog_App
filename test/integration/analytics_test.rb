@@ -1,10 +1,10 @@
 require 'test_helper'
 require 'sidekiq/testing'
 
-# 
+#
 # Test analytics integration using background jobs (CreateCounterJob, CreateLengthJob,
 # CreateBrowserJob, and CreateUniqueJob) in app/controllers/concerns/track_event.rb.
-# 
+#
 
 class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
   setup do

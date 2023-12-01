@@ -1,9 +1,9 @@
 require 'test_helper'
 
-# 
+#
 # Test analytics integration  without  using background jobs (CreateCounterJob, CreateLengthJob,
 # CreateBrowserJob, and CreateUniqueJob) in app/controllers/concerns/track_event.rb.
-# 
+#
 # My Render account does not allow me to run Sidekiq on deployments.
 #
 
