@@ -3,11 +3,13 @@
     chart_target: "counterAnalytic",
     action: counter_analytic.action.titleize,
     count: counter_analytic.count,
+    visitor: counter_analytic.visitor_id,
     created: counter_analytic.created_at.strftime("%Y-%m-%d")
   } do %>
   <p class="is-hidden">
     action: <%= counter_analytic.action %> 
     count: <%= counter_analytic.count %> 
+    visitor: <%= counter_analytic.visitor_id %>
     created: <%= counter_analytic.created_at %>
   </p>
 <% end %>
