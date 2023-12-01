@@ -9,7 +9,7 @@ class CreateBrowserJob
     BrowserAnalytic.where(member_id: member,
                           visitor_id: visitor,
                           device:,
-                          platform:).first_or_create
+                          platform:).first_or_create!
   end
 
   def device_type(browser)
