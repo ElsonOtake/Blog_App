@@ -23,7 +23,7 @@ end
 unless Post.any?
   members = Member.all
   members.each do |member|
-    Faker::Number.between(from: 1, to: 50).times do
+    Faker::Number.between(from: 1, to: 10).times do
       member.posts.create!(
         title: Faker::Quote.famous_last_words,
         text: Faker::Quote.jack_handey
@@ -36,7 +36,7 @@ unless Comment.any?
   member_ids = Member.pluck(:id)
   posts = Post.all
   posts.each do |post|
-    Faker::Number.between(from: 0, to: 20).times do
+    Faker::Number.between(from: 0, to: 5).times do
       post.comments.create!(
         text: Faker::Quote.most_interesting_man_in_the_world,
         author_id: member_ids[Faker::Number.between(from: 1, to: member_ids.size) - 1]
