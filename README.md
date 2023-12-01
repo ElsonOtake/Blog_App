@@ -80,9 +80,9 @@
 ### Key Features <a name="key-features"></a>
 
 - **REST API**
-- **Authentication**
 - **Omniauth**
 - **[API documentation](https://swagger.io/solutions/api-documentation/)**
+- **Real time update analytic charts**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -162,6 +162,11 @@ To run tests, run the following command:
 ```sh
   rspec spec/features
   rspec spec/models
+  rails test test/models
+  rails test test/controllers
+  rails test test/sidekiq
+  rails test test/integration
+  rails test test/system
 ```
 
 To generate the API documentation:
