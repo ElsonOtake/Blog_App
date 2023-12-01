@@ -1,0 +1,11 @@
+<%= tag.div id: dom_id(length_analytic),
+  data: {
+    chart_target: "lengthAnalytic",
+    length: length_analytic.comment_length,
+    created: length_analytic.created_at.strftime("%Y-%m-%d")
+  } do %>
+  <p class="is-hidden">
+    length: <%= length_analytic.comment_length %> 
+    created: <%= length_analytic.created_at.to_date.to_s %>
+  </p>
+<% end %>

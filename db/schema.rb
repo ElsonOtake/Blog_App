@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_29_120527) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_01_001659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "btree_gist"
@@ -63,6 +63,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_120527) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "browser_analytics", force: :cascade do |t|
+    t.string "device"
+    t.string "platform"
+    t.bigint "member_id", null: false
+    t.bigint "visitor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_browser_analytics_on_member_id"
+    t.index ["visitor_id"], name: "index_browser_analytics_on_visitor_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "text"
     t.datetime "created_at", null: false
@@ -79,7 +90,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_120527) do
     t.bigint "member_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "visitor_id"
     t.index ["member_id"], name: "index_counter_analytics_on_member_id"
+    t.index ["visitor_id"], name: "index_counter_analytics_on_visitor_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -91,6 +104,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_120527) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "length_analytics", force: :cascade do |t|
+    t.integer "comment_length"
+    t.bigint "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_length_analytics_on_member_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -136,6 +157,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_120527) do
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
+  create_table "unique_analytics", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "visitor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_unique_analytics_on_member_id"
+    t.index ["visitor_id"], name: "index_unique_analytics_on_visitor_id"
+  end
+
   create_table "visitors", force: :cascade do |t|
     t.string "user_agent"
     t.bigint "member_id"
@@ -146,11 +176,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_120527) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "browser_analytics", "members", on_delete: :cascade
+  add_foreign_key "browser_analytics", "visitors"
   add_foreign_key "comments", "members", column: "author_id"
   add_foreign_key "comments", "posts", on_delete: :cascade
   add_foreign_key "counter_analytics", "members", on_delete: :cascade
+  add_foreign_key "counter_analytics", "visitors"
+  add_foreign_key "length_analytics", "members", on_delete: :cascade
   add_foreign_key "likes", "members", column: "author_id"
   add_foreign_key "likes", "posts", on_delete: :cascade
   add_foreign_key "posts", "members", column: "author_id"
+  add_foreign_key "unique_analytics", "members", on_delete: :cascade
+  add_foreign_key "unique_analytics", "visitors"
   add_foreign_key "visitors", "members", on_delete: :cascade
 end

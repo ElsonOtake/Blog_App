@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% (0..9).each do |n| %>
+unique_<%= n * 4 %>:
+  member: admin
+  visitor: regular
+  created_at: <%= (Date.today - n.day).to_date %>
+
+unique_<%= n * 4 + 1 %>:
+  member: regular
+  visitor: admin
+  created_at: <%= (Date.today - n.day).to_date %>
+
+unique_<%= n * 4 + 2 %>:
+  member: regular
+  visitor: regular
+  created_at: <%= (Date.today - n.day).to_date %>
+
+unique_<%= n * 4 + 3 %>:
+  member: admin
+  visitor: admin
+  created_at: <%= (Date.today - n.day).to_date %>
+<% end %>

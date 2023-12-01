@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% actions = %w[create update delete] %>
+
+<% (0..9).each do |n| %>
+counter_<%= n * 4 %>:
+  action: <%= actions[rand(actions.size)] %>
+  count: <%= rand(1..5) %>
+  member: admin
+  visitor: regular
+  created_at: <%= (Date.today - n.day).to_date %>
+
+counter_<%= n * 4 + 1 %>:
+  action: <%= actions[rand(actions.size)] %>
+  count: <%= rand(1..5) %>
+  member: regular
+  visitor: admin
+  created_at: <%= (Date.today - n.day).to_date %>
+
+counter_<%= n * 4 + 2 %>:
+  action: <%= actions[rand(actions.size)] %>
+  count: <%= rand(1..5) %>
+  member: admin
+  visitor: admin
+  created_at: <%= (Date.today - n.day).to_date %>
+
+counter_<%= n * 4 + 3 %>:
+  action: <%= actions[rand(actions.size)] %>
+  count: <%= rand(1..5) %>
+  member: regular
+  visitor: regular
+  created_at: <%= (Date.today - n.day).to_date %>
+<% end %>
