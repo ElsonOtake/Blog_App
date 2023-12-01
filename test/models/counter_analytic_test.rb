@@ -11,17 +11,17 @@ class CounterAnalyticTest < ActiveSupport::TestCase
   end
 
   test "should save counter analytic without count" do
-    counter_analytic = CounterAnalytic.new(action: "MyString", member: @member)
+    counter_analytic = CounterAnalytic.new(action: "MyString", member: @member, visitor: @visitor)
     assert counter_analytic.save, "Saved counter analytic with action and member"
   end
 
   test "should not save counter analytic without member" do
-    counter_analytic = CounterAnalytic.new(action: "MyString")
+    counter_analytic = CounterAnalytic.new(action: "MyString", visitor: @visitor)
     assert_not counter_analytic.save, "Saved counter analytic without member"
   end
 
   test "should add number to count" do
-    counter_analytic = CounterAnalytic.new(action: "MyString", member: @member)
+    counter_analytic = CounterAnalytic.new(action: "MyString", member: @member, visitor: @visitor)
     assert counter_analytic.save, "Saved counter analytic with action and member"
     assert_equal counter_analytic.count, 0
     counter_analytic.count += 1
