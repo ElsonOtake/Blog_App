@@ -91,6 +91,7 @@ unless CounterAnalytic.any?
             action: action,
             count: count,
             member_id: member,
+            visitor_id: visitor,
             created_at: created)
           if action == "create"
             count.times do
