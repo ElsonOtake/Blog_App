@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class UniqueAnalyticTest < ActiveSupport::TestCase
   setup do
@@ -6,22 +6,22 @@ class UniqueAnalyticTest < ActiveSupport::TestCase
     @visitor = Visitor.last
   end
 
-  test "should have fixture data size" do
+  test 'should have fixture data size' do
     assert_equal UniqueAnalytic.count, 40
   end
 
-  test "should save unique analytic with all data" do
+  test 'should save unique analytic with all data' do
     unique_analytic = UniqueAnalytic.new(member: @member, visitor: @visitor)
-    assert unique_analytic.save, "Saved unique analytic with member, and visitor"
+    assert unique_analytic.save, 'Saved unique analytic with member, and visitor'
   end
 
-  test "should not save unique analytic without member" do
+  test 'should not save unique analytic without member' do
     unique_analytic = UniqueAnalytic.new(visitor: @visitor)
-    assert_not unique_analytic.save, "Saved unique analytic without member"
+    assert_not unique_analytic.save, 'Saved unique analytic without member'
   end
 
-  test "should not save unique analytic without visitor" do
+  test 'should not save unique analytic without visitor' do
     unique_analytic = UniqueAnalytic.new(member: @member)
-    assert_not unique_analytic.save, "Saved unique analytic without visitor"
+    assert_not unique_analytic.save, 'Saved unique analytic without visitor'
   end
 end

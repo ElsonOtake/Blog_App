@@ -7,7 +7,7 @@ class CreateBrowserJobTest < Minitest::Test
     Sidekiq::Testing.fake!
     @member = Member.first
     @visitor = Visitor.last
-    @agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+    @agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36'
   end
 
   def after_teardown
@@ -41,8 +41,8 @@ class CreateBrowserJobTest < Minitest::Test
     assert Sidekiq::Testing.fake?
     assert_equal BrowserAnalytic.last.reload.member_id, @member.id
     assert_equal BrowserAnalytic.last.visitor_id, @visitor.id
-    assert_equal BrowserAnalytic.last.device, "desktop"
-    assert_equal BrowserAnalytic.last.platform, "macOS"
+    assert_equal BrowserAnalytic.last.device, 'desktop'
+    assert_equal BrowserAnalytic.last.platform, 'macOS'
     BrowserAnalytic.last.destroy
   end
 end

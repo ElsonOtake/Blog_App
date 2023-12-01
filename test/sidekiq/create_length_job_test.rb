@@ -13,7 +13,7 @@ class CreateLengthJobTest < Minitest::Test
     # clear all workers' jobs
     Sidekiq::Worker.clear_all
   end
-  
+
   def test_enqueued_job
     # query the current state
     assert Sidekiq::Testing.fake?

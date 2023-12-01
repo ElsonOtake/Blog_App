@@ -13,7 +13,7 @@ module TrackEvent
   end
 
   def create_counter(action, member, visitor)
-    counter = CounterAnalytic.where(action: action, member_id: member, visitor_id: visitor).first_or_create!
+    counter = CounterAnalytic.where(action:, member_id: member, visitor_id: visitor).first_or_create!
     counter.count += 1
     counter.save!
   end
@@ -50,6 +50,6 @@ module TrackEvent
 
   def create_unique(member, visitor)
     UniqueAnalytic.where(member_id: member,
-    visitor_id: visitor).first_or_create!
+                         visitor_id: visitor).first_or_create!
   end
 end
