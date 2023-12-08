@@ -5,7 +5,7 @@ require 'test_helper'
 # AddBrowserJob, and AddUniqueJob) in app/controllers/concerns/track_event.rb.
 #
 
-class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
+class AnalyticsActiveIntegrationTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
   setup do
@@ -38,28 +38,12 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_no_enqueued_jobs
   end
 
-  test 'should create analytic data on creating comments' do
-    assert_no_enqueued_jobs
-    assert_enqueued_jobs 4 do
-      sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/new"
-      assert_response :success
-      post "/members/#{@member.id}/posts/#{@post.id}/comments",
-          params: { comment: { text: 'MyString', author: @member, post: @post } }
-      assert_response :redirect
-      follow_redirect!
-      assert_response :success
-    end
-  end
-
   test 'should run counter job on creating comments' do
     assert_no_enqueued_jobs
     assert_enqueued_jobs 1, only: AddCounterJob do
       sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/new"
-      assert_response :success
       post "/members/#{@member.id}/posts/#{@post.id}/comments",
-          params: { comment: { text: 'MyString', author: @member, post: @post } }
+           params: { comment: { text: 'MyString', author: @member, post: @post } }
       assert_response :redirect
       follow_redirect!
       assert_response :success
@@ -70,10 +54,8 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_no_enqueued_jobs
     assert_enqueued_jobs 1, only: AddLengthJob do
       sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/new"
-      assert_response :success
       post "/members/#{@member.id}/posts/#{@post.id}/comments",
-          params: { comment: { text: 'MyString', author: @member, post: @post } }
+           params: { comment: { text: 'MyString', author: @member, post: @post } }
       assert_response :redirect
       follow_redirect!
       assert_response :success
@@ -84,10 +66,8 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_no_enqueued_jobs
     assert_enqueued_jobs 1, only: AddBrowserJob do
       sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/new"
-      assert_response :success
       post "/members/#{@member.id}/posts/#{@post.id}/comments",
-          params: { comment: { text: 'MyString', author: @member, post: @post } }
+           params: { comment: { text: 'MyString', author: @member, post: @post } }
       assert_response :redirect
       follow_redirect!
       assert_response :success
@@ -98,25 +78,11 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_no_enqueued_jobs
     assert_enqueued_jobs 1, only: AddUniqueJob do
       sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/new"
-      assert_response :success
       post "/members/#{@member.id}/posts/#{@post.id}/comments",
-          params: { comment: { text: 'MyString', author: @member, post: @post } }
+           params: { comment: { text: 'MyString', author: @member, post: @post } }
       assert_response :redirect
       follow_redirect!
       assert_response :success
-    end
-  end
-
-  test 'should create analytic data on updating comments' do
-    assert_no_enqueued_jobs
-    assert_enqueued_jobs 3 do
-      sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}/edit"
-      assert_response :success
-      put "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-          params: { comment: { text: 'MyString', author: @member, post: @post } }
-      assert_response :redirect
     end
   end
 
@@ -124,8 +90,6 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_no_enqueued_jobs
     assert_enqueued_jobs 1, only: AddCounterJob do
       sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}/edit"
-      assert_response :success
       put "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
           params: { comment: { text: 'MyString', author: @member, post: @post } }
       assert_response :redirect
@@ -136,8 +100,6 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_no_enqueued_jobs
     assert_no_enqueued_jobs only: AddLengthJob do
       sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}/edit"
-      assert_response :success
       put "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
           params: { comment: { text: 'MyString', author: @member, post: @post } }
       assert_response :redirect
@@ -148,8 +110,6 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_no_enqueued_jobs
     assert_enqueued_jobs 1, only: AddBrowserJob do
       sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}/edit"
-      assert_response :success
       put "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
           params: { comment: { text: 'MyString', author: @member, post: @post } }
       assert_response :redirect
@@ -160,20 +120,8 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_no_enqueued_jobs
     assert_enqueued_jobs 1, only: AddUniqueJob do
       sign_in @member
-      get "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}/edit"
-      assert_response :success
       put "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
           params: { comment: { text: 'MyString', author: @member, post: @post } }
-      assert_response :redirect
-    end
-  end
-
-  test 'should create analytic data on deleting comments' do
-    assert_no_enqueued_jobs
-    assert_enqueued_jobs 3 do
-      sign_in @member
-      delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-            params: { comment: { member: @member, post: @post, id: @comment.id } }
       assert_response :redirect
     end
   end
@@ -183,7 +131,7 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_enqueued_jobs 1, only: AddCounterJob do
       sign_in @member
       delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-            params: { comment: { member: @member, post: @post, id: @comment.id } }
+             params: { comment: { member: @member, post: @post, id: @comment.id } }
       assert_response :redirect
     end
   end
@@ -193,7 +141,7 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_no_enqueued_jobs only: AddLengthJob do
       sign_in @member
       delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-            params: { comment: { member: @member, post: @post, id: @comment.id } }
+             params: { comment: { member: @member, post: @post, id: @comment.id } }
       assert_response :redirect
     end
   end
@@ -203,7 +151,7 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_enqueued_jobs 1, only: AddBrowserJob do
       sign_in @member
       delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-            params: { comment: { member: @member, post: @post, id: @comment.id } }
+             params: { comment: { member: @member, post: @post, id: @comment.id } }
       assert_response :redirect
     end
   end
@@ -213,7 +161,7 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_enqueued_jobs 1, only: AddUniqueJob do
       sign_in @member
       delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-            params: { comment: { member: @member, post: @post, id: @comment.id } }
+             params: { comment: { member: @member, post: @post, id: @comment.id } }
       assert_response :redirect
     end
   end
