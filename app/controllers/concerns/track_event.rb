@@ -6,7 +6,10 @@ module TrackEvent
     # CreateLengthJob.perform_async(session[:post_author], session[:comment_length]) if session[:action] == 'create'
     # CreateBrowserJob.perform_async(session[:post_author], current_visitor.id, current_visitor.user_agent)
     # CreateUniqueJob.perform_async(session[:post_author], current_visitor.id)
-    create_counter(session[:action], session[:post_author], current_visitor.id)
+
+    AddCounterJob.perform_later(session[:action], session[:post_author], current_visitor.id)
+
+    # create_counter(session[:action], session[:post_author], current_visitor.id)
     create_length(session[:post_author], session[:comment_length]) if session[:action] == 'create'
     create_browser(session[:post_author], current_visitor.id, current_visitor.user_agent)
     create_unique(session[:post_author], current_visitor.id)
