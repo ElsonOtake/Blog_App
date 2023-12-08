@@ -10,12 +10,12 @@ module TrackEvent
     AddCounterJob.perform_later(session[:action], session[:post_author], current_visitor.id)
     AddLengthJob.perform_later(session[:post_author], session[:comment_length]) if session[:action] == 'create'
     AddBrowserJob.perform_later(session[:post_author], current_visitor.id, current_visitor.user_agent)
-    # AddUniqueJob.perform_later(session[:post_author], current_visitor.id)
+    AddUniqueJob.perform_later(session[:post_author], current_visitor.id)
 
     # create_counter(session[:action], session[:post_author], current_visitor.id)
     # create_length(session[:post_author], session[:comment_length]) if session[:action] == 'create'
-    create_browser(session[:post_author], current_visitor.id, current_visitor.user_agent)
-    create_unique(session[:post_author], current_visitor.id)
+    # create_browser(session[:post_author], current_visitor.id, current_visitor.user_agent)
+    # create_unique(session[:post_author], current_visitor.id)
   end
 
   def create_counter(action, member, visitor)
