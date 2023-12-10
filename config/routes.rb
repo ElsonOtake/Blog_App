@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :members, controllers: { omniauth_callbacks: 'members/omniauth_callbacks',
                                       sessions: "members/sessions",
                                       registrations: "members/registrations" }
-  resources :members, only: %i[index show] do
+  resources :members, only: %i[index] do
     resources :posts do
       resources :comments
     end

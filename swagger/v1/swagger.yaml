@@ -3,7 +3,9 @@ openapi: 3.0.1
 info:
   title: Blog app API V1
   description: |-
-    To run the endpoints. Open the endpoint. Click the "Try it out" button. Fill in the parameters, if necessary, and click the "Execute" button. \
+    Select the current server from the list below. \
+              \
+              To run the endpoints. Open the endpoint. Click the "Try it out" button. Fill in the parameters, if necessary, and click the "Execute" button. \
               \
               Endpoints with an open lock require the user to be logged in. Execute the login endpoint and copy the generated token. Click the "Authorize" button at the top of the main page, \
               paste the token, and click the "Authorize" button.
@@ -74,6 +76,8 @@ paths:
                     type: integer
                   post_id:
                     type: integer
+        '401':
+          description: Unauthorized
         '404':
           description: Not found
     post:
@@ -98,6 +102,8 @@ paths:
       responses:
         '200':
           description: OK
+        '401':
+          description: Unauthorized
         '404':
           description: Not found
       requestBody:
@@ -157,6 +163,8 @@ paths:
                     type: integer
                   post_id:
                     type: integer
+        '401':
+          description: Unauthorized
         '404':
           description: Not found
   "/api/v1/members":
@@ -205,6 +213,8 @@ paths:
                     type: string
                   role:
                     type: string
+        '401':
+          description: Unauthorized
         '404':
           description: Not found
   "/api/v1/members/{id}/posts":
@@ -245,6 +255,8 @@ paths:
                     type: string
                   author_id:
                     type: integer
+        '401':
+          description: Unauthorized
         '404':
           description: Not found
   "/api/v1/members/{member_id}/posts/{id}":
@@ -291,6 +303,8 @@ paths:
                     type: string
                   author_id:
                     type: integer
+        '401':
+          description: Unauthorized
         '404':
           description: Not found
 servers:

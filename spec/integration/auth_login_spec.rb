@@ -25,7 +25,7 @@ describe 'Auth login' do
       end
 
       response '401', 'Unauthorized' do
-        let(:id) { { error: 'unauthorized' } }
+        let(:id) { { error: 'Unauthorized member' } }
         run_test!
       end
     end

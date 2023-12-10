@@ -1,6 +1,8 @@
 class Api::V1::CommentsController < ApplicationController
+  include TrackEvent
   before_action :authorize_request
   before_action :find_member_post
+  after_action :track_event, only: %i[create]
 
   ALLOWED_DATA = %(text).freeze
 
@@ -22,6 +24,9 @@ class Api::V1::CommentsController < ApplicationController
 
     comment = @post.comments.new(data)
     comment.author = current_user
+    session[:action] = 'create'
+    session[:post_author] = @post.author_id
+    session[:comment_length] = comment.text.size
     if comment.save
       render json: comment
     else

@@ -23,6 +23,11 @@ describe 'Posts' do
         run_test!
       end
 
+      response '401', 'Unauthorized' do
+        let(:id) { { error: 'Unauthorized member' } }
+        run_test!
+      end
+
       response '404', 'Not found' do
         let(:error) { 'Member/Post not found' }
         run_test!
@@ -50,6 +55,11 @@ describe 'Posts' do
           author_id: { type: :integer }
         }
         let(:comments_counter) { 0 }
+        run_test!
+      end
+
+      response '401', 'Unauthorized' do
+        let(:id) { { error: 'Unauthorized member' } }
         run_test!
       end
 
