@@ -1,17 +1,6 @@
 require 'test_helper'
-require 'sidekiq/testing'
 
 class VisitorsIntegrationTest < ActionDispatch::IntegrationTest
-  setup do
-    # A test fake that pushes all jobs into a jobs array
-    Sidekiq::Testing.fake!
-  end
-
-  def after_teardown
-    # clear all workers' jobs
-    Sidekiq::Worker.clear_all
-  end
-
   test 'should not create Visitor when visiting the root path' do
     assert_difference('Visitor.count', 0) do
       get root_url

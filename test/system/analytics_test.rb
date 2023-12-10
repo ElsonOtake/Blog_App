@@ -1,5 +1,4 @@
 require 'application_system_test_case'
-require 'sidekiq/testing'
 
 class AnalyticsTest < ApplicationSystemTestCase
   setup do
