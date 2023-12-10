@@ -101,30 +101,38 @@ export default class extends Controller {
 
   lengthData = (success) => {
     let averageLength = {};
-    let data = this.createDateRange();
-    this.lengthAnalyticTargets.forEach(target => {
-      if (!averageLength[target.dataset.created]) {
-        averageLength[target.dataset.created] = { totalLength: 0, count: 0 };
+    if (this.lengthAnalyticTargets.length > 0) {
+      let data = this.createDateRange();
+      this.lengthAnalyticTargets.forEach(target => {
+        if (!averageLength[target.dataset.created]) {
+          averageLength[target.dataset.created] = { totalLength: 0, count: 0 };
+        };
+        averageLength[target.dataset.created].totalLength += parseInt(target.dataset.length);
+        averageLength[target.dataset.created].count++;
+      });
+      for (const created in averageLength) {
+        if (data[created] != null) {
+          data[created] = averageLength[created].totalLength / averageLength[created].count;
+        };
       };
-      averageLength[target.dataset.created].totalLength += parseInt(target.dataset.length);
-      averageLength[target.dataset.created].count++;
-    });
-    for (const created in averageLength) {
-      if (data[created] != null) {
-        data[created] = averageLength[created].totalLength / averageLength[created].count;
-      };
-    };
-    success(data);
+      success(data);
+    } else {
+      success([]);
+    }
   }
 
   uniqueData = (success) => {
-    let data = this.createDateRange();
-    this.uniqueAnalyticTargets.forEach(target => {
-      if (data[target.dataset.created] != null) {
-        data[target.dataset.created]++;
-      };
-    });
-    success(data);
+    if (this.uniqueAnalyticTargets.length > 0) {
+      let data = this.createDateRange();
+      this.uniqueAnalyticTargets.forEach(target => {
+        if (data[target.dataset.created] != null) {
+          data[target.dataset.created]++;
+        };
+      });
+      success(data);
+    } else {
+      success([]);
+    }
   }
 
   devicesData = (success) => {
