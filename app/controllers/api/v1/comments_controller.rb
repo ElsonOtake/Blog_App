@@ -1,6 +1,8 @@
 class Api::V1::CommentsController < ApplicationController
+  include TrackEvent
   before_action :authorize_request
   before_action :find_member_post
+  after_action :track_event, only: %i[create]
 
   ALLOWED_DATA = %(text).freeze
 
@@ -20,6 +22,8 @@ class Api::V1::CommentsController < ApplicationController
     data = json_payload.select { |allow| ALLOWED_DATA.include?(allow) }
     return render json: { error: 'Empty body. Could not create it' }, status: :unprocessable_entity if data.empty?
 
+    session[:action] = 'create'
+    session[:post_author] = @post.author_id
     comment = @post.comments.new(data)
     comment.author = current_user
     if comment.save
