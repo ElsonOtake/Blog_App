@@ -159,8 +159,8 @@ Open `http://localhost:3000/` on your browser.
 To run tests, run the following command:
 
 ```sh
-  rspec spec/features
-  rspec spec/models
+  bundle exec rspec spec/features
+  bundle exec rspec spec/models
   rails test test/models
   rails test test/controllers
   rails test test/integration
@@ -169,7 +169,7 @@ To run tests, run the following command:
 
 To generate the API documentation:
 ```sh
-  rake rswag
+  bundle exec rake rswag
 ```
 [API documentation](http://localhost:3000/api-docs/index.html) address.
 
