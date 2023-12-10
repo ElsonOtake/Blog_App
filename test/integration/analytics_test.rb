@@ -1,23 +1,12 @@
 require 'test_helper'
-require 'sidekiq/testing'
-
-#
-# Test analytics integration using background jobs (CreateCounterJob, CreateLengthJob,
-# CreateBrowserJob, and CreateUniqueJob) in app/controllers/concerns/track_event.rb.
-#
 
 class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
+
   setup do
-    # A test fake that pushes all jobs into a jobs array
-    Sidekiq::Testing.fake!
     @member = Member.first
     @post = Post.first
     @comment = Comment.first
-  end
-
-  def after_teardown
-    # clear all workers' jobs
-    Sidekiq::Worker.clear_all
   end
 
   test 'should redirect from root page if user not signed in' do
@@ -32,17 +21,7 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not create analytic data on new posts' do
-    # query the current state
-    assert Sidekiq::Testing.fake?
-    # remove jobs from the queue
-    CreateCounterJob.clear
-    CreateLengthJob.clear
-    CreateUniqueJob.clear
-    CreateBrowserJob.clear
-    assert_equal 0, CreateCounterJob.jobs.size
-    assert_equal 0, CreateLengthJob.jobs.size
-    assert_equal 0, CreateUniqueJob.jobs.size
-    assert_equal 0, CreateBrowserJob.jobs.size
+    assert_no_enqueued_jobs
     sign_in @member
     get "/members/#{@member.id}/posts/new"
     assert_response :success
@@ -51,94 +30,113 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_equal 0, CreateCounterJob.jobs.size
-    assert_equal 0, CreateLengthJob.jobs.size
-    assert_equal 0, CreateUniqueJob.jobs.size
-    assert_equal 0, CreateBrowserJob.jobs.size
+    assert_no_enqueued_jobs
   end
 
-  test 'should create analytic data on creating comments' do
-    # query the current state
-    assert Sidekiq::Testing.fake?
-    # remove jobs from the queue
-    CreateCounterJob.clear
-    CreateLengthJob.clear
-    CreateUniqueJob.clear
-    CreateBrowserJob.clear
-    assert_equal 0, CreateCounterJob.jobs.size
-    assert_equal 0, CreateLengthJob.jobs.size
-    assert_equal 0, CreateUniqueJob.jobs.size
-    assert_equal 0, CreateBrowserJob.jobs.size
+  def create_comment
     sign_in @member
-    get "/members/#{@member.id}/posts/#{@post.id}/comments/new"
-    assert_response :success
-    post "/members/#{@member.id}/posts/#{@post.id}/comments",
-         params: { comment: { text: 'MyString', author: @member, post: @post } }
-    assert_response :redirect
-    follow_redirect!
-    assert_response :success
-    assert_equal 1, CreateCounterJob.jobs.size
-    assert_equal 1, CreateLengthJob.jobs.size
-    assert_equal 1, CreateUniqueJob.jobs.size
-    assert_equal 1, CreateBrowserJob.jobs.size
-    # remove jobs from the queue
-    CreateCounterJob.clear
-    CreateLengthJob.clear
-    CreateUniqueJob.clear
-    CreateBrowserJob.clear
+      post "/members/#{@member.id}/posts/#{@post.id}/comments",
+           params: { comment: { text: 'MyString', author: @member, post: @post } }
+      assert_response :redirect
+      follow_redirect!
+      assert_response :success
   end
 
-  test 'should create analytic data on updating comments' do
-    # query the current state
-    assert Sidekiq::Testing.fake?
-    # remove jobs from the queue
-    CreateCounterJob.clear
-    CreateLengthJob.clear
-    CreateUniqueJob.clear
-    CreateBrowserJob.clear
-    assert_equal 0, CreateCounterJob.jobs.size
-    assert_equal 0, CreateLengthJob.jobs.size
-    assert_equal 0, CreateUniqueJob.jobs.size
-    assert_equal 0, CreateBrowserJob.jobs.size
-    sign_in @member
-    get "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}/edit"
-    assert_response :success
-    put "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-        params: { comment: { text: 'MyString', author: @member, post: @post } }
-    assert_response :redirect
-    assert_equal 1, CreateCounterJob.jobs.size
-    assert_equal 0, CreateLengthJob.jobs.size
-    assert_equal 1, CreateUniqueJob.jobs.size
-    assert_equal 1, CreateBrowserJob.jobs.size
-    # remove jobs from the queue
-    CreateCounterJob.clear
-    CreateUniqueJob.clear
-    CreateBrowserJob.clear
+  test 'should run counter job on creating comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddCounterJob do
+      create_comment
+    end
   end
 
-  test 'should create analytic data on deleting comments' do
-    # query the current state
-    assert Sidekiq::Testing.fake?
-    # remove jobs from the queue
-    CreateCounterJob.clear
-    CreateLengthJob.clear
-    CreateUniqueJob.clear
-    CreateBrowserJob.clear
-    assert_equal 0, CreateCounterJob.jobs.size
-    assert_equal 0, CreateLengthJob.jobs.size
-    assert_equal 0, CreateUniqueJob.jobs.size
-    assert_equal 0, CreateBrowserJob.jobs.size
+  test 'should run length job on creating comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddLengthJob do
+      create_comment
+    end
+  end
+
+  test 'should run browser job on creating comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddBrowserJob do
+      create_comment
+    end
+  end
+
+  test 'should run unique job on creating comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddUniqueJob do
+      create_comment
+    end
+  end
+
+  def update_comment
     sign_in @member
-    delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-           params: { comment: { member: @member, post: @post, id: @comment.id } }
-    assert_response :redirect
-    assert_equal 1, CreateCounterJob.jobs.size
-    assert_equal 0, CreateLengthJob.jobs.size
-    assert_equal 1, CreateUniqueJob.jobs.size
-    assert_equal 1, CreateBrowserJob.jobs.size
-    # remove jobs from the queue
-    CreateCounterJob.clear
-    CreateUniqueJob.clear
-    CreateBrowserJob.clear
+      put "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
+          params: { comment: { text: 'MyString', author: @member, post: @post } }
+      assert_response :redirect
+  end
+
+  test 'should run counter job on updating comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddCounterJob do
+      update_comment
+    end
+  end
+
+  test 'should not run length job when updating comments' do
+    assert_no_enqueued_jobs
+    assert_no_enqueued_jobs only: AddLengthJob do
+      update_comment
+    end
+  end
+
+  test 'should run browser job on updating comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddBrowserJob do
+      update_comment
+    end
+  end
+
+  test 'should run unique job on updating comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddUniqueJob do
+      update_comment
+    end
+  end
+
+  def delete_comment
+    sign_in @member
+      delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
+             params: { comment: { member: @member, post: @post, id: @comment.id } }
+      assert_response :redirect
+  end
+
+  test 'should run counter job on deleting comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddCounterJob do
+      delete_comment
+    end
+  end
+
+  test 'should not create length data on deleting comments' do
+    assert_no_enqueued_jobs
+    assert_no_enqueued_jobs only: AddLengthJob do
+      delete_comment
+    end
+  end
+
+  test 'should run browser job on deleting comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddBrowserJob do
+      delete_comment
+    end
+  end
+
+  test 'should run unique job on deleting comments' do
+    assert_no_enqueued_jobs
+    assert_enqueued_jobs 1, only: AddUniqueJob do
+      delete_comment
+    end
   end
 end
