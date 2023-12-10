@@ -161,6 +161,7 @@ To run tests, run the following command:
 ```sh
   bundle exec rspec spec/features
   bundle exec rspec spec/models
+  bundle exec rspec spec/requests
   rails test test/models
   rails test test/controllers
   rails test test/integration
