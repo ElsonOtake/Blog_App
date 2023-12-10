@@ -46,6 +46,11 @@ describe 'Members' do
         run_test!
       end
 
+      response '401', 'Unauthorized' do
+        let(:id) { { error: 'Unauthorized member' } }
+        run_test!
+      end
+
       response '404', 'Not found' do
         let(:error) { 'Member not found' }
         run_test!
