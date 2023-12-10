@@ -87,6 +87,11 @@ describe 'Comments' do
         run_test!
       end
 
+      response '401', 'Unauthorized' do
+        let(:error) { 'Unauthorized member' }
+        run_test!
+      end
+
       response '404', 'Not found' do
         let(:error) { 'Member and/or post not found' }
         run_test!
