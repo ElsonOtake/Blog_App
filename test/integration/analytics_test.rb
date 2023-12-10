@@ -35,11 +35,11 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
 
   def create_comment
     sign_in @member
-      post "/members/#{@member.id}/posts/#{@post.id}/comments",
-           params: { comment: { text: 'MyString', author: @member, post: @post } }
-      assert_response :redirect
-      follow_redirect!
-      assert_response :success
+    post "/members/#{@member.id}/posts/#{@post.id}/comments",
+         params: { comment: { text: 'MyString', author: @member, post: @post } }
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
   end
 
   test 'should run counter job on creating comments' do
@@ -72,9 +72,9 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
 
   def update_comment
     sign_in @member
-      put "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-          params: { comment: { text: 'MyString', author: @member, post: @post } }
-      assert_response :redirect
+    put "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
+        params: { comment: { text: 'MyString', author: @member, post: @post } }
+    assert_response :redirect
   end
 
   test 'should run counter job on updating comments' do
@@ -107,9 +107,9 @@ class AnalyticsIntegrationTest < ActionDispatch::IntegrationTest
 
   def delete_comment
     sign_in @member
-      delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
-             params: { comment: { member: @member, post: @post, id: @comment.id } }
-      assert_response :redirect
+    delete "/members/#{@member.id}/posts/#{@post.id}/comments/#{@comment.id}",
+           params: { comment: { member: @member, post: @post, id: @comment.id } }
+    assert_response :redirect
   end
 
   test 'should run counter job on deleting comments' do

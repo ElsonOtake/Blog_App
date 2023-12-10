@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class VisitorsIntegrationTest < ActionDispatch::IntegrationTest
-
   test 'should not create Visitor when visiting the root path' do
     assert_difference('Visitor.count', 0) do
       get root_url
