@@ -1,7 +1,9 @@
 <nav class='navbar mx-6'>
   <div class='navbar-brand' data-controller='stimulus'>
     <% if member_signed_in? %>
-      <%= render 'shared/thumbnail', member: current_member %>
+      <%= link_to root_path, class: 'p-3' do %>
+        <%= render 'shared/thumbnail', member: current_member %>
+      <% end %>
       <div class="navbar-item has-text-warning-dark">
         <%= current_member.email %>
       </div>
