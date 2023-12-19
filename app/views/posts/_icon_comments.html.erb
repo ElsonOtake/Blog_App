@@ -1,5 +1,8 @@
 <span>
-  <%= link_to member_post_comments_path(post.author_id, post), data: { turbo_frame: "comments_#{post.id}" } do %>
+  <%= link_to member_post_comments_path(post.author_id, post),
+    data: {
+      turbo_frame: "comments_#{post.id}"
+    } do %>
     <i id=<%= "comment_icon_#{post.id}" %> class="fa-regular fa-comments"></i>
   <% end %>
   <span id=<%= "comments_counter_#{post.id}" %> > <%= post.comments_counter %></span>
