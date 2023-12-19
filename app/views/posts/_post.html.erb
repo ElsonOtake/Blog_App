@@ -13,13 +13,7 @@
           <small><%= render "icon_new", post: post %> · <%= render "icon_comments", post: post %> · <%= render "icon_likes", post: post %> · <%= "#{distance_of_time_in_words_to_now(post.updated_at)} ago" %><%= render "post_update", post: post %></small>
         </p>
       </div>
-      <div id=<%= "comments_#{post.id}" %> class="hidden_comments">
-        <%= turbo_frame_tag "comments_#{post.id}" do %>
-          <% post.comments.includes(:author).each do |comment| %>
-            <%= render "comments/comment", comment: comment %>
-          <% end %>
-        <% end %>
-      </div>
+      <%= turbo_frame_tag "comments_#{post.id}" %>
     </div>
   </article>
 
