@@ -1,10 +1,6 @@
 <%= turbo_frame_tag post do %>
   <article class="media pt-2" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px 0px;">
-    <figure class="media-left">
-      <p class="image is-48x48">
-        <%= render "members/thumb", member: post.author %>
-      </p>
-    </figure>
+    <%= render "shared/thumbnail", member: post.author %>
     <div class="media-content">
       <div class="content">
         <p>

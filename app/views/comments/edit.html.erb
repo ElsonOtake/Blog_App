@@ -1,10 +1,6 @@
 <%= turbo_frame_tag @comment do %>
   <article class="media pt-2" style="border-style:solid;border-color:#cdcdcd;border-width:0.1px 0px 0px;">
-    <figure class="media-left">
-      <p class="image is-48x48">
-        <%= render "members/thumb", member: current_member %>
-      </p>
-    </figure>
+    <%= render "shared/thumbnail", member: current_member %>
     <div class="media-content">
       <%= render "comments/form", url: member_post_comment_path(@comment.post.author, @comment.post, @comment), comment: @comment %>
     </div>
