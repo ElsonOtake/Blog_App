@@ -1,7 +1,9 @@
 <span>
-  <a data-controller="stimulus" data-stimulus-post-value=<%= post.id %> >
-    <i id=<%= "comment_icon_#{post.id}" %>  data-action="click->stimulus#toggle_comments" class="fa-regular fa-comments"></i>
-  </a>
-  <span> </span>
-  <span id=<%= "comments_counter_#{post.id}" %> ><%= post.comments_counter %></span>
+  <%= link_to member_post_comments_path(post.author_id, post),
+    data: {
+      turbo_frame: "comments_#{post.id}"
+    } do %>
+    <i id=<%= "comment_icon_#{post.id}" %> class="fa-regular fa-comments"></i>
+  <% end %>
+  <span id=<%= "comments_counter_#{post.id}" %> > <%= post.comments_counter %></span>
 </span>

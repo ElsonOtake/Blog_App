@@ -73,3 +73,8 @@
     <%= link_to "Back", :back, class: "button is-primary" %>
   </div>
 <% end %>
+<br /><br />
+<div class='field is-grouped'>
+  <p class='subtitle has-text-link py-1 pr-5'>Unhappy?</p>
+  <%= link_to 'Cancel my account', registration_path(resource_name), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class:'button is-danger' %>
+</div>

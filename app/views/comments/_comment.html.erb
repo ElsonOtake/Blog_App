@@ -1,10 +1,6 @@
 <%= turbo_frame_tag comment do %>
   <article class="media">
-    <figure class="media-left">
-      <p class="image is-48x48">
-        <%= render "members/thumb", member: comment.author %>
-      </p>
-    </figure>
+    <%= render "shared/thumbnail", member: comment.author %>
     <div class="media-content">
       <div class="content">
         <p>

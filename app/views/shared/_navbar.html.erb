@@ -2,9 +2,7 @@
   <div class='navbar-brand' data-controller='stimulus'>
     <% if member_signed_in? %>
       <%= link_to root_path, class: 'p-3' do %>
-        <figure class='image is-48x48'>
-          <%= render 'members/thumb', member: current_member %>
-        </figure>
+        <%= render 'shared/thumbnail', member: current_member %>
       <% end %>
       <div class="navbar-item has-text-warning-dark">
         <%= current_member.email %>
