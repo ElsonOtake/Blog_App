@@ -8,6 +8,9 @@ gem 'rubocop', '>= 1.58', '< 2.0'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 8.0.0'
 
+# Required for Ruby 3.5+ compatibility
+gem 'ostruct'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
