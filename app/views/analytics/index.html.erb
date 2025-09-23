@@ -1,4 +1,14 @@
-<h1 class="title">Comment analytics</h1>
+<h1 class="title">Analytics for Your Posts</h1>
+<p class="subtitle has-text-grey">Track comments, visitors, and engagement on posts authored by <%= current_member.name %></p>
+<div class="notification is-info is-light mb-4">
+  <p><strong>📊 What's shown here:</strong></p>
+  <ul>
+    <li>• Comments made on <strong>your posts</strong> by all users</li>
+    <li>• Visitors who viewed <strong>your posts</strong></li>
+    <li>• Average length of comments on <strong>your posts</strong></li>
+    <li>• Browser and device statistics from <strong>your post visitors</strong></li>
+  </ul>
+</div>
 <div data-controller="chart">
   <%= form_with(url: analytics_url, method: :get, class: "is-flex is-justify-content-center my-4") do |form| %>
     <div class="is-flex is-flex-wrap-wrap is-align-items-center">
@@ -31,11 +41,11 @@
     <%= render "broadcast", analytics: analytics %>
   <% end %>
 
-  <%= render "chart", title: "Comments", target: "counter" %>
-  <%= render "chart", title: "Average comment length", target: "length" %>
-  <%= render "chart", title: "Unique visitors", target: "unique" %>
-  <%= render "chart", title: "Browser device", target: "devices" %>
-  <%= render "chart", title: "Browser platform", target: "platforms" %>
+  <%= render "chart", title: "Comments on Your Posts", target: "counter" %>
+  <%= render "chart", title: "Average Comment Length on Your Posts", target: "length" %>
+  <%= render "chart", title: "Unique Visitors to Your Posts", target: "unique" %>
+  <%= render "chart", title: "Devices Used by Your Post Visitors", target: "devices" %>
+  <%= render "chart", title: "Platforms Used by Your Post Visitors", target: "platforms" %>
 </div>
 
 <%= link_to "Back", root_path, class: "button is-primary mt-5" %>
