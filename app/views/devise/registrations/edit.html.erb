@@ -1,80 +1,99 @@
 <h2 class='title has-text-warning-dark'>Edit profile</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render 'devise/shared/error_messages', resource: resource %>
-
-  <div class='field'>
-    <%= f.label :avatar, class: 'label' %>
-    <%= f.file_field :avatar, class: 'input' %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :name, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.text_field :name, class: 'input', autofocus: true, autocomplete: 'name' %>
-      <span class='icon is-small is-left'>
-        <i class='fas fa-user'></i>
-      </span>
-    </div>
-  </div>
-
-  <div class='field'>
-    <%= f.label :email, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.email_field :email, class: 'input', autocomplete: 'email' %>
-      <span class='icon is-small is-left'>
-        <i class='fas fa-envelope'></i>
-      </span>
-    </div>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class='field'>
-    <%= f.label :password, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.password_field :password, class: 'input', autocomplete: 'new-password' %>
-      <span class='icon is-small is-left'>
-        <i class='fas fa-lock'></i>
-      </span>
-    </div>
-    <% if @minimum_password_length %>
-      <span class='help has-text-danger'>(<%= @minimum_password_length %> characters minimum) <span class='has-text-warning-dark'>leave blank if you don't want to change it</span></span>
-    <% else %>
-      <span class='help has-text-warning-dark'>leave blank if you don't want to change it</span>
-    <% end %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :password_confirmation, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.password_field :password_confirmation, class: 'input', autocomplete: 'new-password' %>
-      <span class='icon is-small is-left'>
-        <i class='fas fa-lock'></i>
-      </span>
-    </div>
-  </div>
-
-  <div class='field'>
-    <%= f.label :current_password, class: 'label' %>
-    <div class='control has-icons-left'>
-      <%= f.password_field :current_password, class: 'input', autocomplete: 'current-password' %>
-      <span class='icon is-small is-left'>
-        <i class='fas fa-lock'></i>
-      </span>
-    </div>
-    <span class='help has-text-warning-dark'>We need your current password to confirm your changes</span>
+<% if resource.oauth_user? %>
+  <!-- OAuth users can only go back or delete their account -->
+  <div class='notification is-info is-light'>
+    <p>You signed up using <%= resource.provider.humanize %>. You cannot change your password or email here.</p>
+    <p>To update your profile information, please do so through your <%= resource.provider.humanize %> account.</p>
   </div>
 
   <div class='control buttons'>
-    <%= f.submit 'Update', class:'button is-primary' %>
     <%= link_to "Back", :back, class: "button is-primary" %>
   </div>
+
+  <br /><br />
+  <div class='field is-grouped'>
+    <p class='subtitle has-text-link py-1 pr-5'>Unhappy?</p>
+    <%= link_to 'Cancel my account', registration_path(resource_name), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class:'button is-danger' %>
+  </div>
+<% else %>
+  <!-- Regular users can edit all fields -->
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render 'devise/shared/error_messages', resource: resource %>
+
+    <div class='field'>
+      <%= f.label :avatar, class: 'label' %>
+      <%= f.file_field :avatar, class: 'input' %>
+    </div>
+
+    <div class='field'>
+      <%= f.label :name, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.text_field :name, class: 'input', autofocus: true, autocomplete: 'name' %>
+        <span class='icon is-small is-left'>
+          <i class='fas fa-user'></i>
+        </span>
+      </div>
+    </div>
+
+    <div class='field'>
+      <%= f.label :email, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.email_field :email, class: 'input', autocomplete: 'email' %>
+        <span class='icon is-small is-left'>
+          <i class='fas fa-envelope'></i>
+        </span>
+      </div>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class='field'>
+      <%= f.label :password, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.password_field :password, class: 'input', autocomplete: 'new-password' %>
+        <span class='icon is-small is-left'>
+          <i class='fas fa-lock'></i>
+        </span>
+      </div>
+      <% if @minimum_password_length %>
+        <span class='help has-text-danger'>(<%= @minimum_password_length %> characters minimum) <span class='has-text-warning-dark'>leave blank if you don't want to change it</span></span>
+      <% else %>
+        <span class='help has-text-warning-dark'>leave blank if you don't want to change it</span>
+      <% end %>
+    </div>
+
+    <div class='field'>
+      <%= f.label :password_confirmation, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.password_field :password_confirmation, class: 'input', autocomplete: 'new-password' %>
+        <span class='icon is-small is-left'>
+          <i class='fas fa-lock'></i>
+        </span>
+      </div>
+    </div>
+
+    <div class='field'>
+      <%= f.label :current_password, class: 'label' %>
+      <div class='control has-icons-left'>
+        <%= f.password_field :current_password, class: 'input', autocomplete: 'current-password' %>
+        <span class='icon is-small is-left'>
+          <i class='fas fa-lock'></i>
+        </span>
+      </div>
+      <span class='help has-text-warning-dark'>We need your current password to confirm your changes</span>
+    </div>
+
+    <div class='control buttons'>
+      <%= f.submit 'Update', class:'button is-primary' %>
+      <%= link_to "Back", :back, class: "button is-primary" %>
+    </div>
+  <% end %>
+  <br /><br />
+  <div class='field is-grouped'>
+    <p class='subtitle has-text-link py-1 pr-5'>Unhappy?</p>
+    <%= link_to 'Cancel my account', registration_path(resource_name), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class:'button is-danger' %>
+  </div>
 <% end %>
-<br /><br />
-<div class='field is-grouped'>
-  <p class='subtitle has-text-link py-1 pr-5'>Unhappy?</p>
-  <%= link_to 'Cancel my account', registration_path(resource_name), data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class:'button is-danger' %>
-</div>

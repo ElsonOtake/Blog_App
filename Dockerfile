@@ -11,19 +11,13 @@
 
 #######################################################################
 
-# Learn more about the chosen Ruby stack, Fullstaq Ruby, here:
-#   https://github.com/evilmartians/fullstaq-ruby-docker.
-#
-# We recommend using the highest patch level for better security and
-# performance.
-
-ARG RUBY_VERSION=3.1.2
-ARG VARIANT=jemalloc-bullseye-slim
-FROM quay.io/evl.ms/fullstaq-ruby:${RUBY_VERSION}-${VARIANT} as base
+# Using official Ruby image for Ruby 3.4.5 support
+ARG RUBY_VERSION=3.4.5
+FROM ruby:${RUBY_VERSION}-slim as base
 
 LABEL fly_launch_runtime="rails"
 
-ARG BUNDLER_VERSION=2.3.22
+ARG BUNDLER_VERSION=2.7.2
 
 ARG RAILS_ENV=production
 ENV RAILS_ENV=${RAILS_ENV}
@@ -49,23 +43,30 @@ RUN gem update --system --no-document && \
 
 FROM base as build_deps
 
-ARG BUILD_PACKAGES="git build-essential libpq-dev wget vim curl gzip xz-utils libsqlite3-dev"
+ARG BUILD_PACKAGES="git build-essential libpq-dev wget vim curl gzip xz-utils libsqlite3-dev nodejs npm"
 ENV BUILD_PACKAGES ${BUILD_PACKAGES}
 
+# Install Node.js 22.x
 RUN --mount=type=cache,id=dev-apt-cache,sharing=locked,target=/var/cache/apt \
     --mount=type=cache,id=dev-apt-lib,sharing=locked,target=/var/lib/apt \
     apt-get update -qq && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install --no-install-recommends -y ${BUILD_PACKAGES} \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 #######################################################################
 
-# install gems
+# install gems and node modules
 
 FROM build_deps as gems
 
 COPY Gemfile* ./
-RUN bundle install &&  rm -rf vendor/bundle/ruby/*/cache
+RUN bundle install && rm -rf vendor/bundle/ruby/*/cache
+
+# Copy package.json and install node modules for asset compilation
+COPY package.json ./
+RUN npm install
 
 #######################################################################
 
@@ -73,19 +74,21 @@ RUN bundle install &&  rm -rf vendor/bundle/ruby/*/cache
 
 FROM base
 
-ARG DEPLOY_PACKAGES="postgresql-client file vim curl gzip libsqlite3-0"
+ARG DEPLOY_PACKAGES="postgresql-client file vim curl gzip libsqlite3-0 nodejs"
 ENV DEPLOY_PACKAGES=${DEPLOY_PACKAGES}
 
+# Install Node.js 22.x for runtime (needed for execjs)
 RUN --mount=type=cache,id=prod-apt-cache,sharing=locked,target=/var/cache/apt \
     --mount=type=cache,id=prod-apt-lib,sharing=locked,target=/var/lib/apt \
     apt-get update -qq && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install --no-install-recommends -y \
     ${DEPLOY_PACKAGES} \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# copy installed gems
+# copy installed gems and node modules
 COPY --from=gems /app /app
-COPY --from=gems /usr/lib/fullstaq-ruby/versions /usr/lib/fullstaq-ruby/versions
 COPY --from=gems /usr/local/bundle /usr/local/bundle
 
 #######################################################################

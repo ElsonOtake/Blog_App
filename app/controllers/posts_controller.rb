@@ -13,6 +13,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    # The @post and @member are already set by before_action callbacks
+  end
+
   def new
     @post = Post.new
   end
