@@ -22,6 +22,7 @@ class Member < ApplicationRecord
   }
 
   extend FriendlyId
+
   friendly_id :name, use: %i[slugged finders history]
 
   def is?(requested_role)
