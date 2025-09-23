@@ -46,9 +46,7 @@ class Member < ApplicationRecord
                              uid: access_token.uid)
 
     # Update provider and uid if not set
-    if member.provider.blank? || member.uid.blank?
-      member.update(provider: access_token.provider, uid: access_token.uid)
-    end
+    member.update(provider: access_token.provider, uid: access_token.uid) if member.provider.blank? || member.uid.blank?
 
     if !member.avatar.attached? && !access_token.info.image.empty?
       filename = File.basename(URI.parse(access_token.info.image).path)
