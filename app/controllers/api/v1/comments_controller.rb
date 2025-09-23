@@ -1,5 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
   include TrackEvent
+
   before_action :authorize_request
   before_action :find_member_post
   after_action :track_event, only: %i[create]

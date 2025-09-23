@@ -22,6 +22,7 @@ class Member < ApplicationRecord
   }
 
   extend FriendlyId
+
   friendly_id :name, use: %i[slugged finders history]
 
   def is?(requested_role)
@@ -41,7 +42,12 @@ class Member < ApplicationRecord
 
     member ||= Member.create(name: access_token.info.name,
                              email: access_token.info.email,
-                             password: Devise.friendly_token[0, 20])
+                             password: Devise.friendly_token[0, 20],
+                             provider: access_token.provider,
+                             uid: access_token.uid)
+
+    # Update provider and uid if not set
+    member.update(provider: access_token.provider, uid: access_token.uid) if member.provider.blank? || member.uid.blank?
 
     if !member.avatar.attached? && !access_token.info.image.empty?
       filename = File.basename(URI.parse(access_token.info.image).path)
@@ -50,5 +56,9 @@ class Member < ApplicationRecord
       member.save!
     end
     member
+  end
+
+  def oauth_user?
+    provider.present? && uid.present?
   end
 end

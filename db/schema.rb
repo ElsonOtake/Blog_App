@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_01_001659) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_23_014501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
   enable_extension "btree_gist"
@@ -24,12 +24,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_001659) do
   enable_extension "hstore"
   enable_extension "intarray"
   enable_extension "ltree"
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "pgrowlocks"
   enable_extension "pgstattuple"
-  enable_extension "plpgsql"
   enable_extension "tablefunc"
   enable_extension "unaccent"
   enable_extension "uuid-ossp"
@@ -140,6 +140,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_001659) do
     t.string "unconfirmed_email"
     t.string "role"
     t.string "slug"
+    t.string "provider"
+    t.string "uid"
     t.index ["confirmation_token"], name: "index_members_on_confirmation_token", unique: true
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
