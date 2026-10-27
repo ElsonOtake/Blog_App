@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_visitor
-    session[:visitor_id] ? Visitor.find(session[:visitor_id]) : create_current_visitor
+    Visitor.find_by(id: session[:visitor_id]) || create_current_visitor
   end
 
   def posts_per_page
