@@ -1,2 +1,6 @@
 #!/usr/bin/env ruby
-exec "./bin/rails", "server", *ARGV
+Dir.chdir(File.expand_path("..", __dir__)) do
+  # Build once before Rails starts so the first request has a stylesheet.
+  system("yarn", "build:css", exception: true)
+  exec "foreman", "start", "-f", "Procfile.dev", *ARGV
+end

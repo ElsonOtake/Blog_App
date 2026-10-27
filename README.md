@@ -133,6 +133,9 @@ Fill in the environment variables
 Install this project with:
 ```sh
   bundle install
+  yarn install --frozen-lockfile
+  yarn build:css
+  gem install foreman
   rails db:create db:migrate db:seed
 ```
 
@@ -144,6 +147,11 @@ To run the project, execute the following command:
   bin/dev
 ```
 Open `http://localhost:3000/` on your browser.
+
+`bin/dev` builds the stylesheet, then runs Rails, the CSS watcher, and Sidekiq
+using `Procfile.dev`. Node.js, Yarn, and Foreman must be installed.
+If you start Rails directly with `bin/rails server`, run `yarn build:css` first
+and use `yarn build:css --watch` in another terminal while editing styles.
 
 ### Run tests
 
