@@ -7,17 +7,31 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 unless Member.any?
-  Member.create!(name: 'Elson', bio: 'Student from Brazil', email: 'elson@blog.com', password: 'foobar', password_confirmation: 'foobar')
-  Member.create!(name: 'Worash', bio: 'Student from Ethiopia', email: 'worash@blog.com', password: 'foobar', password_confirmation: 'foobar')
-  Member.create!(name: 'Jesus', bio: 'Student from Mexico', email: 'jesus@blog.com', password: 'foobar', password_confirmation: 'foobar')
-  Member.create!(name: 'Darik', bio: 'Student from Ethiopia', email: 'darik@blog.com', password: 'foobar', password_confirmation: 'foobar')
-  Member.create!(name: 'Gabriel', bio: 'Student from Brazil', email: 'gabriel@blog.com', password: 'foobar', password_confirmation: 'foobar')
-  Member.create!(name: 'David', bio: 'Student from Ecuador', email: 'david@blog.com', password: 'foobar', password_confirmation: 'foobar')
-  Member.create!(name: 'Brenda', bio: 'Student from Rwanda', email: 'brenda@blog.com', password: 'foobar', password_confirmation: 'foobar')
-  Member.create!(name: 'Addisu', bio: 'Student from Ethiopia', email: 'addisu@blog.com', password: 'foobar', password_confirmation: 'foobar')
-  Member.create!(name: 'Tinashe', bio: 'Student from Zimbabwe', email: 'tinashe@blog.com', password: 'foobar', password_confirmation: 'foobar')
-  Member.create!(name: 'Gabriel', bio: 'Student from Brazil', email: 'santo@blog.com', password: 'foobar', password_confirmation: 'foobar')  
-  Member.create!(name: 'Arturo', bio: 'Student from Ecuador', email: 'arturo@blog.com', password: 'foobar', password_confirmation: 'foobar')
+  members = [
+    { name: 'Elson', bio: 'Student from Brazil', email: 'elson@blog.com' },
+    { name: 'Worash', bio: 'Student from Ethiopia', email: 'worash@blog.com' },
+    { name: 'Jesus', bio: 'Student from Mexico', email: 'jesus@blog.com' },
+    { name: 'Darik', bio: 'Student from Ethiopia', email: 'darik@blog.com' },
+    { name: 'Gabriel', bio: 'Student from Brazil', email: 'gabriel@blog.com' },
+    { name: 'David', bio: 'Student from Ecuador', email: 'david@blog.com' },
+    { name: 'Brenda', bio: 'Student from Rwanda', email: 'brenda@blog.com' },
+    { name: 'Addisu', bio: 'Student from Ethiopia', email: 'addisu@blog.com' },
+    { name: 'Tinashe', bio: 'Student from Zimbabwe', email: 'tinashe@blog.com' },
+    { name: 'Gabriel', bio: 'Student from Brazil', email: 'santo@blog.com' },
+    { name: 'Arturo', bio: 'Student from Ecuador', email: 'arturo@blog.com' }
+  ]
+
+  members.each do |attributes|
+    member = Member.new(attributes.merge(password: 'foobar', password_confirmation: 'foobar'))
+    email_name = member.email.split('@').first
+    avatar_path = Rails.root.join('app/assets/images').glob("#{email_name}.{jpg,jpeg,png}").first
+    raise "Avatar image not found for #{member.email}" unless avatar_path
+
+    File.open(avatar_path, 'rb') do |file|
+      member.avatar.attach(io: file, filename: avatar_path.basename.to_s)
+      member.save!
+    end
+  end
 end
 
 unless Post.any?
