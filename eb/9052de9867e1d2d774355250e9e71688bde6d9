@@ -1,0 +1,29 @@
+bin/dev
+  s_70c1d6e9cbe432::t_5a878def651a93 2-6
+README.md
+  s_70c1d6e9cbe432::t_5a878def651a93 136-138,151-154
+  s_70c1d6e9cbe432::t_e92f60c170a19b 155
+bin/setup
+  s_70c1d6e9cbe432::t_5a878def651a93 18-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "eb9052de9867e1d2d774355250e9e71688bde6d9",
+  "prompts": {},
+  "humans": {
+    "h_da978aeed56e72": {
+      "author": "Elson Otake <elsonotake@yahoo.com.br>"
+    }
+  },
+  "sessions": {
+    "s_70c1d6e9cbe432": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a179aa-37e3-7131-aca1-ac1b60fc2717",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Elson Otake <elsonotake@yahoo.com.br>"
+    }
+  }
+}
